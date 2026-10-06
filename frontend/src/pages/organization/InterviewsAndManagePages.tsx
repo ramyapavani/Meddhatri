@@ -14,7 +14,7 @@ export const InterviewsPage: React.FC = () => {
       date: 'April 18, 2026',
       time: '11:00 AM IST',
       type: 'Video Medical Round',
-      meetingLink: 'https://meet.medvance.ai/room-novacare-cardio',
+      meetingLink: 'https://meet.meddhatri.ai/room-novacare-cardio',
       status: 'SCHEDULED'
     },
     {
@@ -43,7 +43,7 @@ export const InterviewsPage: React.FC = () => {
       date,
       time,
       type: 'Video Medical Round',
-      meetingLink: 'https://meet.medvance.ai/room-' + Math.random().toString(36).substring(7),
+      meetingLink: 'https://meet.meddhatri.ai/room-' + Math.random().toString(36).substring(7),
       status: 'SCHEDULED'
     };
 

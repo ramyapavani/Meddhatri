@@ -118,7 +118,14 @@ export const RecruitmentPipelinePage: React.FC = () => {
                 {stageCandidates.map((cand) => (
                   <div key={cand.id} className="bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-xs space-y-3 hover:shadow-subtle transition">
                     <div className="flex items-center gap-2.5">
-                      <img src={cand.avatar} alt={cand.name} className="w-9 h-9 rounded-full object-cover" />
+                      <img
+                        src={cand.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
+                        alt={cand.name}
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+                        }}
+                        className="w-9 h-9 rounded-full object-cover"
+                      />
                       <div className="min-w-0 flex-1">
                         <h4 className="font-bold text-xs text-slate-900 truncate">{cand.name}</h4>
                         <p className="text-[10px] text-teal-700 font-semibold truncate">{cand.specialization}</p>

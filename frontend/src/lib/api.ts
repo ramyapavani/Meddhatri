@@ -1,9 +1,9 @@
-import { INITIAL_MOCK_JOBS, INITIAL_CANDIDATES, INITIAL_BLOGS } from './mockDb.js';
+import { INITIAL_MOCK_JOBS, INITIAL_CANDIDATES } from './mockDb.js';
 
 const API_BASE_URL = '/api/v1';
 
 export class ApiClient {
-  private static tokenKey = 'medvance_jwt_token';
+  private static tokenKey = 'meddhatri_jwt_token';
 
   public static getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
@@ -59,12 +59,6 @@ export class ApiClient {
       return {
         success: true,
         data: INITIAL_CANDIDATES
-      };
-    }
-    if (endpoint.startsWith('/blogs')) {
-      return {
-        success: true,
-        data: INITIAL_BLOGS
       };
     }
     return {

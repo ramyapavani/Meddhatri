@@ -8,8 +8,6 @@ import {
   User, 
   Building2, 
   ShieldCheck, 
-  Menu, 
-  X, 
   ChevronDown,
   LogOut,
   Briefcase,
@@ -22,7 +20,6 @@ import {
 export const Navbar: React.FC = () => {
   const { user, logout, switchRole } = useAuth();
   const { notifications, unreadCount, markAllAsRead } = useNotifications();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const navigate = useNavigate();
@@ -45,6 +42,22 @@ export const Navbar: React.FC = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const openInNewTab = (e: React.MouseEvent, path: string) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const targetUrl = path.startsWith('http') ? path : `${window.location.origin}${path}`;
+    const newWindow = window.open(targetUrl, '_blank');
+    if (!newWindow || newWindow.closed || typeof newWindow.closed === 'undefined') {
+      const link = document.createElement('a');
+      link.href = targetUrl;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   const getDashboardLink = () => {
     if (!user) return '/login';
     if (user.role === 'SUPER_ADMIN') return '/admin/dashboard';
@@ -60,66 +73,55 @@ export const Navbar: React.FC = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 border-b border-slate-200/80 backdrop-blur-md">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-18 py-2">
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#102A43] to-[#0F766E] flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
-              <Stethoscope className="w-5 h-5 text-teal-300" />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-extrabold text-xl tracking-tight text-[#102A43]">MedVance</span>
-                <span className="px-1.5 py-0.5 rounded text-[11px] font-black bg-teal-100 text-teal-800 tracking-wider">AI</span>
-              </div>
-              <p className="text-[10px] text-slate-500 font-medium tracking-wide -mt-0.5">HEALTHCARE TALENT ECOSYSTEM</p>
-            </div>
+    <nav className="sticky top-0 z-50 bg-white border-b border-[#2DC4B4]/20 backdrop-blur-md shadow-xs">
+      <div className="w-full px-2.5 sm:px-6 lg:px-10 xl:px-12">
+        <div className="flex items-center justify-between min-h-[58px] sm:min-h-[72px] py-1">
+          {/* Left: Brand Logo */}
+          <Link to="/" className="flex items-center group shrink-0 py-0.5">
+            <img
+              src="/logo.png"
+              alt="MedDhatri"
+              className="h-10 xs:h-12 sm:h-14 md:h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-200 drop-shadow-xs"
+            />
           </Link>
 
-          {/* Desktop Navigation Links */}
-          <div className="hidden xl:flex items-center gap-7 text-[15px] font-bold text-slate-800">
+          {/* Center: Desktop Navigation Links (Expanded to fill space elegantly) */}
+          <div className="hidden lg:flex items-center gap-7 xl:gap-10 2xl:gap-12 text-[15px] xl:text-base font-extrabold text-slate-800 tracking-normal">
             <Link 
               to="/jobs" 
-              className={`transition hover:text-teal-700 ${location.pathname.startsWith('/jobs') ? 'text-teal-700' : ''}`}
+              className={`px-2 py-1 rounded-lg transition hover:text-[#2DC4B4] hover:bg-teal-50/40 ${location.pathname.startsWith('/jobs') ? 'text-[#2DC4B4]' : ''}`}
             >
               Jobs
             </Link>
             <Link 
               to="/about" 
-              className={`transition hover:text-teal-700 ${location.pathname === '/about' && !location.hash ? 'text-teal-700' : ''}`}
+              className={`px-2 py-1 rounded-lg transition hover:text-[#2DC4B4] hover:bg-teal-50/40 ${location.pathname === '/about' && !location.hash ? 'text-[#2DC4B4]' : ''}`}
             >
               About Us
             </Link>
             <Link 
-              to="/about#leadership" 
-              className="transition hover:text-teal-700"
+              to="/leadership" 
+              className={`px-2 py-1 rounded-lg transition hover:text-[#2DC4B4] hover:bg-teal-50/40 ${location.pathname === '/leadership' ? 'text-[#2DC4B4]' : ''}`}
             >
               Leadership
             </Link>
             <Link 
               to="/how-it-works" 
-              className={`transition hover:text-teal-700 ${location.pathname === '/how-it-works' ? 'text-teal-700' : ''}`}
+              className={`px-2 py-1 rounded-lg transition hover:text-[#2DC4B4] hover:bg-teal-50/40 ${location.pathname === '/how-it-works' ? 'text-[#2DC4B4]' : ''}`}
             >
               How It Works
             </Link>
             <Link 
               to="/faqs" 
-              className={`transition hover:text-teal-700 ${location.pathname === '/faqs' ? 'text-teal-700' : ''}`}
+              className={`px-2 py-1 rounded-lg transition hover:text-[#2DC4B4] hover:bg-teal-50/40 ${location.pathname === '/faqs' || location.pathname === '/faq' ? 'text-[#2DC4B4]' : ''}`}
             >
-              FAQ's
+              FAQs
             </Link>
             <Link 
               to="/contact" 
-              className={`transition hover:text-teal-700 ${location.pathname === '/contact' ? 'text-teal-700' : ''}`}
+              className={`px-2 py-1 rounded-lg transition hover:text-[#2DC4B4] hover:bg-teal-50/40 ${location.pathname === '/contact' || location.pathname === '/contact-us' ? 'text-[#2DC4B4]' : ''}`}
             >
               Contact Us
-            </Link>
-            <Link 
-              to="/resources" 
-              className={`transition hover:text-teal-700 ${location.pathname.startsWith('/resources') || location.pathname.startsWith('/blogs') ? 'text-teal-700' : ''}`}
-            >
-              Blogs
             </Link>
           </div>
 
@@ -173,14 +175,47 @@ export const Navbar: React.FC = () => {
 
             {/* Authenticated User Menu */}
             {user ? (
-              <div className="flex items-center gap-3">
-                <Link
-                  to={getDashboardLink()}
-                  className="bg-[#102A43] hover:bg-[#0B1C2D] text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-2"
-                >
-                  <Briefcase className="w-4 h-4 text-teal-300" />
-                  {getDashboardLabel()}
-                </Link>
+              <div className="flex items-center gap-1.5 sm:gap-3">
+                {user.role === 'PROFESSIONAL' ? (
+                  <a
+                    href="/professional/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => openInNewTab(e, '/professional/dashboard')}
+                    className="bg-[#1B5F85] hover:bg-[#154E70] text-white px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold shadow-xs sm:shadow-sm transition flex items-center gap-1 sm:gap-2 shrink-0 border border-teal-400/30 cursor-pointer"
+                  >
+                    <Briefcase className="w-3.5 h-3.5 text-[#2DC4B4] shrink-0" />
+                    <span className="hidden sm:inline">Clinician Portal</span>
+                    <span className="sm:hidden">Clinician</span>
+                    <ExternalLink className="w-3 h-3 text-[#2DC4B4] hidden xs:inline shrink-0" />
+                  </a>
+                ) : user.role === 'ORGANIZATION_ADMIN' || user.role === 'RECRUITER' ? (
+                  <a
+                    href="/organization/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => openInNewTab(e, '/organization/dashboard')}
+                    className="bg-[#1B5F85] hover:bg-[#154E70] text-white px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold shadow-xs sm:shadow-sm transition flex items-center gap-1 sm:gap-2 shrink-0 border border-teal-400/30 cursor-pointer"
+                  >
+                    <Briefcase className="w-3.5 h-3.5 text-[#2DC4B4] shrink-0" />
+                    <span className="hidden sm:inline">Employer Portal</span>
+                    <span className="sm:hidden">Employer</span>
+                    <ExternalLink className="w-3 h-3 text-[#2DC4B4] hidden xs:inline shrink-0" />
+                  </a>
+                ) : (
+                  <a
+                    href="/admin/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => openInNewTab(e, '/admin/dashboard')}
+                    className="bg-[#1B5F85] hover:bg-[#154E70] text-white px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-[11px] sm:text-xs font-bold shadow-xs sm:shadow-sm transition flex items-center gap-1 sm:gap-2 shrink-0 border border-teal-400/30 cursor-pointer"
+                  >
+                    <Briefcase className="w-3.5 h-3.5 text-[#2DC4B4] shrink-0" />
+                    <span className="hidden sm:inline">Admin Portal</span>
+                    <span className="sm:hidden">Admin</span>
+                    <ExternalLink className="w-3 h-3 text-[#2DC4B4] hidden xs:inline shrink-0" />
+                  </a>
+                )}
 
                 {/* User Profile Pill & Dropdown */}
                 <div className="relative" ref={userDropdownRef}>
@@ -191,6 +226,9 @@ export const Navbar: React.FC = () => {
                     <img
                       src={user.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
                       alt={user.name}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+                      }}
                       className="w-9 h-9 rounded-full object-cover ring-2 ring-teal-600/30"
                     />
                     <ChevronDown className="w-3.5 h-3.5 text-slate-500" />
@@ -204,14 +242,35 @@ export const Navbar: React.FC = () => {
                       </div>
 
                       <div className="py-1">
-                        <Link
-                          to={getDashboardLink()}
-                          onClick={() => setUserDropdownOpen(false)}
-                          className="flex items-center justify-between px-4 py-2 text-xs text-slate-700 hover:bg-slate-50 font-semibold"
-                        >
-                          <span>Open Dashboard</span>
-                          <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
-                        </Link>
+                        {user.role === 'PROFESSIONAL' ? (
+                          <a
+                            href="/professional/dashboard"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              setUserDropdownOpen(false);
+                              openInNewTab(e, '/professional/dashboard');
+                            }}
+                            className="flex items-center justify-between px-4 py-2 text-xs text-[#1B5F85] hover:bg-slate-50 font-bold cursor-pointer"
+                          >
+                            <span>Open Clinician Portal</span>
+                            <ExternalLink className="w-3.5 h-3.5 text-[#2DC4B4]" />
+                          </a>
+                        ) : (
+                          <a
+                            href={getDashboardLink()}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => {
+                              setUserDropdownOpen(false);
+                              openInNewTab(e, getDashboardLink());
+                            }}
+                            className="flex items-center justify-between px-4 py-2 text-xs text-[#1B5F85] hover:bg-slate-50 font-bold cursor-pointer"
+                          >
+                            <span>Open {getDashboardLabel()}</span>
+                            <ExternalLink className="w-3.5 h-3.5 text-[#2DC4B4]" />
+                          </a>
+                        )}
                         {user.role === 'PROFESSIONAL' && (
                           <>
                             <Link
@@ -272,31 +331,31 @@ export const Navbar: React.FC = () => {
                             onClick={() => {
                               switchRole('PROFESSIONAL');
                               setUserDropdownOpen(false);
-                              navigate('/professional/dashboard');
+                              window.open('/professional/dashboard', '_blank', 'noopener,noreferrer');
                             }}
                             className={`py-1 px-1.5 rounded-lg border text-center transition ${user.role === 'PROFESSIONAL' ? 'bg-teal-50 border-teal-300 text-teal-800' : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'}`}
                           >
-                            Doctor
+                            Doctor ↗
                           </button>
                           <button
                             onClick={() => {
                               switchRole('ORGANIZATION_ADMIN');
                               setUserDropdownOpen(false);
-                              navigate('/organization/dashboard');
+                              window.open('/organization/dashboard', '_blank', 'noopener,noreferrer');
                             }}
                             className={`py-1 px-1.5 rounded-lg border text-center transition ${user.role === 'ORGANIZATION_ADMIN' ? 'bg-teal-50 border-teal-300 text-teal-800' : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'}`}
                           >
-                            Employer
+                            Employer ↗
                           </button>
                           <button
                             onClick={() => {
                               switchRole('SUPER_ADMIN');
                               setUserDropdownOpen(false);
-                              navigate('/admin/dashboard');
+                              window.open('/admin/dashboard', '_blank', 'noopener,noreferrer');
                             }}
                             className={`py-1 px-1.5 rounded-lg border text-center transition ${user.role === 'SUPER_ADMIN' ? 'bg-teal-50 border-teal-300 text-teal-800' : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'}`}
                           >
-                            Admin
+                            Admin ↗
                           </button>
                         </div>
                       </div>
@@ -321,53 +380,61 @@ export const Navbar: React.FC = () => {
               <div className="flex items-center gap-2.5">
                 <Link
                   to="/login"
-                  className="bg-[#102A43] hover:bg-[#0B1C2D] text-white text-xs sm:text-sm font-bold px-5 py-2 rounded-full shadow-sm transition"
+                  className="bg-[#1B5F85] hover:bg-[#154E70] text-white text-xs sm:text-sm font-bold px-5 py-2 rounded-full shadow-sm transition"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="border-2 border-[#102A43] text-[#102A43] hover:bg-[#102A43] hover:text-white text-xs sm:text-sm font-bold px-5 py-1.5 rounded-full transition"
+                  className="border-2 border-[#2DC4B4] text-[#1B5F85] hover:bg-[#2DC4B4] hover:text-white text-xs sm:text-sm font-bold px-5 py-1.5 rounded-full transition"
                 >
                   Sign Up
                 </Link>
 
                 <div className="hidden sm:block h-6 w-px bg-slate-300 mx-1" />
 
-                {/* For Employer Dropdown Button */}
+                {/* For Employer Button (Opens in new tab) */}
                 <div className="relative group">
-                  <Link
-                    to="/organization/jobs/create"
-                    className="bg-[#D92534] hover:bg-[#B91C1C] text-white px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-md transition flex items-center gap-1.5"
+                  <a
+                    href="/organization/dashboard"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-[#1B5F85] hover:bg-[#154E70] text-white px-4 py-2 rounded-full text-xs sm:text-sm font-bold shadow-md transition flex items-center gap-1.5 border border-[#2DC4B4]/40"
                   >
-                    <Briefcase className="w-4 h-4" />
+                    <Briefcase className="w-4 h-4 text-[#2DC4B4]" />
                     <span>For Employer</span>
-                    <ChevronDown className="w-3.5 h-3.5" />
-                  </Link>
+                    <ChevronDown className="w-3.5 h-3.5 text-[#2DC4B4]" />
+                  </a>
 
                   {/* Dropdown on Hover/Click */}
                   <div className="absolute right-0 mt-1 w-56 bg-white rounded-2xl shadow-xl border border-slate-200 py-2 hidden group-hover:block z-50 animate-in fade-in zoom-in-95">
-                    <Link
-                      to="/organization/jobs/create"
+                    <a
+                      href="/organization/dashboard"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block px-4 py-2 text-xs text-slate-800 hover:bg-slate-50 font-bold"
                     >
-                      + Post a Healthcare Job
-                    </Link>
-                    <Link
-                      to="/organization/candidates"
+                      Employer Talent SaaS ↗
+                    </a>
+                    <a
+                      href="/organization/jobs/create"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block px-4 py-2 text-xs text-slate-800 hover:bg-slate-50 font-bold"
                     >
-                      Browse Talent Pool
-                    </Link>
-                    <Link
-                      to="/organization/dashboard"
+                      + Post a Healthcare Job ↗
+                    </a>
+                    <a
+                      href="/organization/candidates"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="block px-4 py-2 text-xs text-slate-800 hover:bg-slate-50 font-bold"
                     >
-                      Employer Talent SaaS
-                    </Link>
+                      Browse Talent Pool ↗
+                    </a>
                     <Link
                       to="/pricing"
-                      className="block px-4 py-2 text-xs text-teal-700 hover:bg-slate-50 font-bold border-t border-slate-100"
+                      className="block px-4 py-2 text-xs text-[#1B5F85] hover:bg-slate-50 font-bold border-t border-slate-100"
                     >
                       View Pricing & Plans
                     </Link>
@@ -375,105 +442,9 @@ export const Navbar: React.FC = () => {
                 </div>
               </div>
             )}
-
-            {/* Mobile Hamburger Toggle */}
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-2 text-slate-600 hover:bg-slate-100 rounded-xl"
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
           </div>
         </div>
       </div>
-
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen && (
-        <div className="xl:hidden bg-white border-b border-slate-200 px-4 pt-3 pb-5 space-y-2.5">
-          <Link
-            to="/jobs"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            Jobs
-          </Link>
-          <Link
-            to="/about"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            About Us
-          </Link>
-          <Link
-            to="/about#leadership"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            Leadership
-          </Link>
-          <Link
-            to="/how-it-works"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            How It Works
-          </Link>
-          <Link
-            to="/faqs"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            FAQ's
-          </Link>
-          <Link
-            to="/contact"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            Contact Us
-          </Link>
-          <Link
-            to="/resources"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block px-3 py-2 rounded-xl font-semibold text-slate-800 hover:bg-slate-50 text-sm"
-          >
-            Blogs
-          </Link>
-          {user ? (
-            <Link
-              to={getDashboardLink()}
-              onClick={() => setMobileMenuOpen(false)}
-              className="block bg-teal-700 text-white text-center py-2.5 rounded-xl font-bold text-sm shadow-sm"
-            >
-              Open {getDashboardLabel()}
-            </Link>
-          ) : (
-            <div className="pt-2 grid grid-cols-2 gap-2">
-              <Link
-                to="/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-center py-2.5 rounded-full font-bold text-xs bg-[#102A43] text-white"
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                onClick={() => setMobileMenuOpen(false)}
-                className="block text-center py-2.5 rounded-full font-bold text-xs border-2 border-[#102A43] text-[#102A43]"
-              >
-                Sign Up
-              </Link>
-              <Link
-                to="/organization/jobs/create"
-                onClick={() => setMobileMenuOpen(false)}
-                className="col-span-2 block text-center py-2.5 rounded-full font-bold text-xs bg-[#D92534] text-white shadow-sm mt-1"
-              >
-                For Employer (Post a Job)
-              </Link>
-            </div>
-          )}
-        </div>
-      )}
     </nav>
   );
 };

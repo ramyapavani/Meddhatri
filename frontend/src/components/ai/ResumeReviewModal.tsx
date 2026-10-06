@@ -42,7 +42,7 @@ export const ResumeReviewModal: React.FC<ResumeReviewModalProps> = ({ isOpen, on
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base">MedVance AI Resume Audit</h3>
+              <h3 className="font-bold text-base">MedDhatri AI Resume Audit</h3>
               <p className="text-xs text-teal-200">Clinical keyword & recruiter impact analysis</p>
             </div>
           </div>

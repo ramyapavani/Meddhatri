@@ -29,7 +29,7 @@ export const AIMatchWidget: React.FC<AIMatchWidgetProps> = ({
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h4 className="font-bold text-base text-white">MedVance AI Match Score</h4>
+            <h4 className="font-bold text-base text-white">MedDhatri AI Match Score</h4>
             <p className="text-xs text-teal-200">Intelligent clinical & experience alignment engine</p>
           </div>
         </div>
@@ -92,7 +92,7 @@ export const AIMatchWidget: React.FC<AIMatchWidgetProps> = ({
       </div>
 
       <p className="text-[10px] text-slate-400 mt-4 italic">
-        * MedVance AI scoring is designed to provide career recommendations based on credential metrics and does not constitute medical employment guarantees.
+        * MedDhatri AI scoring is designed to provide career recommendations based on credential metrics and does not constitute medical employment guarantees.
       </p>
     </div>
   );

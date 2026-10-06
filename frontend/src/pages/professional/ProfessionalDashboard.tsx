@@ -30,7 +30,7 @@ export const ProfessionalDashboard: React.FC = () => {
       date: 'April 18, 2026',
       time: '11:00 AM IST',
       type: 'Video Medical Round',
-      meetingLink: 'https://meet.medvance.ai/room-novacare-cardio'
+      meetingLink: 'https://meet.meddhatri.ai/room-novacare-cardio'
     }
   ];
 
@@ -54,17 +54,17 @@ export const ProfessionalDashboard: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6 sm:space-y-8">
       {/* Top Welcome & Profile Strength Banner */}
-      <div className="bg-gradient-to-r from-[#102A43] via-[#0F766E] to-[#102A43] text-white p-6 sm:p-8 rounded-3xl shadow-xl relative overflow-hidden">
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 relative z-10">
+      <div className="bg-gradient-to-r from-[#102A43] via-[#0F766E] to-[#102A43] text-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl shadow-xl relative overflow-hidden">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 sm:gap-6 relative z-10">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 bg-teal-500/20 border border-teal-300/30 text-teal-200 text-xs font-bold px-2.5 py-0.5 rounded-full">
+              <span className="inline-flex items-center gap-1 bg-teal-500/20 border border-teal-300/30 text-teal-200 text-[11px] sm:text-xs font-bold px-2.5 py-0.5 rounded-full">
                 <ShieldCheck className="w-3.5 h-3.5 text-teal-300" /> Medical Registration Verified
               </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight">
               Welcome back, {user?.name || 'Dr. Ananya Rao'}
             </h1>
             <p className="text-xs sm:text-sm text-teal-100 max-w-xl">
@@ -73,7 +73,7 @@ export const ProfessionalDashboard: React.FC = () => {
           </div>
 
           {/* Profile Completion Bar */}
-          <div className="bg-white/10 backdrop-blur-md border border-white/15 p-4 rounded-2xl w-full lg:w-72 space-y-2.5">
+          <div className="bg-white/10 backdrop-blur-md border border-white/15 p-3.5 sm:p-4 rounded-xl sm:rounded-2xl w-full lg:w-72 space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="font-semibold text-white">Profile Strength</span>
               <span className="font-extrabold text-teal-300">{profileCompletion}% Complete</span>
@@ -88,57 +88,57 @@ export const ProfessionalDashboard: React.FC = () => {
         </div>
       </div>
 
-      {/* KPI Blocks */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <Link to="/professional/recommended" className="bg-white p-5 rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
-          <div>
-            <span className="text-2xl font-black text-[#102A43]">8</span>
-            <span className="text-xs font-medium text-slate-500 block mt-0.5">AI Recommended Jobs</span>
+      {/* KPI Blocks (2 columns on mobile, 4 columns on large screens) */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+        <Link to="/professional/recommended" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
+          <div className="min-w-0">
+            <span className="text-xl sm:text-2xl font-black text-[#102A43]">8</span>
+            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">AI Recommended</span>
           </div>
-          <div className="p-3 bg-teal-50 text-teal-700 rounded-xl">
-            <Sparkles className="w-5 h-5" />
-          </div>
-        </Link>
-
-        <Link to="/professional/applications" className="bg-white p-5 rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
-          <div>
-            <span className="text-2xl font-black text-[#102A43]">4</span>
-            <span className="text-xs font-medium text-slate-500 block mt-0.5">Active Applications</span>
-          </div>
-          <div className="p-3 bg-cyan-50 text-cyan-700 rounded-xl">
-            <FileCheck2 className="w-5 h-5" />
+          <div className="p-2 sm:p-3 bg-teal-50 text-teal-700 rounded-xl shrink-0">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </Link>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-subtle flex items-center justify-between">
-          <div>
-            <span className="text-2xl font-black text-[#102A43]">1</span>
-            <span className="text-xs font-medium text-slate-500 block mt-0.5">Upcoming Interview</span>
+        <Link to="/professional/applications" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
+          <div className="min-w-0">
+            <span className="text-xl sm:text-2xl font-black text-[#102A43]">4</span>
+            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">Active Applied</span>
           </div>
-          <div className="p-3 bg-amber-50 text-amber-700 rounded-xl">
-            <Calendar className="w-5 h-5" />
+          <div className="p-2 sm:p-3 bg-cyan-50 text-cyan-700 rounded-xl shrink-0">
+            <FileCheck2 className="w-4 h-4 sm:w-5 sm:h-5" />
+          </div>
+        </Link>
+
+        <div className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle flex items-center justify-between">
+          <div className="min-w-0">
+            <span className="text-xl sm:text-2xl font-black text-[#102A43]">1</span>
+            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">Upcoming Meet</span>
+          </div>
+          <div className="p-2 sm:p-3 bg-amber-50 text-amber-700 rounded-xl shrink-0">
+            <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </div>
 
-        <Link to="/professional/saved" className="bg-white p-5 rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
-          <div>
-            <span className="text-2xl font-black text-[#102A43]">5</span>
-            <span className="text-xs font-medium text-slate-500 block mt-0.5">Saved Openings</span>
+        <Link to="/professional/saved" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
+          <div className="min-w-0">
+            <span className="text-xl sm:text-2xl font-black text-[#102A43]">5</span>
+            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">Saved Jobs</span>
           </div>
-          <div className="p-3 bg-indigo-50 text-indigo-700 rounded-xl">
-            <Bookmark className="w-5 h-5" />
+          <div className="p-2 sm:p-3 bg-indigo-50 text-indigo-700 rounded-xl shrink-0">
+            <Bookmark className="w-4 h-4 sm:w-5 sm:h-5" />
           </div>
         </Link>
       </div>
 
       {/* Grid: Recommended Jobs (Left) + Upcoming Interviews & Applications (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
         {/* Left: Recommended Opportunities */}
-        <div className="lg:col-span-8 space-y-6">
+        <div className="lg:col-span-8 space-y-4 sm:space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-bold text-lg text-[#102A43] flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-teal-600" />
-              High-Match Clinical Opportunities
+            <h2 className="font-bold text-base sm:text-lg text-[#102A43] flex items-center gap-2">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600" />
+              High-Match Clinical Openings
             </h2>
             <Link to="/professional/recommended" className="text-xs font-bold text-teal-700 hover:underline">
               View All ➔
@@ -155,12 +155,12 @@ export const ProfessionalDashboard: React.FC = () => {
         {/* Right: Upcoming Interviews & Applications Tracker */}
         <div className="lg:col-span-4 space-y-6">
           {/* Upcoming Interview Card */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-subtle space-y-4">
+          <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-subtle space-y-4">
             <h3 className="font-bold text-sm text-[#102A43] flex items-center gap-2">
               <Calendar className="w-4 h-4 text-teal-600" /> Upcoming Hospital Interview
             </h3>
             {upcomingInterviews.map((int) => (
-              <div key={int.id} className="p-4 rounded-2xl bg-teal-50/60 border border-teal-200/80 space-y-3">
+              <div key={int.id} className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-teal-50/60 border border-teal-200/80 space-y-3">
                 <div>
                   <span className="font-bold text-xs text-teal-900 block">{int.role}</span>
                   <span className="text-[11px] text-teal-700 font-semibold">{int.hospital}</span>
@@ -173,7 +173,7 @@ export const ProfessionalDashboard: React.FC = () => {
                   href={int.meetingLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="block text-center bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs py-2 rounded-xl shadow-xs transition"
+                  className="block text-center bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs py-2 sm:py-2.5 rounded-xl shadow-xs transition"
                 >
                   Join Clinical Meeting
                 </a>
@@ -182,18 +182,18 @@ export const ProfessionalDashboard: React.FC = () => {
           </div>
 
           {/* Recent Applications Mini Tracker */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 shadow-subtle space-y-4">
+          <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-subtle space-y-4">
             <h3 className="font-bold text-sm text-[#102A43] flex items-center gap-2">
               <FileCheck2 className="w-4 h-4 text-teal-600" /> Active Application Status
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               {recentApplications.map((app) => (
-                <div key={app.id} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
-                  <div>
-                    <h4 className="font-bold text-xs text-slate-900 truncate max-w-[140px]">{app.role}</h4>
-                    <span className="text-[10px] text-slate-500">{app.hospital}</span>
+                <div key={app.id} className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between gap-2">
+                  <div className="min-w-0">
+                    <h4 className="font-bold text-xs text-slate-900 truncate">{app.role}</h4>
+                    <span className="text-[10px] text-slate-500 truncate block">{app.hospital}</span>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-teal-100 text-teal-800 border border-teal-200">
+                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-teal-100 text-teal-800 border border-teal-200 shrink-0">
                     {app.status}
                   </span>
                 </div>

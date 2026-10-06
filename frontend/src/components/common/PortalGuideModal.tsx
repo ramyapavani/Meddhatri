@@ -130,16 +130,17 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
   if (!isOpen) return null;
 
   const handleLaunchPortal = (portal: PortalInfo) => {
-    if (portal.id === 'doctor') {
-      switchRolePersona('doctor');
-    } else if (portal.id === 'nurse') {
-      switchRolePersona('nurse');
-    } else if (portal.id === 'recruiter') {
-      switchRolePersona('recruiter');
-    } else if (portal.id === 'admin') {
-      switchRolePersona('admin');
+    const targetUrl = portal.targetUrl.startsWith('http') ? portal.targetUrl : `${window.location.origin}${portal.targetUrl}`;
+    if (portal.id === 'doctor' || portal.id === 'nurse') {
+      if (portal.id === 'doctor') switchRolePersona('doctor');
+      else switchRolePersona('nurse');
+      window.open(targetUrl, '_blank');
+      onClose();
+      return;
     }
-    navigate(portal.targetUrl);
+    if (portal.id === 'recruiter') switchRolePersona('recruiter');
+    else if (portal.id === 'admin') switchRolePersona('admin');
+    window.open(targetUrl, '_blank');
     onClose();
   };
 
@@ -147,13 +148,13 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       <div className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#102A43] via-[#0F766E] to-[#102A43] text-white p-5 px-6 flex items-center justify-between">
+        <div className="bg-gradient-to-r from-[#1B5F85] via-[#2DC4B4] to-[#1B5F85] text-white p-5 px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-2xl bg-white/10 text-teal-300 border border-white/10">
               <Layers className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="font-extrabold text-lg">MedVance AI — Guided Portal Navigator</h2>
+              <h2 className="font-extrabold text-lg">MedDhatri AI — Guided Portal Navigator</h2>
               <p className="text-xs text-teal-200">Switch roles & explore all 4 full-stack portals with 1-click</p>
             </div>
           </div>
@@ -259,15 +260,15 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
   const navigate = useNavigate();
 
   return (
-    <div className="fixed bottom-6 left-6 z-40">
+    <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40">
       {collapsed ? (
         <button
           onClick={() => setCollapsed(false)}
-          className="bg-[#102A43] hover:bg-[#0B1C2D] text-white p-3 rounded-full shadow-2xl border border-slate-700 transition flex items-center gap-2 group"
+          className="bg-gradient-to-r from-[#102A43] to-teal-800 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2 group ring-4 ring-teal-500/20"
           title="Switch Role Portal"
         >
-          <Layers className="w-4 h-4 text-teal-300" />
-          <span className="text-xs font-bold pr-1 hidden group-hover:inline">Switch Portal</span>
+          <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-teal-300" />
+          <span className="font-bold text-xs pr-1 hidden sm:inline">Switch Portal</span>
         </button>
       ) : (
         <div className="bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl p-2 rounded-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 ring-4 ring-slate-900/5">
@@ -282,10 +283,10 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
           <button
             onClick={() => {
               switchRolePersona('doctor');
-              navigate('/professional/dashboard');
+              window.open(`${window.location.origin}/professional/dashboard`, '_blank');
               setCollapsed(true);
             }}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition"
+            className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E0F7F5] hover:text-[#1B5F85] transition"
           >
             👨‍⚕️ Doctor
           </button>
@@ -293,7 +294,7 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
           <button
             onClick={() => {
               switchRolePersona('recruiter');
-              navigate('/organization/dashboard');
+              window.open(`${window.location.origin}/organization/dashboard`, '_blank');
               setCollapsed(true);
             }}
             className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition"
@@ -304,7 +305,7 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
           <button
             onClick={() => {
               switchRolePersona('admin');
-              navigate('/admin/dashboard');
+              window.open(`${window.location.origin}/admin/dashboard`, '_blank');
               setCollapsed(true);
             }}
             className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-purple-50 hover:text-purple-800 transition"

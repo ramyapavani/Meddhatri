@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext.js';
-import { Send, Search, Building2, User, CheckCheck, Paperclip } from 'lucide-react';
+import { Send, Search, Building2, User, CheckCheck, Paperclip, ArrowLeft, MoreVertical } from 'lucide-react';
 
 export const MessagesPage: React.FC = () => {
   const { user } = useAuth();
@@ -29,6 +29,7 @@ export const MessagesPage: React.FC = () => {
   ];
 
   const [activeContact, setActiveContact] = useState(contacts[0]);
+  const [showMobileChat, setShowMobileChat] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 'm1',
@@ -51,6 +52,11 @@ export const MessagesPage: React.FC = () => {
   ]);
   const [input, setInput] = useState('');
 
+  const handleSelectContact = (c: typeof contacts[0]) => {
+    setActiveContact(c);
+    setShowMobileChat(true);
+  };
+
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim()) return;
@@ -67,17 +73,17 @@ export const MessagesPage: React.FC = () => {
   };
 
   return (
-    <div className="h-[75vh] bg-white rounded-3xl border border-slate-200 shadow-subtle overflow-hidden flex flex-col md:flex-row">
-      {/* Contact List */}
-      <div className="w-full md:w-80 border-r border-slate-200 flex flex-col bg-slate-50/50">
-        <div className="p-4 border-b border-slate-200">
+    <div className="h-[78vh] sm:h-[75vh] bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-subtle overflow-hidden flex flex-col md:flex-row">
+      {/* Contact List (Hidden on mobile when chat is active) */}
+      <div className={`w-full md:w-80 border-r border-slate-200 flex flex-col bg-slate-50/50 ${showMobileChat ? 'hidden md:flex' : 'flex'}`}>
+        <div className="p-3.5 sm:p-4 border-b border-slate-200">
           <h2 className="font-bold text-sm text-slate-900 mb-2">Hospital Conversations</h2>
           <div className="relative">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search conversations..."
-              className="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none"
+              className="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500"
             />
           </div>
         </div>
@@ -86,13 +92,20 @@ export const MessagesPage: React.FC = () => {
           {contacts.map((c) => (
             <button
               key={c.id}
-              onClick={() => setActiveContact(c)}
-              className={`w-full p-4 text-left flex items-start gap-3 transition ${
-                activeContact.id === c.id ? 'bg-teal-50/70 border-l-4 border-teal-600' : 'hover:bg-slate-100/60'
+              onClick={() => handleSelectContact(c)}
+              className={`w-full p-3.5 sm:p-4 text-left flex items-start gap-3 transition ${
+                activeContact.id === c.id ? 'bg-teal-50/80 border-l-4 border-teal-600' : 'hover:bg-slate-100/60'
               }`}
             >
               <div className="relative shrink-0">
-                <img src={c.avatar} alt={c.name} className="w-10 h-10 rounded-full object-cover" />
+                <img
+                  src={c.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
+                  alt={c.name}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+                  }}
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 {c.online && (
                   <span className="w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full absolute bottom-0 right-0" />
                 )}
@@ -109,32 +122,48 @@ export const MessagesPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Chat Thread */}
-      <div className="flex-1 flex flex-col bg-white">
+      {/* Chat Thread (Hidden on mobile when contact list is active) */}
+      <div className={`flex-1 flex flex-col bg-white ${!showMobileChat ? 'hidden md:flex' : 'flex'}`}>
         {/* Top Header */}
-        <div className="p-4 border-b border-slate-200 flex items-center justify-between bg-white">
-          <div className="flex items-center gap-3">
-            <img src={activeContact.avatar} alt={activeContact.name} className="w-10 h-10 rounded-full object-cover" />
-            <div>
-              <h3 className="font-bold text-xs text-slate-900">{activeContact.name}</h3>
-              <p className="text-[11px] text-teal-700 font-medium">{activeContact.role}</p>
+        <div className="p-3 sm:p-4 border-b border-slate-200 flex items-center justify-between bg-white">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            {/* Mobile Back Button */}
+            <button
+              onClick={() => setShowMobileChat(false)}
+              className="md:hidden p-1.5 -ml-1 text-slate-600 hover:bg-slate-100 rounded-lg transition shrink-0"
+              aria-label="Back to contacts"
+            >
+              <ArrowLeft className="w-5 h-5 text-teal-800" />
+            </button>
+
+            <img
+              src={activeContact.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
+              alt={activeContact.name}
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+              }}
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover shrink-0"
+            />
+            <div className="min-w-0">
+              <h3 className="font-bold text-xs sm:text-sm text-slate-900 truncate">{activeContact.name}</h3>
+              <p className="text-[10px] sm:text-[11px] text-teal-700 font-medium truncate">{activeContact.role}</p>
             </div>
           </div>
         </div>
 
         {/* Message Feed */}
-        <div className="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50/40">
+        <div className="flex-1 p-3.5 sm:p-5 overflow-y-auto space-y-3 sm:space-y-4 bg-slate-50/40">
           {messages.map((m) => (
             <div key={m.id} className={`flex ${m.sender === 'me' ? 'justify-end' : 'justify-start'}`}>
               <div
-                className={`max-w-[75%] p-3.5 rounded-2xl text-xs leading-relaxed shadow-xs ${
+                className={`max-w-[85%] sm:max-w-[75%] p-3 sm:p-3.5 rounded-2xl text-xs leading-relaxed shadow-xs ${
                   m.sender === 'me'
                     ? 'bg-[#102A43] text-white rounded-tr-none'
                     : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none'
                 }`}
               >
                 <p>{m.text}</p>
-                <span className={`block text-[10px] mt-1 ${m.sender === 'me' ? 'text-slate-300 text-right' : 'text-slate-400'}`}>
+                <span className={`block text-[9.5px] sm:text-[10px] mt-1 ${m.sender === 'me' ? 'text-slate-300 text-right' : 'text-slate-400'}`}>
                   {m.time}
                 </span>
               </div>
@@ -143,15 +172,19 @@ export const MessagesPage: React.FC = () => {
         </div>
 
         {/* Input Bar */}
-        <form onSubmit={handleSend} className="p-4 border-t border-slate-200 flex items-center gap-2 bg-white">
+        <form onSubmit={handleSend} className="p-2.5 sm:p-4 border-t border-slate-200 flex items-center gap-2 bg-white">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message to recruiter..."
-            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            placeholder="Type message to recruiter..."
+            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
           />
-          <button type="submit" className="bg-teal-700 hover:bg-teal-800 text-white p-2.5 rounded-xl transition">
+          <button
+            type="submit"
+            className="bg-teal-700 hover:bg-teal-800 text-white p-2 sm:p-2.5 rounded-xl transition shrink-0"
+            aria-label="Send message"
+          >
             <Send className="w-4 h-4" />
           </button>
         </form>

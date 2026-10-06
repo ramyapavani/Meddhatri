@@ -20,7 +20,7 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
     {
       id: 'm1',
       sender: 'ai',
-      text: `Hello ${user?.name || 'Doctor'}! I am your MedVance AI Healthcare Career Advisor. Ask me anything about specialty compensation benchmarks, hospital medical board interviews, or optimizing your clinical profile.`,
+      text: `Hello ${user?.name || 'Doctor'}! I am your MedDhatri AI Healthcare Career Advisor. Ask me anything about specialty compensation benchmarks, hospital medical board interviews, or optimizing your clinical profile.`,
       time: 'Just now'
     }
   ]);
@@ -90,7 +90,7 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base">MedVance AI Career Advisor</h3>
+              <h3 className="font-bold text-base">MedDhatri AI Career Advisor</h3>
               <p className="text-xs text-teal-200">Context-aware healthcare mentorship</p>
             </div>
           </div>

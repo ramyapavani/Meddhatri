@@ -5,7 +5,7 @@ import { Stethoscope, Lock, Mail, ShieldCheck, Sparkles, ArrowRight, UserCheck, 
 
 export const LoginPage: React.FC = () => {
   const { login, switchRolePersona } = useAuth();
-  const [email, setEmail] = useState('ananya.rao@medvance.demo');
+  const [email, setEmail] = useState('ananya.rao@meddhatri.demo');
   const [password, setPassword] = useState('password123');
   const [role, setRole] = useState<UserRole>('PROFESSIONAL');
   const [error, setError] = useState('');
@@ -37,7 +37,7 @@ export const LoginPage: React.FC = () => {
           <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center mx-auto shadow-md">
             <Stethoscope className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-extrabold text-[#102A43]">Welcome Back to MedVance AI</h2>
+          <h2 className="text-2xl font-extrabold text-[#102A43]">Welcome Back to MedDhatri AI</h2>
           <p className="text-xs text-slate-500">Sign in to manage your healthcare applications or recruitment pipeline</p>
         </div>
 
@@ -49,11 +49,11 @@ export const LoginPage: React.FC = () => {
               type="button"
               onClick={() => {
                 switchRolePersona('doctor');
-                navigate('/professional/dashboard');
+                window.open('/professional/dashboard', '_blank', 'noopener,noreferrer');
               }}
               className="p-2 rounded-xl bg-white border border-slate-200 font-semibold text-slate-800 hover:border-teal-500 transition text-left"
             >
-              👨‍⚕️ Dr. Ananya (Doctor)
+              👨‍⚕️ Dr. Ananya (Doctor) ↗
             </button>
             <button
               type="button"
@@ -133,7 +133,7 @@ export const LoginPage: React.FC = () => {
         </form>
 
         <p className="text-center text-xs text-slate-500">
-          New to MedVance AI?{' '}
+          New to MedDhatri AI?{' '}
           <Link to="/register" className="font-bold text-teal-700 hover:underline">Create Account</Link>
         </p>
       </div>

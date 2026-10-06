@@ -15,15 +15,14 @@ import { JobSearchPage } from './pages/public/JobSearchPage.js';
 import { JobDetailPage } from './pages/public/JobDetailPage.js';
 import { ProfessionalsExplorePage } from './pages/public/ProfessionalsExplorePage.js';
 import { OrganizationsExplorePage } from './pages/public/OrganizationsExplorePage.js';
-import { ResourcesBlogPage } from './pages/public/ResourcesBlogPage.js';
-import { BlogDetailPage } from './pages/public/BlogDetailPage.js';
 import { PricingPage } from './pages/public/PricingPage.js';
 import { LoginPage } from './pages/public/LoginPage.js';
 import { RegisterPage } from './pages/public/RegisterPage.js';
 import { PortalsGuidePage } from './pages/public/PortalsGuidePage.js';
 import { AboutUsPage } from './pages/public/AboutUsPage.js';
+import { LeadershipPage } from './pages/public/LeadershipPage.js';
 import { HowItWorksPage } from './pages/public/HowItWorksPage.js';
-import { FaqPage } from './pages/public/FaqPage.js';
+import { FaqsPage } from './pages/public/FaqsPage.js';
 import { ContactUsPage } from './pages/public/ContactUsPage.js';
 
 // Professional Pages
@@ -60,15 +59,16 @@ function AppContent() {
           <Route path="/jobs" element={<JobSearchPage />} />
           <Route path="/jobs/:slug" element={<JobDetailPage />} />
           <Route path="/about" element={<AboutUsPage />} />
-          <Route path="/leadership" element={<AboutUsPage />} />
+          <Route path="/leadership" element={<LeadershipPage />} />
           <Route path="/how-it-works" element={<HowItWorksPage />} />
-          <Route path="/faqs" element={<FaqPage />} />
+          <Route path="/faqs" element={<FaqsPage />} />
+          <Route path="/faq" element={<FaqsPage />} />
           <Route path="/contact" element={<ContactUsPage />} />
+          <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/help" element={<ContactUsPage />} />
+          <Route path="/support" element={<ContactUsPage />} />
           <Route path="/professionals" element={<ProfessionalsExplorePage />} />
           <Route path="/organizations" element={<OrganizationsExplorePage />} />
-          <Route path="/resources" element={<ResourcesBlogPage />} />
-          <Route path="/blogs" element={<ResourcesBlogPage />} />
-          <Route path="/resources/:slug" element={<BlogDetailPage />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
@@ -77,6 +77,8 @@ function AppContent() {
         {/* Professional Portal */}
         <Route path="/professional" element={<ProfessionalLayout />}>
           <Route path="dashboard" element={<ProfessionalDashboard />} />
+          <Route path="jobs" element={<JobSearchPage />} />
+          <Route path="jobs/:slug" element={<JobDetailPage />} />
           <Route path="recommended" element={<RecommendedJobsPage />} />
           <Route path="applications" element={<MyApplicationsPage />} />
           <Route path="saved" element={<SavedJobsPage />} />

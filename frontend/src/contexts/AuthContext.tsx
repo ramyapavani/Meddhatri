@@ -33,7 +33,7 @@ const DEMO_PERSONAS: Record<string, AuthUser> = {
   doctor: {
     _id: 'user_doc_01',
     name: 'Dr. Ananya Rao',
-    email: 'ananya.rao@medvance.demo',
+    email: 'ananya.rao@meddhatri.demo',
     phone: '+91 94451 22345',
     role: 'PROFESSIONAL',
     avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&auto=format&fit=crop&q=80',
@@ -45,7 +45,7 @@ const DEMO_PERSONAS: Record<string, AuthUser> = {
   nurse: {
     _id: 'user_nurse_01',
     name: 'Priya Nair',
-    email: 'priya.nair@medvance.demo',
+    email: 'priya.nair@meddhatri.demo',
     phone: '+91 97401 55678',
     role: 'PROFESSIONAL',
     avatar: 'https://images.unsplash.com/photo-1594824813591-13723383a54b?w=200&auto=format&fit=crop&q=80',
@@ -66,7 +66,7 @@ const DEMO_PERSONAS: Record<string, AuthUser> = {
   admin: {
     _id: 'user_admin_01',
     name: 'Dr. Rajesh Sharma (Super Admin)',
-    email: 'admin@medvance.ai',
+    email: 'admin@meddhatri.ai',
     phone: '+91 98765 43210',
     role: 'SUPER_ADMIN',
     avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&auto=format&fit=crop&q=80',
@@ -78,7 +78,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(() => {
-    const saved = localStorage.getItem('medvance_current_user');
+    const saved = localStorage.getItem('meddhatri_current_user');
     return saved ? JSON.parse(saved) : DEMO_PERSONAS.doctor; // Start logged-in as verified Dr. Ananya Rao for instant exploration!
   });
   const [token, setToken] = useState<string | null>(() => ApiClient.getToken() || 'demo_mock_jwt_token');
@@ -86,9 +86,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     if (user) {
-      localStorage.setItem('medvance_current_user', JSON.stringify(user));
+      localStorage.setItem('meddhatri_current_user', JSON.stringify(user));
     } else {
-      localStorage.removeItem('medvance_current_user');
+      localStorage.removeItem('meddhatri_current_user');
     }
   }, [user]);
 
@@ -141,7 +141,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(null);
     setToken(null);
     ApiClient.removeToken();
-    localStorage.removeItem('medvance_current_user');
+    localStorage.removeItem('meddhatri_current_user');
   };
 
   const switchRolePersona = (roleKey: 'doctor' | 'recruiter' | 'admin' | 'nurse') => {

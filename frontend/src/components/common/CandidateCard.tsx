@@ -32,7 +32,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/90 hover:border-teal-400/80 p-6 shadow-subtle hover:shadow-premium transition-all duration-300 relative flex flex-col justify-between">
+    <div className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#2DC4B4]/80 p-6 shadow-subtle hover:shadow-xl transition-all duration-300 relative flex flex-col justify-between">
       <div>
         {/* Top Header with Avatar, Verified status, Headline */}
         <div className="flex items-start gap-4 mb-4">
@@ -40,10 +40,13 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
             <img
               src={candidate.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
               alt={candidate.name}
-              className="w-14 h-14 rounded-2xl object-cover border-2 border-white shadow-md ring-2 ring-slate-100"
+              onError={(e) => {
+                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+              }}
+              className="w-14 h-14 rounded-2xl object-cover border-2 border-white shadow-md ring-2 ring-[#E0F7F5]"
             />
             {candidate.verificationStatus === 'VERIFIED' && (
-              <span className="absolute -bottom-1 -right-1 bg-teal-600 text-white p-0.5 rounded-full ring-2 ring-white" title="Council Verified">
+              <span className="absolute -bottom-1 -right-1 bg-[#2DC4B4] text-white p-0.5 rounded-full ring-2 ring-white" title="Council Verified">
                 <CheckCircle2 className="w-3.5 h-3.5" />
               </span>
             )}
@@ -51,19 +54,19 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
 
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between gap-2">
-              <h3 className="font-bold text-base text-[#102A43] truncate">{candidate.name}</h3>
-              <span className="inline-flex items-center gap-1 bg-teal-50 border border-teal-200/60 text-teal-800 text-[11px] font-bold px-2 py-0.5 rounded-full">
-                <Sparkles className="w-3 h-3 text-teal-600" />
+              <h3 className="font-bold text-base text-[#1B5F85] truncate">{candidate.name}</h3>
+              <span className="inline-flex items-center gap-1 bg-[#E0F7F5] border border-[#2DC4B4]/40 text-[#1B5F85] text-[11px] font-bold px-2 py-0.5 rounded-full">
+                <Sparkles className="w-3 h-3 text-[#2DC4B4]" />
                 94% Match
               </span>
             </div>
-            <p className="text-xs font-semibold text-teal-700 truncate">{candidate.headline}</p>
+            <p className="text-xs font-semibold text-[#2DC4B4] truncate">{candidate.headline}</p>
             <div className="flex items-center gap-3 text-xs text-slate-500 mt-1">
               <span className="flex items-center gap-1">
-                <MapPin className="w-3 h-3" /> {candidate.location}
+                <MapPin className="w-3 h-3 text-slate-400" /> {candidate.location}
               </span>
               <span className="flex items-center gap-1">
-                <Briefcase className="w-3 h-3" /> {candidate.experienceYears} yrs exp
+                <Briefcase className="w-3 h-3 text-slate-400" /> {candidate.experienceYears} yrs exp
               </span>
             </div>
           </div>
@@ -71,7 +74,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
 
         {/* Bio summary */}
         {candidate.bio && (
-          <p className="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed bg-slate-50/50 p-2.5 rounded-xl border border-slate-100">
+          <p className="text-xs text-slate-600 line-clamp-2 mb-4 leading-relaxed bg-slate-50/70 p-2.5 rounded-xl border border-slate-100">
             {candidate.bio}
           </p>
         )}
@@ -79,7 +82,7 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
         {/* Skills */}
         <div className="flex flex-wrap gap-1.5 mb-5">
           {candidate.skills?.slice(0, 5).map((skill: string, idx: number) => (
-            <span key={idx} className="text-[11px] px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-700 font-medium">
+            <span key={idx} className="text-[11px] px-2.5 py-0.5 rounded-md bg-[#E0F7F5]/60 text-[#1B5F85] font-semibold border border-[#2DC4B4]/15">
               {skill}
             </span>
           ))}
@@ -101,14 +104,14 @@ export const CandidateCard: React.FC<CandidateCardProps> = ({
                 : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
             }`}
           >
-            <BookmarkCheck className="w-3.5 h-3.5 text-teal-600" />
+            <BookmarkCheck className="w-3.5 h-3.5 text-[#2DC4B4]" />
             {shortlisted ? 'Shortlisted' : 'Shortlist'}
           </button>
           <button
             onClick={() => onSchedule && onSchedule(candidate)}
-            className="px-3 py-1.5 rounded-lg text-xs font-bold bg-[#102A43] hover:bg-[#0B1C2D] text-white transition flex items-center gap-1 shadow-sm"
+            className="px-3.5 py-1.5 rounded-lg text-xs font-bold bg-[#1B5F85] hover:bg-[#154E70] text-white transition flex items-center gap-1 shadow-sm"
           >
-            <Calendar className="w-3.5 h-3.5 text-teal-300" />
+            <Calendar className="w-3.5 h-3.5 text-[#2DC4B4]" />
             Interview
           </button>
         </div>

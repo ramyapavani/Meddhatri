@@ -100,17 +100,17 @@ export const JobSearchPage: React.FC = () => {
   const jobTypesList = ['All', 'Full-time', 'Part-time', 'Contract', 'Locum', 'Fellowship'];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+    <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-8 space-y-6">
       {/* Top Search & Filter Bar */}
-      <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-subtle flex flex-col md:flex-row gap-3 items-center justify-between">
-        <div className="flex-1 w-full flex items-center gap-3 bg-slate-50 border border-slate-200 px-4 py-2.5 rounded-xl">
-          <Search className="w-5 h-5 text-slate-400 shrink-0" />
+      <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-subtle flex flex-col md:flex-row gap-3 items-center justify-between">
+        <div className="flex-1 w-full flex items-center gap-3 bg-slate-50/80 border border-slate-200 px-4 py-3 rounded-xl focus-within:ring-2 focus-within:ring-[#2DC4B4] focus-within:border-[#2DC4B4] transition">
+          <Search className="w-5 h-5 text-[#1B5F85] shrink-0" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search by specialty, role, skill (e.g. Cardiology, Cath Lab, ICU)..."
-            className="w-full text-xs sm:text-sm bg-transparent focus:outline-none text-slate-800"
+            className="w-full text-xs sm:text-sm bg-transparent focus:outline-none text-slate-800 placeholder-slate-400"
           />
           {searchTerm && (
             <button onClick={() => setSearchTerm('')} className="text-slate-400 hover:text-slate-600">

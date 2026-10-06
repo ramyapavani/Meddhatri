@@ -162,7 +162,14 @@ export const OrganizationDashboard: React.FC = () => {
           {INITIAL_CANDIDATES.slice(0, 3).map((cand) => (
             <div key={cand._id} className="p-4 rounded-2xl border border-slate-100 bg-slate-50/50 space-y-3">
               <div className="flex items-center gap-3">
-                <img src={cand.avatar} alt={cand.name} className="w-12 h-12 rounded-xl object-cover" />
+                <img
+                  src={cand.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
+                  alt={cand.name}
+                  onError={(e) => {
+                    (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+                  }}
+                  className="w-12 h-12 rounded-xl object-cover"
+                />
                 <div className="min-w-0 flex-1">
                   <h4 className="font-bold text-xs text-slate-900 truncate">{cand.name}</h4>
                   <p className="text-[11px] text-teal-700 truncate font-semibold">{cand.specialization}</p>

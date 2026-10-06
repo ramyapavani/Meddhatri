@@ -54,36 +54,39 @@ export const ProfileEditPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-[#102A43]">Professional Healthcare Profile</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-[#102A43]">Professional Healthcare Profile</h1>
           <p className="text-xs text-slate-500 mt-0.5">Keep your clinical qualifications, council registration, and procedural volume updated</p>
         </div>
 
         {savedSuccess && (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold animate-in fade-in">
+          <span className="self-start sm:self-auto inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold animate-in fade-in">
             <CheckCircle2 className="w-4 h-4 text-emerald-600" /> Changes Saved
           </span>
         )}
       </div>
 
-      <form onSubmit={handleSave} className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle space-y-6">
+      <form onSubmit={handleSave} className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 md:p-8 shadow-subtle space-y-5 sm:space-y-6">
         {/* Avatar & Verification Indicator */}
-        <div className="flex items-center gap-5 pb-6 border-b border-slate-100">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 pb-6 border-b border-slate-100 text-center sm:text-left">
           <img
             src={user?.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&auto=format&fit=crop&q=80'}
             alt="Doctor"
-            className="w-20 h-20 rounded-2xl object-cover ring-4 ring-slate-100 shadow-md"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&auto=format&fit=crop&q=80';
+            }}
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-4 ring-slate-100 shadow-md shrink-0"
           />
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
               <h3 className="font-bold text-base text-slate-900">{name}</h3>
               <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-bold">
                 <ShieldCheck className="w-3.5 h-3.5 text-teal-600" /> Verified Practitioner
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-0.5">State Medical Council Reg: REG-492104</p>
+            <p className="text-xs text-slate-500 mt-1">State Medical Council Reg: REG-492104</p>
           </div>
         </div>
 
@@ -155,11 +158,11 @@ export const ProfileEditPage: React.FC = () => {
         {/* Skills Tag Input */}
         <div>
           <label className="text-xs font-bold text-slate-700 block mb-2">Clinical Competencies & Procedural Skills</label>
-          <div className="flex flex-wrap gap-2 mb-3">
+          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
             {skills.map((s, idx) => (
-              <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-semibold">
+              <span key={idx} className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-semibold">
                 {s}
-                <button type="button" onClick={() => handleRemoveSkill(s)} className="text-teal-600 hover:text-teal-900">×</button>
+                <button type="button" onClick={() => handleRemoveSkill(s)} className="text-teal-600 hover:text-teal-900 font-bold ml-0.5">×</button>
               </span>
             ))}
           </div>
@@ -169,13 +172,13 @@ export const ProfileEditPage: React.FC = () => {
               type="text"
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
-              placeholder="Add skill (e.g. Critical Care Triage, NABH Compliance)..."
+              placeholder="Add skill (e.g. Critical Care, Triage)..."
               className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
             />
             <button
               type="button"
               onClick={handleAddSkill}
-              className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-1"
+              className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 sm:px-4 py-2 rounded-xl text-xs flex items-center gap-1 shrink-0"
             >
               <Plus className="w-3.5 h-3.5" /> Add
             </button>
@@ -185,7 +188,7 @@ export const ProfileEditPage: React.FC = () => {
         <div className="pt-4 border-t border-slate-100 flex items-center justify-end">
           <button
             type="submit"
-            className="bg-teal-700 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-xl text-xs shadow-md transition flex items-center gap-2"
+            className="w-full sm:w-auto bg-teal-700 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2"
           >
             <Save className="w-4 h-4" /> Save Profile Updates
           </button>

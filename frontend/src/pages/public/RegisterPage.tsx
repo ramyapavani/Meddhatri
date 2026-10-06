@@ -48,7 +48,7 @@ export const RegisterPage: React.FC = () => {
           <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center mx-auto shadow-md">
             <Stethoscope className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-extrabold text-[#102A43]">Create Your MedVance AI Account</h2>
+          <h2 className="text-2xl font-extrabold text-[#102A43]">Create Your MedDhatri AI Account</h2>
           <p className="text-xs text-slate-500">Join the verified healthcare talent ecosystem</p>
         </div>
 

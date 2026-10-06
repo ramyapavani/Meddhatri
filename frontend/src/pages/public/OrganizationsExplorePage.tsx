@@ -55,55 +55,62 @@ export const OrganizationsExplorePage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
-      <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold">
-          <Building2 className="w-3.5 h-3.5 text-teal-600" /> Accredited Medical Employers
+    <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-10 space-y-8">
+      <div className="text-center max-w-4xl mx-auto space-y-3">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E0F7F5] border border-[#2DC4B4]/30 text-[#1B5F85] text-xs font-bold shadow-xs">
+          <Building2 className="w-3.5 h-3.5 text-[#2DC4B4]" /> Accredited Medical Employers
         </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#102A43]">
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#1B5F85] tracking-tight">
           Partner Healthcare Institutions
         </h1>
-        <p className="text-xs sm:text-sm text-slate-600">
+        <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
           Discover top NABH & JCI accredited hospitals, diagnostic laboratories, and medical colleges actively hiring clinical leaders.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {organizations.map((org) => (
-          <div key={org.id} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-subtle hover:shadow-premium transition flex flex-col justify-between space-y-4">
+          <div key={org.id} className="bg-white p-6 sm:p-7 rounded-3xl border border-slate-200 shadow-subtle hover:shadow-xl hover:border-[#2DC4B4]/40 transition flex flex-col justify-between space-y-4">
             <div className="flex items-start gap-4">
-              <img src={org.logo} alt={org.name} className="w-16 h-16 rounded-2xl object-cover border border-slate-100 shadow-sm" />
+              <img
+                src={org.logo || 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=200&auto=format&fit=crop&q=80'}
+                alt={org.name}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=200&auto=format&fit=crop&q=80';
+                }}
+                className="w-16 h-16 rounded-2xl object-cover border border-slate-100 shadow-sm"
+              />
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-semibold text-teal-700">{org.type}</span>
-                  <ShieldCheck className="w-3.5 h-3.5 text-teal-600" />
+                  <span className="text-xs font-semibold text-[#2DC4B4]">{org.type}</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#2DC4B4]" />
                 </div>
-                <h3 className="font-bold text-lg text-slate-900">{org.name}</h3>
-                <div className="flex items-center gap-3 text-xs text-slate-500 mt-1">
-                  <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> {org.city}</span>
+                <h3 className="font-bold text-lg sm:text-xl text-[#1B5F85]">{org.name}</h3>
+                <div className="flex items-center gap-3 text-xs sm:text-sm text-slate-500 mt-1">
+                  <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5 text-slate-400" /> {org.city}</span>
                   <span>•</span>
                   <span>{org.beds}</span>
                 </div>
               </div>
             </div>
 
-            <p className="text-xs text-slate-600 leading-relaxed bg-slate-50/60 p-3 rounded-xl border border-slate-100">
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50/70 p-3.5 rounded-xl border border-slate-100">
               {org.description}
             </p>
 
             <div className="flex flex-wrap gap-1.5">
               {org.accreditations.map((acc, idx) => (
-                <span key={idx} className="text-[11px] px-2.5 py-0.5 rounded-md bg-teal-50 text-teal-800 border border-teal-100 font-semibold">
+                <span key={idx} className="text-xs px-2.5 py-0.5 rounded-md bg-[#E0F7F5] text-[#1B5F85] border border-[#2DC4B4]/20 font-semibold">
                   {acc}
                 </span>
               ))}
             </div>
 
             <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
-              <span className="text-xs font-bold text-slate-700">{org.openings}</span>
+              <span className="text-xs sm:text-sm font-bold text-slate-700">{org.openings}</span>
               <Link
                 to={`/jobs?search=${encodeURIComponent(org.name)}`}
-                className="text-xs font-bold bg-[#102A43] hover:bg-[#0B1C2D] text-white px-4 py-2 rounded-xl transition flex items-center gap-1.5"
+                className="text-xs sm:text-sm font-bold bg-[#1B5F85] hover:bg-[#154E70] text-white px-5 py-2.5 rounded-xl transition flex items-center gap-1.5 shadow-sm"
               >
                 View Vacancies <ArrowRight className="w-3.5 h-3.5" />
               </Link>

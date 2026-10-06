@@ -56,29 +56,29 @@ export const PricingPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold">
-          <Sparkles className="w-3.5 h-3.5 text-teal-600" /> Transparent Hospital & Recruiter Pricing
+    <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-12 space-y-12">
+      <div className="text-center max-w-4xl mx-auto space-y-4">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E0F7F5] border border-[#2DC4B4]/30 text-[#1B5F85] text-xs font-bold shadow-xs">
+          <Sparkles className="w-3.5 h-3.5 text-[#2DC4B4]" /> Transparent Hospital & Recruiter Pricing
         </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-[#102A43]">
+        <h1 className="text-3xl sm:text-5xl font-extrabold text-[#1B5F85] tracking-tight">
           Accelerate Your Healthcare Recruitment
         </h1>
-        <p className="text-xs sm:text-sm text-slate-600">
+        <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
           Empower your hospital talent team with certified clinician matching, credential validation, and seamless applicant tracking.
         </p>
 
         {/* Billing Switch */}
-        <div className="inline-flex items-center gap-3 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold">
+        <div className="inline-flex items-center gap-3 bg-slate-100 p-1.5 rounded-2xl text-xs font-bold mt-2">
           <button
             onClick={() => setBillingCycle('monthly')}
-            className={`px-4 py-2 rounded-xl transition ${billingCycle === 'monthly' ? 'bg-white text-[#102A43] shadow-xs' : 'text-slate-500'}`}
+            className={`px-4 py-2 rounded-xl transition ${billingCycle === 'monthly' ? 'bg-white text-[#1B5F85] shadow-xs font-extrabold' : 'text-slate-500'}`}
           >
             Monthly Billing
           </button>
           <button
             onClick={() => setBillingCycle('yearly')}
-            className={`px-4 py-2 rounded-xl transition flex items-center gap-1.5 ${billingCycle === 'yearly' ? 'bg-teal-700 text-white shadow-xs' : 'text-slate-500'}`}
+            className={`px-4 py-2 rounded-xl transition flex items-center gap-1.5 ${billingCycle === 'yearly' ? 'bg-[#1B5F85] text-white shadow-xs font-extrabold' : 'text-slate-500'}`}
           >
             Annual Billing (Save 20%)
           </button>
@@ -86,39 +86,39 @@ export const PricingPage: React.FC = () => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch pt-4">
         {plans.map((plan, idx) => (
           <div
             key={idx}
-            className={`rounded-3xl p-8 flex flex-col justify-between transition-all relative ${
+            className={`rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all relative ${
               plan.highlight
-                ? 'bg-gradient-to-b from-[#102A43] to-[#0B1C2D] text-white shadow-2xl border-2 border-teal-400/60 ring-4 ring-teal-500/10 scale-105 z-10'
-                : 'bg-white text-slate-900 border border-slate-200 shadow-subtle'
+                ? 'bg-gradient-to-b from-[#1B5F85] to-[#113E57] text-white shadow-2xl border-2 border-[#2DC4B4] ring-4 ring-[#2DC4B4]/20 scale-105 z-10'
+                : 'bg-white text-slate-900 border border-slate-200 shadow-subtle hover:border-[#2DC4B4]/40 hover:shadow-xl'
             }`}
           >
             {plan.highlight && (
-              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-teal-500 text-[#102A43] text-[11px] font-black uppercase tracking-wider px-3.5 py-1 rounded-full shadow-md">
+              <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-[#2DC4B4] text-[#1B5F85] text-xs font-black uppercase tracking-wider px-4 py-1 rounded-full shadow-md">
                 Most Popular for Hospitals
               </span>
             )}
 
             <div className="space-y-6">
               <div>
-                <h3 className="text-xl font-bold">{plan.name}</h3>
-                <p className={`text-xs mt-1 ${plan.highlight ? 'text-slate-300' : 'text-slate-500'}`}>{plan.tagline}</p>
+                <h3 className="text-xl sm:text-2xl font-bold">{plan.name}</h3>
+                <p className={`text-xs sm:text-sm mt-1.5 ${plan.highlight ? 'text-slate-200' : 'text-slate-500'}`}>{plan.tagline}</p>
               </div>
 
               <div className="flex items-baseline gap-1">
-                <span className="text-3xl sm:text-4xl font-black">{plan.price}</span>
+                <span className="text-3xl sm:text-4xl font-extrabold">{plan.price}</span>
                 {plan.period && (
-                  <span className={`text-xs ${plan.highlight ? 'text-teal-300' : 'text-slate-500'}`}>{plan.period}</span>
+                  <span className={`text-xs sm:text-sm ${plan.highlight ? 'text-[#2DC4B4]' : 'text-slate-500'}`}>{plan.period}</span>
                 )}
               </div>
 
-              <div className="space-y-3 pt-4 border-t border-slate-200/20 text-xs">
+              <div className="space-y-3 pt-4 border-t border-slate-200/20 text-xs sm:text-sm">
                 {plan.features.map((f, i) => (
                   <div key={i} className="flex items-start gap-2.5">
-                    <Check className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlight ? 'text-teal-400' : 'text-teal-600'}`} />
+                    <Check className={`w-4 h-4 shrink-0 mt-0.5 ${plan.highlight ? 'text-[#2DC4B4]' : 'text-[#2DC4B4]'}`} />
                     <span>{f}</span>
                   </div>
                 ))}
@@ -128,10 +128,10 @@ export const PricingPage: React.FC = () => {
             <div className="pt-8">
               <Link
                 to="/register?role=ORGANIZATION_ADMIN"
-                className={`w-full py-3.5 rounded-xl text-xs font-bold transition flex items-center justify-center shadow-md ${
+                className={`w-full py-3.5 rounded-xl text-sm font-extrabold transition flex items-center justify-center shadow-md ${
                   plan.highlight
-                    ? 'bg-teal-500 hover:bg-teal-400 text-[#102A43]'
-                    : 'bg-[#102A43] hover:bg-[#0B1C2D] text-white'
+                    ? 'bg-[#2DC4B4] hover:bg-[#25ab9d] text-white'
+                    : 'bg-[#1B5F85] hover:bg-[#154E70] text-white'
                 }`}
               >
                 {plan.cta}

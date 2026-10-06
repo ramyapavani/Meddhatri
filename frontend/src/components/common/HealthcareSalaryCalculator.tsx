@@ -97,21 +97,21 @@ export const HealthcareSalaryCalculator: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-200 shadow-premium overflow-hidden">
-      <div className="p-6 sm:p-8 bg-gradient-to-r from-[#102A43] to-[#0F766E] text-white">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-400/20 text-teal-200 border border-teal-300/30 text-xs font-bold mb-3">
+    <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-premium overflow-hidden">
+      <div className="p-4 sm:p-6 md:p-8 bg-gradient-to-r from-[#102A43] to-[#0F766E] text-white">
+        <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full bg-teal-400/20 text-teal-200 border border-teal-300/30 text-[10.5px] sm:text-xs font-bold mb-2 sm:mb-3">
           <Sparkles className="w-3.5 h-3.5 text-teal-300" />
           <span>AI Clinical Compensation Benchmark Engine</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-black tracking-tight">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight">
           Healthcare Salary & Locum Shift Calculator
         </h2>
-        <p className="text-xs sm:text-sm text-teal-100/90 mt-1 max-w-2xl">
+        <p className="text-xs sm:text-sm text-teal-100/90 mt-1 max-w-2xl font-normal">
           Real-time compensation analytics benchmarked across 320+ NABH quaternary hospitals, multi-specialty chains, and diagnostic networks in India.
         </p>
       </div>
 
-      <div className="p-6 sm:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="p-4 sm:p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
         {/* Controls Column */}
         <div className="lg:col-span-5 space-y-6">
           <div>

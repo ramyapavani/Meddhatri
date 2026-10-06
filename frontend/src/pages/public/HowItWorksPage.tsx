@@ -73,17 +73,17 @@ export const HowItWorksPage: React.FC = () => {
   const currentSteps = activeTab === 'PROFESSIONAL' ? clinicianSteps : employerSteps;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold shadow-xs">
-          <Sparkles className="w-4 h-4 text-teal-600" />
+      <div className="text-center max-w-4xl mx-auto space-y-4">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#E0F7F5] border border-[#2DC4B4]/30 text-[#1B5F85] text-xs font-bold shadow-xs">
+          <Sparkles className="w-4 h-4 text-[#2DC4B4]" />
           <span>Simple, Transparent Healthcare Recruitment</span>
         </span>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#102A43] tracking-tight">
-          How MedVance AI Works
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1B5F85] tracking-tight">
+          How MedDhatri AI Works
         </h1>
-        <p className="text-sm sm:text-base text-slate-600">
+        <p className="text-base sm:text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
           Whether you are a healthcare practitioner looking for flexible career growth or a hospital scaling critical care teams, our platform simplifies the entire journey.
         </p>
 
@@ -93,7 +93,7 @@ export const HowItWorksPage: React.FC = () => {
             onClick={() => setActiveTab('PROFESSIONAL')}
             className={`px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 ${
               activeTab === 'PROFESSIONAL'
-                ? 'bg-teal-700 text-white shadow-sm'
+                ? 'bg-[#1B5F85] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -103,7 +103,7 @@ export const HowItWorksPage: React.FC = () => {
             onClick={() => setActiveTab('EMPLOYER')}
             className={`px-6 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition flex items-center gap-2 ${
               activeTab === 'EMPLOYER'
-                ? 'bg-teal-700 text-white shadow-sm'
+                ? 'bg-[#1B5F85] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -119,20 +119,20 @@ export const HowItWorksPage: React.FC = () => {
           return (
             <div
               key={idx}
-              className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-subtle hover:shadow-premium transition flex flex-col justify-between relative space-y-6"
+              className="bg-white rounded-3xl border border-slate-200/80 p-7 sm:p-8 shadow-subtle hover:shadow-xl hover:border-[#2DC4B4]/40 transition flex flex-col justify-between relative space-y-6"
             >
               <div>
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center border border-teal-100">
-                    <Icon className="w-6 h-6 text-teal-600" />
+                  <div className="w-14 h-14 rounded-2xl bg-[#E0F7F5] text-[#1B5F85] flex items-center justify-center border border-[#2DC4B4]/20">
+                    <Icon className="w-7 h-7 text-[#2DC4B4]" />
                   </div>
-                  <span className="text-2xl font-black text-slate-200">{step.num}</span>
+                  <span className="text-3xl font-black text-slate-200">{step.num}</span>
                 </div>
-                <h3 className="font-bold text-base text-[#102A43] mb-2">{step.title}</h3>
-                <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+                <h3 className="font-bold text-lg text-[#1B5F85] mb-2">{step.title}</h3>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">{step.desc}</p>
               </div>
 
-              <div className="pt-4 border-t border-slate-100 flex items-center text-[11px] font-bold text-teal-700">
+              <div className="pt-4 border-t border-slate-100 flex items-center text-xs font-bold text-[#2DC4B4]">
                 <span>Step {idx + 1} of 4</span>
               </div>
             </div>
@@ -141,20 +141,20 @@ export const HowItWorksPage: React.FC = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-12 text-center space-y-6">
-        <h2 className="text-2xl sm:text-3xl font-bold text-[#102A43]">
+      <div className="bg-gradient-to-r from-slate-50 via-teal-50/40 to-slate-50 border border-slate-200/80 rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-sm">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B5F85]">
           Ready to experience frictionless healthcare staffing?
         </h2>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Link
             to="/jobs"
-            className="bg-teal-700 hover:bg-teal-800 text-white font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm shadow-md transition flex items-center gap-2"
+            className="bg-[#1B5F85] hover:bg-[#154E70] text-white font-extrabold px-7 py-3 rounded-xl text-sm shadow-md transition flex items-center gap-2"
           >
             Search Open Positions <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             to="/organization/jobs/create"
-            className="bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm transition"
+            className="bg-white hover:bg-[#E0F7F5] text-[#1B5F85] border border-slate-300 font-extrabold px-7 py-3 rounded-xl text-sm transition"
           >
             Post a Hospital Job Opening
           </Link>

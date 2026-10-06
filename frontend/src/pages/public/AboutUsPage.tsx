@@ -28,50 +28,50 @@ export const AboutUsPage: React.FC = () => {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
       {/* Hero Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4">
-        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-xs font-bold shadow-xs">
-          <ShieldCheck className="w-4 h-4 text-teal-600" />
-          <span>About MedVance AI</span>
+      <div className="text-center max-w-4xl mx-auto space-y-4">
+        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#E0F7F5] border border-[#2DC4B4]/30 text-[#1B5F85] text-xs font-bold shadow-xs">
+          <ShieldCheck className="w-4 h-4 text-[#2DC4B4]" />
+          <span>About MedDhatri AI</span>
         </span>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#102A43] tracking-tight leading-tight">
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1B5F85] tracking-tight leading-tight">
           Empowering Healthcare Careers, Elevating Patient Care.
         </h1>
-        <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-          MedVance AI is India’s premier dedicated healthcare talent ecosystem, connecting verified clinicians, nurses, pharmacists, and allied professionals with accredited quaternary hospitals and research laboratories.
+        <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-3xl mx-auto">
+          MedDhatri AI is India’s premier dedicated healthcare talent ecosystem, connecting verified clinicians, nurses, pharmacists, and allied professionals with accredited quaternary hospitals and research laboratories.
         </p>
       </div>
 
       {/* Vision & Mission Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-subtle space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-teal-700 flex items-center justify-center border border-teal-100">
-            <HeartPulse className="w-6 h-6 text-teal-600" />
+        <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-subtle space-y-4 hover:border-[#2DC4B4]/40 transition">
+          <div className="w-14 h-14 rounded-2xl bg-[#E0F7F5] text-[#1B5F85] flex items-center justify-center border border-[#2DC4B4]/20">
+            <HeartPulse className="w-7 h-7 text-[#2DC4B4]" />
           </div>
-          <h2 className="text-2xl font-bold text-[#102A43]">Our Mission</h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <h2 className="text-2xl font-bold text-[#1B5F85]">Our Mission</h2>
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             To eliminate clinical staffing bottlenecks, protect medical compliance through automated council credential verification, and offer healthcare professionals transparent, fulfilling, and flexible career journeys.
           </p>
         </div>
 
-        <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-subtle space-y-4">
-          <div className="w-12 h-12 rounded-2xl bg-cyan-50 text-cyan-700 flex items-center justify-center border border-cyan-100">
-            <Sparkles className="w-6 h-6 text-cyan-600" />
+        <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-subtle space-y-4 hover:border-[#2DC4B4]/40 transition">
+          <div className="w-14 h-14 rounded-2xl bg-cyan-50 text-cyan-700 flex items-center justify-center border border-cyan-100">
+            <Sparkles className="w-7 h-7 text-[#2DC4B4]" />
           </div>
-          <h2 className="text-2xl font-bold text-[#102A43]">Our Vision</h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          <h2 className="text-2xl font-bold text-[#1B5F85]">Our Vision</h2>
+          <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
             A future where every hospital ward, emergency ICU, and specialized clinic is staffed by verified, motivated, and optimally matched clinical talent powered by transparent AI matching.
           </p>
         </div>
       </div>
 
       {/* Leadership Section */}
-      <section id="leadership" className="space-y-8 pt-6">
+      <section id="leadership" className="space-y-8 pt-4">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-bold text-teal-700 uppercase tracking-widest block mb-2">Executive Team</span>
-          <h2 className="text-3xl font-extrabold text-[#102A43]">Clinical & Technology Leadership</h2>
-          <p className="text-xs sm:text-sm text-slate-600 mt-1">
+          <span className="text-xs font-bold text-[#2DC4B4] uppercase tracking-widest block mb-2">Executive Team</span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-[#1B5F85]">Clinical & Technology Leadership</h2>
+          <p className="text-sm sm:text-base text-slate-600 mt-2">
             Guided by seasoned medical directors, healthcare informatics researchers, and enterprise platform architects.
           </p>
         </div>
@@ -80,19 +80,22 @@ export const AboutUsPage: React.FC = () => {
           {leaders.map((leader, idx) => (
             <div
               key={idx}
-              className="bg-white rounded-3xl border border-slate-200 p-6 shadow-subtle hover:shadow-premium transition flex flex-col items-center text-center space-y-4"
+              className="bg-white rounded-3xl border border-slate-200 p-7 shadow-subtle hover:shadow-xl hover:border-[#2DC4B4]/40 transition flex flex-col items-center text-center space-y-4"
             >
               <img
                 src={leader.avatar}
                 alt={leader.name}
-                className="w-28 h-28 rounded-full object-cover ring-4 ring-teal-50 shadow-md"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=300&auto=format&fit=crop&q=80';
+                }}
+                className="w-28 h-28 rounded-full object-cover ring-4 ring-[#E0F7F5] shadow-md"
               />
               <div>
-                <h3 className="font-bold text-lg text-[#102A43]">{leader.name}</h3>
-                <span className="text-xs font-semibold text-teal-700 block">{leader.role}</span>
-                <span className="text-[11px] text-slate-400 block mt-0.5">{leader.qual}</span>
+                <h3 className="font-bold text-lg text-[#1B5F85]">{leader.name}</h3>
+                <span className="text-xs font-semibold text-[#2DC4B4] block">{leader.role}</span>
+                <span className="text-xs text-slate-400 block mt-0.5">{leader.qual}</span>
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {leader.bio}
               </p>
             </div>
@@ -101,23 +104,23 @@ export const AboutUsPage: React.FC = () => {
       </section>
 
       {/* CTA Box */}
-      <div className="bg-gradient-to-r from-[#102A43] to-[#0F766E] rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+      <div className="bg-gradient-to-r from-[#1B5F85] via-[#165070] to-[#0D9488] rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
         <div className="space-y-2 text-center md:text-left">
-          <h3 className="text-2xl sm:text-3xl font-black">Join the MedVance Network Today</h3>
-          <p className="text-xs sm:text-sm text-teal-100 max-w-xl">
+          <h3 className="text-2xl sm:text-3xl font-black">Join the MedDhatri Network Today</h3>
+          <p className="text-sm sm:text-base text-teal-100 max-w-xl">
             Whether you are a specialist physician looking for your next clinical fellowship or a hospital hiring manager, we are here for you.
           </p>
         </div>
         <div className="flex flex-wrap gap-3">
           <Link
             to="/jobs"
-            className="bg-white text-teal-900 font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm hover:bg-teal-50 transition shadow-sm"
+            className="bg-white text-[#1B5F85] hover:text-[#154E70] font-extrabold px-7 py-3 rounded-xl text-sm hover:bg-[#E0F7F5] transition shadow-md"
           >
             Explore Healthcare Jobs
           </Link>
           <Link
             to="/organization/jobs/create"
-            className="bg-teal-600 hover:bg-teal-700 text-white font-extrabold px-6 py-3 rounded-xl text-xs sm:text-sm transition border border-teal-400"
+            className="bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold px-7 py-3 rounded-xl text-sm transition shadow-md border border-[#2DC4B4]"
           >
             Post a Job
           </Link>

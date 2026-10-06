@@ -29,9 +29,15 @@ export const ProfessionalLayout: React.FC = () => {
   const [aiModalOpen, setAiModalOpen] = useState(false);
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
+  const handleLogout = () => {
+    logout();
+    setSidebarOpen(false);
+    navigate('/login');
+  };
+
   const navigationItems = [
     { name: 'Dashboard', path: '/professional/dashboard', icon: LayoutDashboard },
-    { name: 'Find Jobs', path: '/jobs', icon: Briefcase },
+    { name: 'Find Jobs', path: '/professional/jobs', icon: Briefcase },
     { name: 'AI Recommended', path: '/professional/recommended', icon: Sparkles, badge: 'AI' },
     { name: 'My Applications', path: '/professional/applications', icon: FileCheck2 },
     { name: 'Saved Opportunities', path: '/professional/saved', icon: Bookmark },
@@ -43,44 +49,192 @@ export const ProfessionalLayout: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col md:flex-row">
-      {/* Persona Demo Bar at Top */}
-      <div className="md:hidden bg-[#102A43] text-white text-[11px] p-2 flex items-center justify-between">
-        <span className="truncate">{user?.name} ({user?.profession})</span>
-        <button onClick={() => switchRolePersona('recruiter')} className="text-teal-300 font-bold">
-          Switch to Recruiter ➔
-        </button>
-      </div>
+      {/* Mobile Top App Header */}
+      <header className="md:hidden sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 px-4 py-2.5 flex items-center justify-between shadow-2xs">
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setSidebarOpen(true)}
+            className="p-2 text-slate-700 hover:bg-slate-100 rounded-xl transition cursor-pointer"
+            aria-label="Open Clinician Menu"
+          >
+            <Menu className="w-5 h-5 text-[#1B5F85]" />
+          </button>
+          <Link to="/" className="flex items-center">
+            <img
+              src="/logo.png"
+              alt="MedDhatri"
+              className="h-8 sm:h-9 w-auto object-contain"
+            />
+          </Link>
+          <span className="text-[9.5px] px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-extrabold tracking-wider ml-0.5">
+            PRO
+          </span>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => switchRolePersona('recruiter')}
+            className="text-[11px] font-bold px-2.5 py-1 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 hover:bg-teal-100 transition cursor-pointer"
+          >
+            Recruiter ➔
+          </button>
+          <button
+            onClick={handleLogout}
+            title="Sign Out"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 transition cursor-pointer"
+          >
+            <LogOut className="w-4 h-4 text-rose-500" />
+          </button>
+          <Link
+            to="/professional/profile"
+            className="w-8 h-8 rounded-full overflow-hidden ring-2 ring-[#2DC4B4]/40"
+          >
+            <img
+              src={user?.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
+              alt={user?.name}
+              className="w-full h-full object-cover"
+            />
+          </Link>
+        </div>
+      </header>
+
+      {/* Mobile Slide-Over Navigation Drawer */}
+      {sidebarOpen && (
+        <div className="md:hidden fixed inset-0 z-50 flex">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs transition-opacity animate-in fade-in"
+            onClick={() => setSidebarOpen(false)}
+          />
+
+          {/* Drawer Panel */}
+          <div className="relative w-4/5 max-w-xs bg-white h-full shadow-2xl flex flex-col z-10 animate-in slide-in-from-left duration-200 overflow-hidden">
+            {/* Drawer Header */}
+            <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 shrink-0">
+              <div className="flex items-center gap-2">
+                <img
+                  src="/logo.png"
+                  alt="MedDhatri"
+                  className="h-8 w-auto object-contain"
+                />
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-extrabold">
+                  CLINICIAN
+                </span>
+              </div>
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="p-1.5 text-slate-500 hover:bg-slate-200 rounded-xl cursor-pointer"
+              >
+                <X className="w-5 h-5 text-slate-700" />
+              </button>
+            </div>
+
+            {/* Doctor Info Card */}
+            <div className="p-3.5 m-3 rounded-2xl border border-teal-100 bg-teal-50/40 flex items-center gap-3 shrink-0">
+              <img
+                src={user?.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
+                alt={user?.name}
+                className="w-10 h-10 rounded-full object-cover ring-2 ring-[#2DC4B4]"
+              />
+              <div className="min-w-0 flex-1">
+                <h4 className="text-xs font-bold text-slate-900 truncate">{user?.name}</h4>
+                <p className="text-[11px] text-[#1B5F85] font-semibold truncate">{user?.headline || user?.profession || 'Doctor'}</p>
+              </div>
+            </div>
+
+            {/* Navigation Items */}
+            <nav className="flex-1 px-3 py-1 space-y-1 overflow-y-auto min-h-0">
+              {navigationItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = location.pathname === item.path;
+                return (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    onClick={() => setSidebarOpen(false)}
+                    className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition ${
+                      isActive
+                        ? 'bg-[#1B5F85] text-white shadow-sm'
+                        : 'text-slate-600 hover:bg-slate-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#2DC4B4]' : 'text-slate-400'}`} />
+                      <span>{item.name}</span>
+                    </div>
+                    {item.badge && (
+                      <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                        isActive ? 'bg-white/20 text-white' : 'bg-teal-50 text-teal-700 border border-teal-200'
+                      }`}>
+                        {item.badge}
+                      </span>
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            {/* AI Tools & Actions */}
+            <div className="p-3 border-t border-slate-100 space-y-2 bg-slate-50/90 shrink-0 mt-auto">
+              <button
+                onClick={() => { setSidebarOpen(false); setResumeModalOpen(true); }}
+                className="w-full bg-white text-teal-700 p-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-teal-200 shadow-2xs cursor-pointer"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-teal-500" />
+                AI Resume Audit
+              </button>
+              <button
+                onClick={() => { setSidebarOpen(false); setAiModalOpen(true); }}
+                className="w-full bg-teal-50 text-teal-900 p-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-teal-200 cursor-pointer"
+              >
+                <MessageSquare className="w-3.5 h-3.5 text-teal-600" />
+                AI Career Advisor
+              </button>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-2 text-rose-600 hover:text-white hover:bg-rose-600 border border-rose-200 hover:border-rose-600 p-2.5 rounded-xl text-xs font-bold transition cursor-pointer bg-rose-50"
+              >
+                <LogOut className="w-3.5 h-3.5" /> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex flex-col w-64 bg-[#102A43] text-slate-200 border-r border-slate-800 shrink-0 select-none">
+      <aside className="hidden md:flex flex-col w-64 bg-white text-slate-700 border-r border-slate-200 shrink-0 select-none shadow-sm h-screen sticky top-0 z-30">
         {/* Brand */}
-        <div className="p-5 border-b border-slate-800 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-teal-600 flex items-center justify-center text-white shadow-sm">
-              <Stethoscope className="w-4 h-4" />
-            </div>
-            <div>
-              <span className="font-extrabold text-base tracking-tight text-white">MedVance</span>
-              <span className="text-[10px] ml-1 px-1 rounded bg-teal-900 text-teal-300 font-bold">PRO</span>
-            </div>
+        <div className="p-4 sm:p-5 border-b border-slate-100 flex flex-col items-center justify-center text-center gap-1.5 shrink-0">
+          <Link to="/" className="flex items-center justify-center group w-full">
+            <img
+              src="/logo.png"
+              alt="MedDhatri"
+              className="h-12 sm:h-14 w-auto max-w-[190px] object-contain transition-transform group-hover:scale-105"
+            />
           </Link>
+          <span className="inline-block text-[10px] px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-extrabold tracking-wider">
+            CLINICIAN PRO
+          </span>
         </div>
 
         {/* User Card */}
-        <div className="p-4 border-b border-slate-800/80 flex items-center gap-3 bg-slate-900/40">
+        <div className="p-3 mx-3 my-2 rounded-2xl border border-slate-100 bg-slate-50/80 flex items-center gap-3 shrink-0">
           <img
             src={user?.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
             alt={user?.name}
-            className="w-10 h-10 rounded-full object-cover ring-2 ring-teal-500/40"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
+            }}
+            className="w-10 h-10 rounded-full object-cover ring-2 ring-teal-500/20"
           />
           <div className="min-w-0 flex-1">
-            <h4 className="text-xs font-bold text-white truncate">{user?.name}</h4>
-            <p className="text-[11px] text-teal-300 truncate font-medium">{user?.headline || user?.profession || 'Specialist'}</p>
+            <h4 className="text-xs font-bold text-slate-900 truncate">{user?.name}</h4>
+            <p className="text-[11px] text-[#1B5F85] font-semibold truncate">{user?.headline || user?.profession || 'Specialist'}</p>
           </div>
         </div>
 
         {/* Navigation List */}
-        <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-1.5 space-y-1 overflow-y-auto min-h-0">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = location.pathname === item.path;
@@ -88,24 +242,26 @@ export const ProfessionalLayout: React.FC = () => {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium transition ${
+                className={`flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-bold transition ${
                   isActive
-                    ? 'bg-teal-700 text-white font-semibold shadow-sm'
-                    : 'text-slate-300 hover:bg-slate-800/70 hover:text-white'
+                    ? 'bg-[#1B5F85] text-white shadow-sm'
+                    : 'text-slate-600 hover:bg-slate-100/80 hover:text-slate-900'
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-slate-400'}`} />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#2DC4B4]' : 'text-slate-400'}`} />
                   <span>{item.name}</span>
                 </div>
                 {item.badge && (
                   <span
-                    className={`text-[10px] font-bold px-1.5 py-0.2 rounded-full ${
-                      item.badge === 'Verified'
-                        ? 'bg-emerald-500/20 text-emerald-300'
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      isActive
+                        ? 'bg-white/20 text-white'
+                        : item.badge === 'Verified'
+                        ? 'bg-emerald-50 text-emerald-700 border border-emerald-200'
                         : item.badge === 'AI'
-                        ? 'bg-teal-500/20 text-teal-300'
-                        : 'bg-amber-500/20 text-amber-300'
+                        ? 'bg-teal-50 text-teal-700 border border-teal-200'
+                        : 'bg-amber-50 text-amber-700 border border-amber-200'
                     }`}
                   >
                     {item.badge}
@@ -116,26 +272,26 @@ export const ProfessionalLayout: React.FC = () => {
           })}
         </nav>
 
-        {/* AI Tools Quick Trigger */}
-        <div className="p-3 border-t border-slate-800 space-y-2">
+        {/* AI Tools Quick Trigger & Logout */}
+        <div className="p-3 border-t border-slate-100 space-y-2 bg-slate-50/80 shrink-0 mt-auto">
           <button
             onClick={() => setResumeModalOpen(true)}
-            className="w-full bg-slate-800/80 hover:bg-slate-800 text-teal-300 p-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 border border-slate-700 transition"
+            className="w-full bg-white hover:bg-slate-50 text-teal-700 p-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-teal-200 shadow-2xs transition cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5 text-teal-400" />
+            <Sparkles className="w-3.5 h-3.5 text-teal-500" />
             AI Resume Audit
           </button>
           <button
             onClick={() => setAiModalOpen(true)}
-            className="w-full bg-teal-800/40 hover:bg-teal-800/60 text-white p-2.5 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 border border-teal-500/30 transition"
+            className="w-full bg-teal-50 hover:bg-teal-100/80 text-teal-900 p-2 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border border-teal-200 transition cursor-pointer"
           >
-            <MessageSquare className="w-3.5 h-3.5 text-teal-300" />
+            <MessageSquare className="w-3.5 h-3.5 text-teal-600" />
             AI Career Advisor
           </button>
 
           <button
-            onClick={logout}
-            className="w-full flex items-center justify-center gap-2 text-slate-400 hover:text-rose-400 p-2 text-xs transition"
+            onClick={handleLogout}
+            className="w-full flex items-center justify-center gap-2 text-rose-600 hover:text-white hover:bg-rose-600 border border-rose-200 hover:border-rose-600 p-2.5 rounded-xl text-xs font-bold transition-all duration-200 shadow-2xs cursor-pointer bg-rose-50/70"
           >
             <LogOut className="w-3.5 h-3.5" /> Sign Out
           </button>
@@ -144,7 +300,8 @@ export const ProfessionalLayout: React.FC = () => {
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="bg-white border-b border-slate-200 px-6 py-3.5 flex items-center justify-between">
+        {/* Desktop Top Header */}
+        <header className="hidden md:flex bg-white border-b border-slate-200 px-6 py-3.5 items-center justify-between sticky top-0 z-20">
           <div className="flex items-center gap-3">
             <Link to="/" className="text-xs font-medium text-slate-500 hover:text-teal-700 flex items-center gap-1">
               <Home className="w-3.5 h-3.5" /> Platform Home
@@ -156,39 +313,45 @@ export const ProfessionalLayout: React.FC = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={() => switchRolePersona('recruiter')}
-              className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 hover:bg-teal-100 transition hidden sm:inline-block"
+              className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-teal-50 text-teal-800 border border-teal-200 hover:bg-teal-100 transition cursor-pointer"
             >
               Test as Recruiter ➔
+            </button>
+            <button
+              onClick={handleLogout}
+              className="text-xs font-semibold px-3 py-1.5 rounded-lg text-rose-600 hover:text-rose-700 hover:bg-rose-50 border border-rose-200 transition flex items-center gap-1.5 cursor-pointer"
+            >
+              <LogOut className="w-3.5 h-3.5" /> Sign Out
             </button>
           </div>
         </header>
 
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 pb-20 md:pb-8 overflow-y-auto">
+        <main className="flex-1 p-3.5 sm:p-5 md:p-6 lg:p-8 pb-24 md:pb-8 overflow-y-auto">
           <Outlet />
         </main>
       </div>
 
-      {/* Responsive Mobile Bottom Navigation (Requirement #45) */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 py-2 px-4 z-40 flex items-center justify-around text-[10px] font-medium text-slate-600 shadow-lg">
-        <Link to="/professional/dashboard" className={`flex flex-col items-center gap-1 ${location.pathname === '/professional/dashboard' ? 'text-teal-700 font-bold' : ''}`}>
-          <LayoutDashboard className="w-5 h-5" />
-          Dashboard
+      {/* Responsive Mobile Bottom Navigation with Safe Area */}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200 py-2 px-2 z-40 flex items-center justify-around text-[10px] font-bold text-slate-600 shadow-xl mobile-safe-bottom">
+        <Link to="/professional/dashboard" className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition ${location.pathname === '/professional/dashboard' ? 'text-[#1B5F85] bg-teal-50 font-black' : 'hover:text-slate-900'}`}>
+          <LayoutDashboard className="w-4 h-4 text-[#2DC4B4]" />
+          <span>Dashboard</span>
         </Link>
-        <Link to="/jobs" className={`flex flex-col items-center gap-1 ${location.pathname.startsWith('/jobs') ? 'text-teal-700 font-bold' : ''}`}>
-          <Briefcase className="w-5 h-5" />
-          Jobs
+        <Link to="/professional/jobs" className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition ${location.pathname.startsWith('/professional/jobs') ? 'text-[#1B5F85] bg-teal-50 font-black' : 'hover:text-slate-900'}`}>
+          <Briefcase className="w-4 h-4 text-[#2DC4B4]" />
+          <span>Jobs</span>
         </Link>
-        <Link to="/professional/applications" className={`flex flex-col items-center gap-1 ${location.pathname === '/professional/applications' ? 'text-teal-700 font-bold' : ''}`}>
-          <FileCheck2 className="w-5 h-5" />
-          Applied
+        <Link to="/professional/applications" className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition ${location.pathname === '/professional/applications' ? 'text-[#1B5F85] bg-teal-50 font-black' : 'hover:text-slate-900'}`}>
+          <FileCheck2 className="w-4 h-4 text-[#2DC4B4]" />
+          <span>Applied</span>
         </Link>
-        <Link to="/professional/messages" className={`flex flex-col items-center gap-1 ${location.pathname === '/professional/messages' ? 'text-teal-700 font-bold' : ''}`}>
-          <MessageSquare className="w-5 h-5" />
-          Chat
+        <Link to="/professional/messages" className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition ${location.pathname === '/professional/messages' ? 'text-[#1B5F85] bg-teal-50 font-black' : 'hover:text-slate-900'}`}>
+          <MessageSquare className="w-4 h-4 text-[#2DC4B4]" />
+          <span>Chat</span>
         </Link>
-        <Link to="/professional/profile" className={`flex flex-col items-center gap-1 ${location.pathname === '/professional/profile' ? 'text-teal-700 font-bold' : ''}`}>
-          <UserCircle2 className="w-5 h-5" />
-          Profile
+        <Link to="/professional/profile" className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition ${location.pathname === '/professional/profile' ? 'text-[#1B5F85] bg-teal-50 font-black' : 'hover:text-slate-900'}`}>
+          <UserCircle2 className="w-4 h-4 text-[#2DC4B4]" />
+          <span>Profile</span>
         </Link>
       </nav>
 

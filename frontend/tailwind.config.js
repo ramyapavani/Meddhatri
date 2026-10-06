@@ -8,25 +8,28 @@ export default {
     extend: {
       colors: {
         brand: {
-          navy: '#102A43',
-          dark: '#0B1C2D',
-          teal: '#0F766E',
-          tealHover: '#0D655E',
-          mint: '#DFF7F2',
-          mintLight: '#F0FDF9',
-          cyan: '#38BDF8',
-          emerald: '#10B981',
-          slate: '#486581',
-          lightBg: '#F8FAFC'
+          // MedDhatri Logo Colors
+          tealBright: '#2DC4B4',   // "Med" text + ECG waveform (bright teal)
+          navy: '#1B5F85',         // "Dhatri" text + D shape (dark navy-teal)
+          dark: '#154E70',         // Darker navy for hover states
+          red: '#E53935',          // Red medical cross accent
+          // UI Colors derived from logo
+          teal: '#2DC4B4',
+          tealHover: '#25A89A',
+          tealDark: '#1B5F85',
+          mint: '#E0F7F5',
+          mintLight: '#F0FDFC',
+          slate: '#2E6B8A',
+          lightBg: '#F7FBFC'
         }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       boxShadow: {
-        'subtle': '0 2px 10px rgba(16, 42, 67, 0.06)',
-        'premium': '0 10px 30px -10px rgba(16, 42, 67, 0.12)',
-        'glow': '0 0 20px rgba(15, 118, 110, 0.15)'
+        'subtle': '0 2px 10px rgba(27, 95, 133, 0.07)',
+        'premium': '0 10px 30px -10px rgba(27, 95, 133, 0.14)',
+        'glow': '0 0 20px rgba(45, 196, 180, 0.18)'
       }
     },
   },
