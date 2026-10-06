@@ -1,7 +1,7 @@
 {
-  "name": "medvance-backend",
+  "name": "meddhatri-backend",
   "version": "1.0.0",
-  "description": "MedVance AI - Backend REST APIs, AI Engine & Real-Time Socket Server",
+  "description": "MedDhatri AI - Backend REST APIs, AI Engine & Real-Time Socket Server",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",

@@ -65,7 +65,7 @@ export class AuthController {
       // Send Welcome Email
       EmailService.sendEmail(
         user.email,
-        'Welcome to MedVance AI - Your Healthcare Career Ecosystem',
+        'Welcome to MedDhatri AI - Your Healthcare Career Ecosystem',
         EmailService.getTemplate('WELCOME', { name: user.name })
       );
 

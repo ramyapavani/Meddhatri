@@ -19,9 +19,9 @@ export const seedDatabase = async () => {
     // 1. CREATE SUPER ADMIN
     const adminUser = await User.create({
       name: 'Dr. Rajesh Sharma',
-      email: 'admin@medvance.ai',
+      email: 'admin@meddhatri.ai',
       phone: '+91 98765 43210',
-      passwordHash: 'Admin@MedVance2026',
+      passwordHash: 'Admin@MedDhatri2026',
       role: 'SUPER_ADMIN',
       isEmailVerified: true,
       avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=200&auto=format&fit=crop&q=80'
@@ -95,7 +95,7 @@ export const seedDatabase = async () => {
         name: `${item.name} HR Team`,
         email: item.email,
         phone: item.phone,
-        passwordHash: 'Recruiter@MedVance2026',
+        passwordHash: 'Recruiter@MedDhatri2026',
         role: 'ORGANIZATION_ADMIN',
         isEmailVerified: true
       });
@@ -123,7 +123,7 @@ export const seedDatabase = async () => {
     const professionalProfiles = [
       {
         name: 'Dr. Ananya Rao',
-        email: 'ananya.rao@medvance.demo',
+        email: 'ananya.rao@meddhatri.demo',
         phone: '+91 94451 22345',
         headline: 'Senior Interventional Cardiologist | MD, DM Cardiology (AIIMS)',
         profession: 'Doctor',
@@ -138,7 +138,7 @@ export const seedDatabase = async () => {
       },
       {
         name: 'Dr. Arjun Mehta',
-        email: 'arjun.mehta@medvance.demo',
+        email: 'arjun.mehta@meddhatri.demo',
         phone: '+91 98112 33456',
         headline: 'Consultant Neurologist & Stroke Specialist | DM Neurology (NIMHANS)',
         profession: 'Doctor',
@@ -153,7 +153,7 @@ export const seedDatabase = async () => {
       },
       {
         name: 'Priya Nair',
-        email: 'priya.nair@medvance.demo',
+        email: 'priya.nair@meddhatri.demo',
         phone: '+91 97401 55678',
         headline: 'Lead Critical Care Staff Nurse | B.Sc Nursing, Critical Care Fellowship',
         profession: 'Nurse',
@@ -168,7 +168,7 @@ export const seedDatabase = async () => {
       },
       {
         name: 'Rahul Verma',
-        email: 'rahul.verma@medvance.demo',
+        email: 'rahul.verma@meddhatri.demo',
         phone: '+91 98220 99881',
         headline: 'Senior Medical Laboratory Technologist | M.Sc Medical Biochemistry',
         profession: 'Lab Technologist',
@@ -183,7 +183,7 @@ export const seedDatabase = async () => {
       },
       {
         name: 'Sneha Iyer',
-        email: 'sneha.iyer@medvance.demo',
+        email: 'sneha.iyer@meddhatri.demo',
         phone: '+91 99341 77654',
         headline: 'Senior Clinical Pharmacist | Pharm.D, Hospital Clinical Pharmacy Specialist',
         profession: 'Pharmacist',
@@ -203,7 +203,7 @@ export const seedDatabase = async () => {
         name: p.name,
         email: p.email,
         phone: p.phone,
-        passwordHash: 'Professional@MedVance2026',
+        passwordHash: 'Professional@MedDhatri2026',
         role: 'PROFESSIONAL',
         avatar: p.avatar,
         isEmailVerified: true

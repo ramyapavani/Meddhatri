@@ -88,7 +88,7 @@ export class JobController {
       if (req.user && req.user.role === 'PROFESSIONAL') {
         const profile = await ProfessionalProfile.findOne({ userId: req.user.userId }).lean();
         if (profile) {
-          enrichedJobs = jobs.map((job) => {
+          enrichedJobs = jobs.map((job: any) => {
             const match = AIService.calculateMatch(profile, job);
             return {
               ...job,

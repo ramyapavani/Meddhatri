@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Request, Response } from 'express';
 import { Verification, ProfessionalProfile, Organization, User, Job, Application, Payment, Blog } from '../models/index.js';
 import { ApiResponse } from '../utils/apiResponse.js';
 import { AuthRequest } from '../middleware/auth.js';

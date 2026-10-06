@@ -43,7 +43,7 @@ registerSocketHandlers(io);
 
 // Health Check
 app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok', service: 'MedVance AI Healthcare Core API', timestamp: new Date() });
+  res.status(200).json({ status: 'ok', service: 'MedDhatri AI Healthcare Core API', timestamp: new Date() });
 });
 
 // Primary REST API v1 routes
@@ -56,32 +56,10 @@ app.use(errorHandler);
 const startServer = async () => {
   await connectDatabase();
   server.listen(ENV.PORT, () => {
-    console.log(`[MedVance Core] Server running smoothly on http://localhost:${ENV.PORT}`);
-    console.log(`[MedVance Core] Real-time Socket.IO enabled`);
+    console.log(`[MedDhatri Core] Server running smoothly on http://localhost:${ENV.PORT}`);
+    console.log(`[MedDhatri Core] Real-time Socket.IO enabled`);
   });
 };
 
 startServer();
-registerSocketHandlers(io);
 
-// Health Check
-app.get('/health', (req, res) => {
-  res.status(200).json({ status: 'ok', service: 'MedVance AI Healthcare Core API', timestamp: new Date() });
-});
-
-// Primary REST API v1 routes
-app.use('/api/v1', apiRouter);
-
-// Global Error Handler
-app.use(errorHandler);
-
-// Connect DB and Start Server
-const startServer = async () => {
-  await connectDatabase();
-  server.listen(ENV.PORT, () => {
-    console.log(`[MedVance Core] Server running smoothly on http://localhost:${ENV.PORT}`);
-    console.log(`[MedVance Core] Real-time Socket.IO enabled`);
-  });
-};
-
-startServer();

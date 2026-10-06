@@ -1,7 +1,7 @@
 {
-  "name": "medvance-ai-platform",
+  "name": "meddhatri-ai-platform",
   "version": "1.0.0",
-  "description": "MedVance AI - Production Full-Stack Healthcare Career & Talent Ecosystem",
+  "description": "MedDhatri AI - Production Full-Stack Healthcare Career & Talent Ecosystem",
   "private": true,
   "workspaces": [
     "frontend",

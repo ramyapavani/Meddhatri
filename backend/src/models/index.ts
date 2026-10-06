@@ -1,5 +1,11 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+export * from './User.js';
+export * from './ProfessionalProfile.js';
+export * from './Organization.js';
+export * from './Job.js';
+export * from './Application.js';
+
 // SavedJob
 export const SavedJob = mongoose.model(
   'SavedJob',

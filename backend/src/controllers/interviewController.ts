@@ -29,7 +29,7 @@ export class InterviewController {
         startTime,
         endTime,
         type: type || 'Video Call',
-        meetingLink: meetingLink || 'https://meet.medvance.ai/room-' + Math.random().toString(36).substring(7),
+        meetingLink: meetingLink || 'https://meet.meddhatri.ai/room-' + Math.random().toString(36).substring(7),
         location,
         notes
       });

@@ -36,7 +36,7 @@ export class StorageService {
 
     // Cloud storage simulation/hook for AWS S3 or Cloudinary
     return {
-      url: `https://medvance-cloud-storage.s3.amazonaws.com/${folder}/${Date.now()}-${file.originalname}`,
+      url: `https://meddhatri-cloud-storage.s3.amazonaws.com/${folder}/${Date.now()}-${file.originalname}`,
       filename: file.originalname,
       size: file.size,
       mimeType: file.mimetype

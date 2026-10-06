@@ -35,7 +35,7 @@ export class EmailService {
       <div style="font-family: Arial, sans-serif; background-color: #F8FAFC; padding: 24px; color: #102A43;">
         <div style="max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 8px; border: 1px solid #E2E8F0; overflow: hidden;">
           <div style="background-color: #102A43; padding: 20px; text-align: center;">
-            <h1 style="color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 0.5px;">MedVance <span style="color: #38BDF8;">AI</span></h1>
+            <h1 style="color: #ffffff; margin: 0; font-size: 22px; letter-spacing: 0.5px;">MedDhatri <span style="color: #38BDF8;">AI</span></h1>
             <p style="color: #DFF7F2; margin: 4px 0 0 0; font-size: 13px;">Healthcare Career & Talent Marketplace</p>
           </div>
           <div style="padding: 30px;">
@@ -44,7 +44,7 @@ export class EmailService {
     const brandFooter = `
           </div>
           <div style="background: #F1F5F9; padding: 16px; text-align: center; font-size: 12px; color: #64748B;">
-            &copy; 2026 MedVance AI Platform. All healthcare careers protected.<br/>
+            &copy; 2026 MedDhatri AI Platform. All healthcare careers protected.<br/>
             Security & HIPAA-Compliant Architecture.
           </div>
         </div>
@@ -54,7 +54,7 @@ export class EmailService {
     switch (type) {
       case 'WELCOME':
         return `${brandHeader}
-          <h2>Welcome to MedVance AI, ${data.name}!</h2>
+          <h2>Welcome to MedDhatri AI, ${data.name}!</h2>
           <p>Your intelligent healthcare career ecosystem account is ready. Connect directly with premier hospitals, verify your medical council credentials, and let AI matching elevate your practice.</p>
           <div style="margin: 25px 0; text-align: center;">
             <a href="${data.url || '#'}" style="background-color: #0F766E; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-block;">Complete Your Profile</a>
@@ -86,7 +86,7 @@ export class EmailService {
         ${brandFooter}`;
 
       default:
-        return `${brandHeader}<h2>Notification from MedVance AI</h2><p>${data.message || ''}</p>${brandFooter}`;
+        return `${brandHeader}<h2>Notification from MedDhatri AI</h2><p>${data.message || ''}</p>${brandFooter}`;
     }
   }
 }

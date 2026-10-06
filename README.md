@@ -1,4 +1,4 @@
-# 🏥 MedVance AI — Full-Stack Healthcare Career & Talent Marketplace
+# 🏥 MedDhatri AI — Full-Stack Healthcare Career & Talent Marketplace
 
 An original, production-ready healthcare career ecosystem connecting certified medical professionals (*Doctors, Critical Care Nurses, Pharmacists, Technologists, Healthcare IT Leaders*) with accredited healthcare institutions (*Quaternary Hospitals, Diagnostics Networks, Clinics, HealthTech Startups*).
 
@@ -6,7 +6,7 @@ An original, production-ready healthcare career ecosystem connecting certified m
 
 ## 🌟 1. System Architecture & Capabilities
 
-MedVance AI brings together:
+MedDhatri AI brings together:
 1. **Healthcare Professional Social & Profile Hub** — Dynamic profile strength calculation, State Medical Council registration validation, and clinical procedural tracking.
 2. **Intelligent Job Marketplace** — Backend-driven multi-parameter filtering, compensation banding, and location indexing.
 3. **7-Factor AI Matching Engine** — Real-time candidate-to-job fit scoring with deterministic fallback:
