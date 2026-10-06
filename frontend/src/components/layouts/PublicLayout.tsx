@@ -27,9 +27,9 @@ export const PublicLayout: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F8FAFC] w-full max-w-[100vw] overflow-x-hidden pb-16 md:pb-0">
+    <div className="min-h-screen flex flex-col bg-[#F8FAFC] w-full max-w-[100vw] overflow-x-clip pb-16 md:pb-0">
       <Navbar />
-      <main className="flex-1 w-full max-w-[100vw] overflow-x-hidden">
+      <main className="flex-1 w-full max-w-[100vw] overflow-x-clip">
         <Outlet />
       </main>
       <Footer />

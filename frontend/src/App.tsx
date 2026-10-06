@@ -45,6 +45,7 @@ import { AdminDashboard, AdminVerificationsPage } from './pages/admin/AdminPages
 
 // Global Portals Dock & Guide Modal
 import { FloatingPortalDock, PortalGuideModal } from './components/common/PortalGuideModal.js';
+import { ScrollToTop } from './components/common/ScrollToTop.js';
 
 function AppContent() {
   const [guideModalOpen, setGuideModalOpen] = useState(false);
@@ -128,6 +129,7 @@ function AppContent() {
 export function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <AuthProvider>
         <NotificationProvider>
           <AppContent />
