@@ -260,7 +260,7 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
   const navigate = useNavigate();
 
   return (
-    <div className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40">
+    <div className="fixed bottom-20 left-4 md:bottom-6 md:left-6 z-40">
       {collapsed ? (
         <button
           onClick={() => setCollapsed(false)}

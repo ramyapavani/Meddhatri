@@ -75,13 +75,13 @@ export const Navbar: React.FC = () => {
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-[#2DC4B4]/20 backdrop-blur-md shadow-xs">
       <div className="w-full px-2.5 sm:px-6 lg:px-10 xl:px-12">
-        <div className="flex items-center justify-between min-h-[58px] sm:min-h-[72px] py-1">
+        <div className="flex items-center justify-between min-h-[64px] sm:min-h-[76px] py-1 sm:py-1.5">
           {/* Left: Brand Logo */}
           <Link to="/" className="flex items-center group shrink-0 py-0.5">
             <img
               src="/logo.png"
               alt="MedDhatri"
-              className="h-10 xs:h-12 sm:h-14 md:h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-200 drop-shadow-xs"
+              className="h-12 sm:h-16 md:h-18 lg:h-20 w-auto max-w-[170px] sm:max-w-[220px] md:max-w-[260px] object-contain group-hover:scale-105 transition-transform duration-200 drop-shadow-xs"
             />
           </Link>
 

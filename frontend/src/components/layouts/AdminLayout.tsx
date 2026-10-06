@@ -42,7 +42,7 @@ export const AdminLayout: React.FC = () => {
             <img
               src="/logo.png"
               alt="MedDhatri"
-              className="h-12 sm:h-14 w-auto max-w-[190px] object-contain transition-transform group-hover:scale-105"
+              className="h-14 sm:h-16 w-auto max-w-[210px] object-contain transition-transform group-hover:scale-105"
             />
           </Link>
           <span className="inline-block text-[10px] px-2.5 py-0.5 rounded-full bg-rose-50 border border-rose-200 text-rose-700 font-extrabold tracking-wider">

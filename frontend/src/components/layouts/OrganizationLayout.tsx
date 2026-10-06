@@ -48,7 +48,7 @@ export const OrganizationLayout: React.FC = () => {
             <img
               src="/logo.png"
               alt="MedDhatri"
-              className="h-12 sm:h-14 w-auto max-w-[190px] object-contain transition-transform group-hover:scale-105"
+              className="h-14 sm:h-16 w-auto max-w-[210px] object-contain transition-transform group-hover:scale-105"
             />
           </Link>
           <span className="inline-block text-[10px] px-2.5 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-700 font-extrabold tracking-wider">

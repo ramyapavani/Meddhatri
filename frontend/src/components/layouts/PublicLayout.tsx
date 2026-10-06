@@ -64,11 +64,23 @@ export const PublicLayout: React.FC = () => {
       {/* Floating AI Assistant Trigger */}
       <button
         onClick={() => setAiModalOpen(true)}
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-gradient-to-r from-teal-700 to-[#102A43] text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2 group ring-4 ring-teal-500/20"
-        title="MedDhatri AI Career Advisor"
+        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-gradient-to-r from-[#1B5F85] via-teal-700 to-[#102A43] text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full shadow-[0_4px_25px_rgba(45,196,180,0.4)] hover:shadow-[0_6px_30px_rgba(45,196,180,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 group ring-2 ring-teal-300/40 cursor-pointer"
+        title="MedDhatri AI Healthcare Career Advisor"
+        aria-label="Open AI Career Assistant Chatbot"
       >
-        <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-teal-300 animate-pulse" />
-        <span className="font-bold text-xs pr-1 hidden sm:inline">Ask AI Career Assistant</span>
+        <div className="relative flex items-center justify-center">
+          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-teal-300 animate-pulse" />
+          <span className="absolute -top-1 -right-1 flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+          </span>
+        </div>
+        <div className="flex flex-col text-left">
+          <span className="font-extrabold text-xs leading-tight tracking-tight text-white flex items-center gap-1">
+            AI Advisor
+          </span>
+          <span className="text-[9px] text-teal-200 hidden sm:inline leading-none font-medium">Healthcare Career Bot</span>
+        </div>
       </button>
 
       <AICareerAssistantModal isOpen={aiModalOpen} onClose={() => setAiModalOpen(false)} />
