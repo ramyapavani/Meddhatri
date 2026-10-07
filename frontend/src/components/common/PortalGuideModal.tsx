@@ -40,7 +40,7 @@ export const PORTALS_LIST: PortalInfo[] = [
     targetUrl: '/',
     personaName: 'Public Explorer',
     headline: 'Healthcare Job Search, Hospital Directories & Career Resources',
-    color: 'from-teal-600 to-[#102A43]',
+    color: 'bg-[#1B5F85]',
     highlights: [
       'Multi-filter clinical search (Specialty, Location, Experience)',
       'Hospital credentials directory (NABH & JCI accredited)',
@@ -58,7 +58,7 @@ export const PORTALS_LIST: PortalInfo[] = [
     targetUrl: '/professional/dashboard',
     personaName: 'Dr. Ananya Rao (DM Cardiology)',
     headline: 'AI Matching, Procedural Scope & Career Command Center',
-    color: 'from-[#102A43] to-teal-800',
+    color: 'bg-[#1B5F85]',
     highlights: [
       'Dynamic Profile Strength bar (92% completion calculator)',
       'AI Recommended jobs scored against clinical credentials',
@@ -76,7 +76,7 @@ export const PORTALS_LIST: PortalInfo[] = [
     targetUrl: '/professional/dashboard',
     personaName: 'Priya Nair (Lead ICU Staff Nurse)',
     headline: 'ICU Shifts, ACLS Certifications & Hospital Direct Chat',
-    color: 'from-rose-900 to-[#102A43]',
+    color: 'bg-[#1B5F85]',
     highlights: [
       'Critical care shift & ventilator competency tracking',
       'Direct messaging with quaternary hospital HR leads',
@@ -94,7 +94,7 @@ export const PORTALS_LIST: PortalInfo[] = [
     targetUrl: '/organization/dashboard',
     personaName: 'NovaCare Health HR Team',
     headline: '6-Stage Kanban Pipeline, Candidate Search & Job Wizard',
-    color: 'from-[#0B1C2D] to-teal-900',
+    color: 'bg-[#1B5F85]',
     highlights: [
       '6-Step Guided Vacancy Publishing Wizard with Zod checks',
       'Interactive Drag-and-Drop Recruitment Kanban Board',
@@ -112,7 +112,7 @@ export const PORTALS_LIST: PortalInfo[] = [
     targetUrl: '/admin/dashboard',
     personaName: 'Dr. Rajesh Sharma (Super Admin)',
     headline: 'Medical Board Verification Audits & Platform KPIs',
-    color: 'from-purple-950 to-[#102A43]',
+    color: 'bg-[#1B5F85]',
     highlights: [
       'Audit State Medical Council licenses and grant verified badges',
       'Platform-wide user and hospital moderation tools',
@@ -148,7 +148,7 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6 overflow-y-auto">
       <div className="bg-white w-full max-w-4xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#1B5F85] via-[#2DC4B4] to-[#1B5F85] text-white p-5 px-6 flex items-center justify-between">
+        <div className="bg-[#1B5F85] text-white p-5 px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-2xl bg-white/10 text-teal-300 border border-white/10">
               <Layers className="w-5 h-5" />
@@ -186,7 +186,7 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
                       : 'border-slate-200/80 hover:bg-white hover:border-slate-300'
                   }`}
                 >
-                  <div className={`p-2 rounded-xl shrink-0 ${isSelected ? 'bg-teal-700 text-white' : 'bg-slate-200 text-slate-700'}`}>
+                  <div className={`p-2 rounded-xl shrink-0 ${isSelected ? 'bg-[#1B5F85] text-white' : 'bg-slate-200 text-slate-700'}`}>
                     <Icon className="w-4 h-4" />
                   </div>
                   <div className="min-w-0 flex-1">
@@ -205,7 +205,7 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
 
           {/* Right Detailed Preview Panel */}
           <div className="flex-1 p-6 overflow-y-auto space-y-6 bg-white">
-            <div className={`bg-gradient-to-r ${selectedPortal.color} text-white p-6 rounded-3xl shadow-md space-y-3`}>
+            <div className={`${selectedPortal.color} text-white p-6 rounded-3xl shadow-md space-y-3`}>
               <span className="text-xs font-bold text-teal-300 uppercase tracking-wider block">Active Portal Preview</span>
               <h3 className="text-2xl font-black">{selectedPortal.name}</h3>
               <p className="text-xs text-slate-200 leading-relaxed max-w-xl">{selectedPortal.headline}</p>
@@ -228,7 +228,7 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {selectedPortal.highlights.map((h, i) => (
                   <div key={i} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5 text-xs text-slate-700">
-                    <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
                     <span>{h}</span>
                   </div>
                 ))}
@@ -240,7 +240,7 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
               <span className="text-xs text-slate-500">Instant jump with configured permissions</span>
               <button
                 onClick={() => handleLaunchPortal(selectedPortal)}
-                className="bg-teal-700 hover:bg-teal-800 text-white font-extrabold text-xs px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2"
+                className="bg-[#1B5F85] hover:bg-[#154E70] text-white font-extrabold text-xs px-6 py-3 rounded-xl shadow-md transition flex items-center gap-2 cursor-pointer"
               >
                 Launch {selectedPortal.name}
                 <ArrowRight className="w-4 h-4" />
@@ -264,19 +264,19 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
       {collapsed ? (
         <button
           onClick={() => setCollapsed(false)}
-          className="bg-gradient-to-r from-[#102A43] to-teal-800 text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2 group ring-4 ring-teal-500/20"
+          className="bg-[#1B5F85] hover:bg-[#154E70] text-white p-3 sm:p-4 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2 group ring-4 ring-[#2DC4B4]/20 cursor-pointer"
           title="Switch Role Portal"
         >
-          <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-teal-300" />
+          <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-[#2DC4B4]" />
           <span className="font-bold text-xs pr-1 hidden sm:inline">Switch Portal</span>
         </button>
       ) : (
         <div className="bg-white/95 backdrop-blur-md border border-slate-200 shadow-2xl p-2 rounded-2xl flex items-center gap-1.5 animate-in fade-in zoom-in-95 ring-4 ring-slate-900/5">
           <button
             onClick={onOpenGuide}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#102A43] text-white text-xs font-bold"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#1B5F85] text-white text-xs font-bold cursor-pointer hover:bg-[#154E70] transition"
           >
-            <Layers className="w-3.5 h-3.5 text-teal-300" />
+            <Layers className="w-3.5 h-3.5 text-[#2DC4B4]" />
             Guide
           </button>
 
@@ -286,7 +286,7 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
               window.open(`${window.location.origin}/professional/dashboard`, '_blank');
               setCollapsed(true);
             }}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-[#E0F7F5] hover:text-[#1B5F85] transition"
+            className="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-[#E0F7F5] hover:text-[#1B5F85] transition cursor-pointer"
           >
             👨‍⚕️ Doctor
           </button>
@@ -297,7 +297,7 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
               window.open(`${window.location.origin}/organization/dashboard`, '_blank');
               setCollapsed(true);
             }}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-800 transition"
+            className="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-[#E0F7F5] hover:text-[#1B5F85] transition cursor-pointer"
           >
             🏥 Recruiter
           </button>
@@ -308,14 +308,14 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
               window.open(`${window.location.origin}/admin/dashboard`, '_blank');
               setCollapsed(true);
             }}
-            className="px-2.5 py-1.5 rounded-xl text-xs font-semibold text-slate-700 hover:bg-purple-50 hover:text-purple-800 transition"
+            className="px-2.5 py-1.5 rounded-xl text-xs font-bold text-slate-700 hover:bg-[#E0F7F5] hover:text-[#1B5F85] transition cursor-pointer"
           >
             🛡️ Admin
           </button>
 
           <button
             onClick={() => setCollapsed(true)}
-            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+            className="p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
           >
             <X className="w-4 h-4" />
           </button>

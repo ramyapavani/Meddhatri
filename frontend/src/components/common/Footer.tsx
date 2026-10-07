@@ -22,13 +22,13 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#102A43] text-slate-300 border-t border-[#1B5F85]/40 pt-6 sm:pt-10 pb-20 md:pb-8 w-full">
+    <footer className="bg-[#1B5F85] text-slate-100 border-t border-[#2DC4B4]/30 pt-6 sm:pt-10 pb-20 md:pb-8 w-full">
       <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12">
         
         {/* Desktop-Only Sitemap Quick Bar */}
-        <div className="hidden md:flex items-center justify-between bg-[#1B5F85]/50 border border-teal-500/20 rounded-2xl p-3 px-5 mb-8 shadow-xs backdrop-blur-sm">
+        <div className="hidden md:flex items-center justify-between bg-black/20 border border-[#2DC4B4]/20 rounded-2xl p-3 px-5 mb-8 shadow-xs backdrop-blur-sm">
           <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold text-[#2DC4B4] uppercase tracking-wider">Platform Sitemap:</span>
+            <span className="text-xs font-bold text-[#2DC4B4] uppercase tracking-wider">Platform Sitemap:</span>
           </div>
           <div className="flex flex-wrap items-center gap-2">
             {mainSections.map((sec) => {
@@ -37,9 +37,9 @@ export const Footer: React.FC = () => {
                 <Link
                   key={sec.path}
                   to={sec.path}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white/10 hover:bg-[#2DC4B4] text-white hover:text-[#102A43] text-xs font-bold transition border border-white/10 shadow-2xs group"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/10 hover:bg-[#2DC4B4] text-white hover:text-[#1B5F85] text-xs font-bold transition border border-white/10 shadow-2xs group cursor-pointer"
                 >
-                  <Icon className="w-3 h-3 text-[#2DC4B4] group-hover:text-[#102A43] transition-colors" />
+                  <Icon className="w-3.5 h-3.5 text-[#2DC4B4] group-hover:text-[#1B5F85] transition-colors" />
                   <span>{sec.name}</span>
                 </Link>
               );

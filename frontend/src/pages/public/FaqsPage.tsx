@@ -102,7 +102,7 @@ export const FaqsPage: React.FC = () => {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
       {/* 1. Hero Header & Integrated Search Bar */}
-      <div className="bg-gradient-to-br from-white via-teal-50/40 to-[#E0F7F5]/50 border border-teal-100 rounded-3xl p-6 sm:p-10 shadow-xs text-center space-y-4">
+      <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-10 shadow-subtle text-center space-y-4">
         <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white border border-[#2DC4B4]/40 text-[#1B5F85] text-xs font-bold shadow-2xs">
           <HelpCircle className="w-4 h-4 text-[#2DC4B4]" />
           <span>MedDhatri AI Knowledge & Help Center</span>
@@ -156,7 +156,7 @@ export const FaqsPage: React.FC = () => {
                   >
                     <div className="flex items-center gap-3">
                       <div className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 ${
-                        isActive ? 'bg-[#2DC4B4] text-[#102A43]' : 'bg-white text-[#1B5F85] border border-slate-200'
+                        isActive ? 'bg-[#2DC4B4] text-[#1B5F85]' : 'bg-white text-[#1B5F85] border border-slate-200'
                       }`}>
                         <Icon className="w-4 h-4" />
                       </div>
@@ -164,7 +164,7 @@ export const FaqsPage: React.FC = () => {
                         <span className={`block text-xs sm:text-sm font-bold ${isActive ? 'text-white' : 'text-slate-800'}`}>
                           {cat.label}
                         </span>
-                        <span className={`block text-[11px] font-medium ${isActive ? 'text-teal-200' : 'text-slate-400'}`}>
+                        <span className={`block text-xs font-medium ${isActive ? 'text-teal-200' : 'text-slate-400'}`}>
                           {cat.desc}
                         </span>
                       </div>
@@ -181,7 +181,7 @@ export const FaqsPage: React.FC = () => {
           </div>
 
           {/* Quick Help Card */}
-          <div className="bg-gradient-to-br from-[#1B5F85] to-[#144966] text-white rounded-3xl p-6 shadow-md space-y-3">
+          <div className="bg-[#1B5F85] text-white rounded-3xl p-6 shadow-md space-y-3">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-[#2DC4B4]" />
               <h4 className="font-bold text-sm">Need Personalized Help?</h4>
@@ -301,7 +301,7 @@ export const FaqsPage: React.FC = () => {
       </div>
 
       {/* 3. Bottom Full-Width CTA Banner */}
-      <div className="bg-gradient-to-r from-[#1B5F85] via-[#165070] to-[#0D9488] rounded-3xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+      <div className="bg-[#1B5F85] rounded-3xl p-6 sm:p-10 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
         <div className="space-y-1 text-center md:text-left">
           <h3 className="text-xl sm:text-2xl font-black">Still have unanswered questions?</h3>
           <p className="text-xs sm:text-sm text-teal-100 max-w-xl font-normal">

@@ -141,7 +141,7 @@ export const HowItWorksPage: React.FC = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="bg-gradient-to-r from-slate-50 via-teal-50/40 to-slate-50 border border-slate-200/80 rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-sm">
+      <div className="bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-12 text-center space-y-6 shadow-subtle">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B5F85]">
           Ready to experience frictionless healthcare staffing?
         </h2>

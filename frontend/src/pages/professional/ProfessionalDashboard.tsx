@@ -56,7 +56,7 @@ export const ProfessionalDashboard: React.FC = () => {
   return (
     <div className="space-y-6 sm:space-y-8">
       {/* Top Welcome & Profile Strength Banner */}
-      <div className="bg-gradient-to-r from-[#102A43] via-[#0F766E] to-[#102A43] text-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl shadow-xl relative overflow-hidden">
+      <div className="bg-[#1B5F85] text-white p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl shadow-xl relative overflow-hidden">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5 sm:gap-6 relative z-10">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
@@ -79,7 +79,7 @@ export const ProfessionalDashboard: React.FC = () => {
               <span className="font-extrabold text-teal-300">{profileCompletion}% Complete</span>
             </div>
             <div className="w-full bg-black/30 h-2 rounded-full overflow-hidden">
-              <div className="bg-gradient-to-r from-teal-400 to-cyan-300 h-full rounded-full" style={{ width: `${profileCompletion}%` }} />
+              <div className="bg-[#2DC4B4] h-full rounded-full" style={{ width: `${profileCompletion}%` }} />
             </div>
             <Link to="/professional/profile" className="text-[11px] text-teal-200 hover:text-white font-semibold block text-right">
               Edit Clinical Credentials ➔
@@ -90,43 +90,43 @@ export const ProfessionalDashboard: React.FC = () => {
 
       {/* KPI Blocks (2 columns on mobile, 4 columns on large screens) */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-        <Link to="/professional/recommended" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
+        <Link to="/professional/recommended" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-[#2DC4B4] transition flex items-center justify-between">
           <div className="min-w-0">
-            <span className="text-xl sm:text-2xl font-black text-[#102A43]">8</span>
-            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">AI Recommended</span>
+            <span className="text-xl sm:text-2xl font-black text-[#1B5F85]">8</span>
+            <span className="text-xs font-semibold text-slate-500 block mt-0.5 truncate">AI Recommended</span>
           </div>
-          <div className="p-2 sm:p-3 bg-teal-50 text-teal-700 rounded-xl shrink-0">
-            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="p-2 sm:p-3 bg-[#E0F7F5] text-[#1B5F85] rounded-xl shrink-0">
+            <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#2DC4B4]" />
           </div>
         </Link>
 
-        <Link to="/professional/applications" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
+        <Link to="/professional/applications" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-[#2DC4B4] transition flex items-center justify-between">
           <div className="min-w-0">
-            <span className="text-xl sm:text-2xl font-black text-[#102A43]">4</span>
-            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">Active Applied</span>
+            <span className="text-xl sm:text-2xl font-black text-[#1B5F85]">4</span>
+            <span className="text-xs font-semibold text-slate-500 block mt-0.5 truncate">Active Applied</span>
           </div>
-          <div className="p-2 sm:p-3 bg-cyan-50 text-cyan-700 rounded-xl shrink-0">
-            <FileCheck2 className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="p-2 sm:p-3 bg-[#E0F7F5] text-[#1B5F85] rounded-xl shrink-0">
+            <FileCheck2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#2DC4B4]" />
           </div>
         </Link>
 
         <div className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle flex items-center justify-between">
           <div className="min-w-0">
-            <span className="text-xl sm:text-2xl font-black text-[#102A43]">1</span>
-            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">Upcoming Meet</span>
+            <span className="text-xl sm:text-2xl font-black text-[#1B5F85]">1</span>
+            <span className="text-xs font-semibold text-slate-500 block mt-0.5 truncate">Upcoming Meet</span>
           </div>
-          <div className="p-2 sm:p-3 bg-amber-50 text-amber-700 rounded-xl shrink-0">
-            <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="p-2 sm:p-3 bg-[#E0F7F5] text-[#1B5F85] rounded-xl shrink-0">
+            <Calendar className="w-4 h-4 sm:w-5 sm:h-5 text-[#2DC4B4]" />
           </div>
         </div>
 
-        <Link to="/professional/saved" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-teal-400 transition flex items-center justify-between">
+        <Link to="/professional/saved" className="bg-white p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-200 shadow-subtle hover:border-[#2DC4B4] transition flex items-center justify-between">
           <div className="min-w-0">
-            <span className="text-xl sm:text-2xl font-black text-[#102A43]">5</span>
-            <span className="text-[11px] sm:text-xs font-medium text-slate-500 block mt-0.5 truncate">Saved Jobs</span>
+            <span className="text-xl sm:text-2xl font-black text-[#1B5F85]">5</span>
+            <span className="text-xs font-semibold text-slate-500 block mt-0.5 truncate">Saved Jobs</span>
           </div>
-          <div className="p-2 sm:p-3 bg-indigo-50 text-indigo-700 rounded-xl shrink-0">
-            <Bookmark className="w-4 h-4 sm:w-5 sm:h-5" />
+          <div className="p-2 sm:p-3 bg-[#E0F7F5] text-[#1B5F85] rounded-xl shrink-0">
+            <Bookmark className="w-4 h-4 sm:w-5 sm:h-5 text-[#2DC4B4]" />
           </div>
         </Link>
       </div>
@@ -136,11 +136,11 @@ export const ProfessionalDashboard: React.FC = () => {
         {/* Left: Recommended Opportunities */}
         <div className="lg:col-span-8 space-y-4 sm:space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-bold text-base sm:text-lg text-[#102A43] flex items-center gap-2">
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-teal-600" />
+            <h2 className="font-black text-base sm:text-lg text-[#1B5F85] flex items-center gap-2 tracking-tight">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-[#2DC4B4]" />
               High-Match Clinical Openings
             </h2>
-            <Link to="/professional/recommended" className="text-xs font-bold text-teal-700 hover:underline">
+            <Link to="/professional/recommended" className="text-xs font-bold text-[#1B5F85] hover:text-[#2DC4B4]">
               View All ➔
             </Link>
           </div>
@@ -156,16 +156,16 @@ export const ProfessionalDashboard: React.FC = () => {
         <div className="lg:col-span-4 space-y-6">
           {/* Upcoming Interview Card */}
           <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-subtle space-y-4">
-            <h3 className="font-bold text-sm text-[#102A43] flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-teal-600" /> Upcoming Hospital Interview
+            <h3 className="font-extrabold text-sm text-[#1B5F85] flex items-center gap-2">
+              <Calendar className="w-4 h-4 text-[#2DC4B4]" /> Upcoming Hospital Interview
             </h3>
             {upcomingInterviews.map((int) => (
-              <div key={int.id} className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-teal-50/60 border border-teal-200/80 space-y-3">
+              <div key={int.id} className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-[#E0F7F5]/50 border border-[#2DC4B4]/40 space-y-3">
                 <div>
-                  <span className="font-bold text-xs text-teal-900 block">{int.role}</span>
-                  <span className="text-[11px] text-teal-700 font-semibold">{int.hospital}</span>
+                  <span className="font-extrabold text-xs text-[#1B5F85] block">{int.role}</span>
+                  <span className="text-xs text-[#2DC4B4] font-bold">{int.hospital}</span>
                 </div>
-                <div className="text-xs text-slate-600 space-y-1">
+                <div className="text-xs text-slate-600 space-y-1 font-medium">
                   <p><strong>Date:</strong> {int.date} at {int.time}</p>
                   <p><strong>Format:</strong> {int.type}</p>
                 </div>
@@ -173,7 +173,7 @@ export const ProfessionalDashboard: React.FC = () => {
                   href={int.meetingLink}
                   target="_blank"
                   rel="noreferrer"
-                  className="block text-center bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs py-2 sm:py-2.5 rounded-xl shadow-xs transition"
+                  className="block text-center bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold text-xs py-2.5 rounded-xl shadow-xs transition cursor-pointer"
                 >
                   Join Clinical Meeting
                 </a>
@@ -183,23 +183,23 @@ export const ProfessionalDashboard: React.FC = () => {
 
           {/* Recent Applications Mini Tracker */}
           <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-4 sm:p-6 shadow-subtle space-y-4">
-            <h3 className="font-bold text-sm text-[#102A43] flex items-center gap-2">
-              <FileCheck2 className="w-4 h-4 text-teal-600" /> Active Application Status
+            <h3 className="font-extrabold text-sm text-[#1B5F85] flex items-center gap-2">
+              <FileCheck2 className="w-4 h-4 text-[#2DC4B4]" /> Active Application Status
             </h3>
             <div className="space-y-2.5 sm:space-y-3">
               {recentApplications.map((app) => (
                 <div key={app.id} className="p-3 sm:p-3.5 rounded-xl sm:rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between gap-2">
                   <div className="min-w-0">
-                    <h4 className="font-bold text-xs text-slate-900 truncate">{app.role}</h4>
-                    <span className="text-[10px] text-slate-500 truncate block">{app.hospital}</span>
+                    <h4 className="font-bold text-xs text-[#1B5F85] truncate">{app.role}</h4>
+                    <span className="text-xs text-slate-500 truncate block font-medium">{app.hospital}</span>
                   </div>
-                  <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold bg-teal-100 text-teal-800 border border-teal-200 shrink-0">
+                  <span className="px-2.5 py-1 rounded-full text-xs font-black bg-[#E0F7F5] text-[#1B5F85] border border-[#2DC4B4]/30 shrink-0">
                     {app.status}
                   </span>
                 </div>
               ))}
             </div>
-            <Link to="/professional/applications" className="text-xs font-bold text-teal-700 block text-center hover:underline pt-2">
+            <Link to="/professional/applications" className="text-xs font-bold text-[#1B5F85] block text-center hover:text-[#2DC4B4] pt-2">
               Open Complete Applications Tracker ➔
             </Link>
           </div>

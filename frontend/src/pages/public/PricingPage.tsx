@@ -92,7 +92,7 @@ export const PricingPage: React.FC = () => {
             key={idx}
             className={`rounded-3xl p-8 sm:p-9 flex flex-col justify-between transition-all relative ${
               plan.highlight
-                ? 'bg-gradient-to-b from-[#1B5F85] to-[#113E57] text-white shadow-2xl border-2 border-[#2DC4B4] ring-4 ring-[#2DC4B4]/20 scale-105 z-10'
+                ? 'bg-[#1B5F85] text-white shadow-2xl border-2 border-[#2DC4B4] ring-4 ring-[#2DC4B4]/20 scale-105 z-10'
                 : 'bg-white text-slate-900 border border-slate-200 shadow-subtle hover:border-[#2DC4B4]/40 hover:shadow-xl'
             }`}
           >

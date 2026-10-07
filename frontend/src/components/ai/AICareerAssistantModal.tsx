@@ -106,7 +106,7 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
       <div className="bg-white w-full max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col h-[85vh] sm:h-[600px] max-h-[92vh] animate-in fade-in slide-in-from-bottom sm:zoom-in-95 duration-200">
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-[#102A43] to-[#0F766E] text-white p-3.5 sm:p-4 px-4 sm:px-6 flex items-center justify-between shrink-0">
+        <div className="bg-[#1B5F85] text-white p-3.5 sm:p-4 px-4 sm:px-6 flex items-center justify-between shrink-0">
           <div className="flex items-center gap-2.5 sm:gap-3">
             <div className="p-2 rounded-xl bg-white/10 text-teal-300">
               <Sparkles className="w-5 h-5" />
@@ -143,7 +143,7 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
             >
               <div
                 className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-xs shrink-0 ${
-                  m.sender === 'user' ? 'bg-[#102A43] text-white' : 'bg-teal-600 text-white'
+                  m.sender === 'user' ? 'bg-[#1B5F85] text-white' : 'bg-[#2DC4B4] text-white'
                 }`}
               >
                 {m.sender === 'user' ? <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
@@ -152,14 +152,14 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
               <div
                 className={`max-w-[85%] sm:max-w-[80%] rounded-2xl p-3 sm:p-4 text-xs leading-relaxed shadow-xs ${
                   m.sender === 'user'
-                    ? 'bg-[#102A43] text-white rounded-tr-none'
-                    : 'bg-white text-slate-800 border border-slate-200/80 rounded-tl-none whitespace-pre-line'
+                    ? 'bg-[#1B5F85] text-white rounded-tr-none font-medium'
+                    : 'bg-white text-slate-800 border border-slate-200/80 rounded-tl-none whitespace-pre-line font-normal'
                 }`}
               >
                 {m.text}
                 <span
-                  className={`block text-[10px] mt-1.5 ${
-                    m.sender === 'user' ? 'text-slate-300 text-right' : 'text-slate-400'
+                  className={`block text-xs mt-1.5 ${
+                    m.sender === 'user' ? 'text-slate-200 text-right' : 'text-slate-400'
                   }`}
                 >
                   {m.time}
@@ -170,9 +170,9 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
 
           {loading && (
             <div className="flex items-center gap-2 text-xs text-slate-500 pl-9 sm:pl-11">
-              <span className="w-2 h-2 bg-teal-500 rounded-full animate-bounce" />
-              <span className="w-2 h-2 bg-teal-500 rounded-full animate-bounce [animation-delay:0.2s]" />
-              <span className="w-2 h-2 bg-teal-500 rounded-full animate-bounce [animation-delay:0.4s]" />
+              <span className="w-2 h-2 bg-[#2DC4B4] rounded-full animate-bounce" />
+              <span className="w-2 h-2 bg-[#2DC4B4] rounded-full animate-bounce [animation-delay:0.2s]" />
+              <span className="w-2 h-2 bg-[#2DC4B4] rounded-full animate-bounce [animation-delay:0.4s]" />
               <span>Analyzing healthcare career database...</span>
             </div>
           )}
@@ -180,13 +180,13 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
         </div>
 
         {/* Quick Prompts */}
-        <div className="px-3 sm:px-5 py-2 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto text-[11px] shrink-0 no-scrollbar">
-          <span className="text-slate-400 shrink-0 font-medium text-[10px] sm:text-[11px]">Suggestions:</span>
+        <div className="px-3 sm:px-5 py-2.5 bg-white border-t border-slate-100 flex items-center gap-2 overflow-x-auto text-xs shrink-0 no-scrollbar">
+          <span className="text-[#1B5F85] shrink-0 font-bold text-xs">Suggestions:</span>
           {quickQuestions.map((q, idx) => (
             <button
               key={idx}
               onClick={() => handleSend(q)}
-              className="px-2.5 py-1 rounded-full bg-slate-100 hover:bg-teal-50 hover:text-teal-800 text-slate-600 transition whitespace-nowrap border border-slate-200/60 shrink-0 cursor-pointer"
+              className="px-3 py-1 rounded-full bg-[#E0F7F5] hover:bg-[#2DC4B4] hover:text-white text-[#1B5F85] font-semibold transition whitespace-nowrap border border-[#2DC4B4]/30 shrink-0 cursor-pointer text-xs"
             >
               {q}
             </button>
@@ -201,12 +201,12 @@ export const AICareerAssistantModal: React.FC<AICareerAssistantModalProps> = ({ 
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
             placeholder="Ask your career or interview question..."
-            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:px-4 sm:py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:bg-white transition"
+            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3.5 py-2 sm:px-4 sm:py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4] focus:bg-white transition"
           />
           <button
             onClick={() => handleSend()}
             disabled={!input.trim() || loading}
-            className="bg-teal-700 hover:bg-teal-800 disabled:opacity-50 text-white p-2.5 rounded-xl shadow-sm transition cursor-pointer"
+            className="bg-[#2DC4B4] hover:bg-[#25ab9d] disabled:opacity-50 text-white p-2.5 rounded-xl shadow-sm transition cursor-pointer"
             aria-label="Send message"
           >
             <Send className="w-4 h-4" />

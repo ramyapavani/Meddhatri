@@ -49,7 +49,7 @@ export const MyApplicationsPage: React.FC = () => {
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold text-[#102A43]">My Healthcare Applications</h1>
+        <h1 className="text-xl sm:text-2xl font-black text-[#1B5F85] tracking-tight">My Healthcare Applications</h1>
         <p className="text-xs text-slate-500 mt-1">Track recruitment milestones, review stages, and interview schedules</p>
       </div>
 
@@ -67,16 +67,16 @@ export const MyApplicationsPage: React.FC = () => {
                   className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl object-cover border border-slate-100 shrink-0"
                 />
                 <div className="min-w-0">
-                  <h3 className="font-bold text-sm sm:text-base text-[#102A43] truncate">{app.job.title}</h3>
-                  <p className="text-[11px] sm:text-xs text-slate-500 truncate">{app.job.organization.name} • Applied {app.appliedAt}</p>
+                  <h3 className="font-extrabold text-sm sm:text-base text-[#1B5F85] truncate">{app.job.title}</h3>
+                  <p className="text-xs text-slate-500 truncate font-medium">{app.job.organization.name} • Applied {app.appliedAt}</p>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 sm:gap-3 shrink-0 self-start sm:self-auto">
-                <span className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] sm:text-xs font-bold">
-                  <Sparkles className="w-3.5 h-3.5 text-teal-600" /> {app.matchScore}% Match
+                <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-[#E0F7F5] border border-[#2DC4B4]/30 text-[#1B5F85] text-xs font-bold">
+                  <Sparkles className="w-3.5 h-3.5 text-[#2DC4B4]" /> {app.matchScore}% Match
                 </span>
-                <span className="px-2.5 sm:px-3.5 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-black bg-teal-700 text-white uppercase tracking-wider">
+                <span className="px-3.5 py-1 rounded-full text-xs font-black bg-[#1B5F85] text-white uppercase tracking-wider shadow-2xs">
                   {app.status}
                 </span>
               </div>
@@ -84,25 +84,25 @@ export const MyApplicationsPage: React.FC = () => {
 
             {/* Application Progress Timeline */}
             <div>
-              <h4 className="text-[11px] sm:text-xs font-bold text-slate-700 uppercase tracking-wider mb-3 sm:mb-4">Hiring Progress Tracker</h4>
+              <h4 className="text-xs font-extrabold text-[#1B5F85] uppercase tracking-wider mb-3 sm:mb-4">Hiring Progress Tracker</h4>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
                 {app.history.map((step, idx) => (
                   <div
                     key={idx}
-                    className={`p-3 rounded-xl sm:rounded-2xl border text-xs transition ${
+                    className={`p-3.5 rounded-xl sm:rounded-2xl border text-xs transition ${
                       step.done
                         ? 'bg-emerald-50/70 border-emerald-200 text-emerald-900'
                         : step.current
-                        ? 'bg-teal-700 text-white border-teal-800 shadow-sm'
+                        ? 'bg-[#1B5F85] text-white border-[#1B5F85] shadow-sm'
                         : 'bg-slate-50 border-slate-200 text-slate-400'
                     }`}
                   >
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="font-bold text-[10px] sm:text-[11px]">Step {idx + 1}</span>
-                      {step.done && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
+                    <div className="flex items-center justify-between mb-1.5">
+                      <span className="font-extrabold text-xs">Step {idx + 1}</span>
+                      {step.done && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
                     </div>
-                    <p className="font-semibold text-[11px] sm:text-xs leading-snug">{step.title}</p>
-                    <span className="text-[9.5px] sm:text-[10px] opacity-80 block mt-1">{step.date}</span>
+                    <p className="font-bold text-xs leading-snug">{step.title}</p>
+                    <span className="text-xs opacity-80 block mt-1.5 font-medium">{step.date}</span>
                   </div>
                 ))}
               </div>

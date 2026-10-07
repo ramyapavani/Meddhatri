@@ -104,7 +104,7 @@ export const AboutUsPage: React.FC = () => {
       </section>
 
       {/* CTA Box */}
-      <div className="bg-gradient-to-r from-[#1B5F85] via-[#165070] to-[#0D9488] rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+      <div className="bg-[#1B5F85] rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
         <div className="space-y-2 text-center md:text-left">
           <h3 className="text-2xl sm:text-3xl font-black">Join the MedDhatri Network Today</h3>
           <p className="text-sm sm:text-base text-teal-100 max-w-xl">

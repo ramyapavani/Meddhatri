@@ -98,7 +98,7 @@ export const HealthcareSalaryCalculator: React.FC = () => {
 
   return (
     <div className="bg-white rounded-2xl sm:rounded-3xl border border-slate-200 shadow-premium overflow-hidden">
-      <div className="p-4 sm:p-6 md:p-8 bg-gradient-to-r from-[#102A43] to-[#0F766E] text-white">
+      <div className="p-4 sm:p-6 md:p-8 bg-[#1B5F85] text-white">
         <div className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1 rounded-full bg-teal-400/20 text-teal-200 border border-teal-300/30 text-[10.5px] sm:text-xs font-bold mb-2 sm:mb-3">
           <Sparkles className="w-3.5 h-3.5 text-teal-300" />
           <span>AI Clinical Compensation Benchmark Engine</span>
@@ -180,27 +180,27 @@ export const HealthcareSalaryCalculator: React.FC = () => {
         <div className="lg:col-span-7 bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-6 flex flex-col justify-between">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Full-time Annual Package */}
-            <div className="bg-white p-5 rounded-2xl border border-teal-100 shadow-xs">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+            <div className="bg-white p-5 rounded-2xl border border-[#2DC4B4]/30 shadow-xs">
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
                 Estimated Annual CTC
               </span>
-              <div className="text-2xl sm:text-3xl font-black text-[#102A43] mt-1 tracking-tight">
+              <div className="text-2xl sm:text-3xl font-black text-[#1B5F85] mt-1 tracking-tight">
                 {formatINR(estimatedMin)} – {formatINR(estimatedMax)}
               </div>
-              <span className="inline-flex items-center gap-1 text-[10px] font-bold text-teal-700 mt-2 bg-teal-50 px-2 py-0.5 rounded-full">
-                <TrendingUp className="w-3 h-3 text-teal-600" /> Market Median + Tier Multiplier
+              <span className="inline-flex items-center gap-1 text-xs font-bold text-[#1B5F85] mt-2 bg-[#E0F7F5] px-2.5 py-0.5 rounded-full border border-[#2DC4B4]/30">
+                <TrendingUp className="w-3 h-3 text-[#2DC4B4]" /> Market Median + Tier Multiplier
               </span>
             </div>
 
             {/* Locum & Shift Rate */}
             <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
-              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block">
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block">
                 Locum / Per-Shift (12h) Rate
               </span>
-              <div className="text-2xl sm:text-3xl font-black text-teal-700 mt-1 tracking-tight">
+              <div className="text-2xl sm:text-3xl font-black text-[#2DC4B4] mt-1 tracking-tight">
                 ₹{estimatedLocumMin.toLocaleString('en-IN')} – ₹{estimatedLocumMax.toLocaleString('en-IN')}
               </div>
-              <span className="text-[10px] text-slate-400 mt-2 block font-medium">
+              <span className="text-xs text-slate-500 mt-2 block font-medium">
                 Night ICU & On-Call Emergency Shifts
               </span>
             </div>
@@ -219,8 +219,8 @@ export const HealthcareSalaryCalculator: React.FC = () => {
               <span className="font-bold text-slate-700 block mb-1.5">Key Accreditations / Valued Certifications:</span>
               <div className="flex flex-wrap gap-1.5">
                 {currentData.keyCertifications.map((cert, i) => (
-                  <span key={i} className="inline-flex items-center gap-1 text-[11px] font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-slate-700">
-                    <CheckCircle2 className="w-3 h-3 text-teal-600" /> {cert}
+                  <span key={i} className="inline-flex items-center gap-1 text-xs font-semibold bg-white border border-slate-200 px-2.5 py-1 rounded-lg text-slate-700">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#2DC4B4]" /> {cert}
                   </span>
                 ))}
               </div>
@@ -228,7 +228,7 @@ export const HealthcareSalaryCalculator: React.FC = () => {
 
             <div className="text-xs">
               <span className="font-bold text-slate-700 block mb-1">Top Hiring Organizations in {city}:</span>
-              <p className="text-[11px] text-slate-600 font-medium">
+              <p className="text-xs text-slate-600 font-medium">
                 {currentData.topHospitals.join(', ')} & allied quaternary networks.
               </p>
             </div>

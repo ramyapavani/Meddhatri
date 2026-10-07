@@ -36,17 +36,17 @@ export const ResumeReviewModal: React.FC<ResumeReviewModalProps> = ({ isOpen, on
   return (
     <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
       <div className="bg-white w-full max-w-2xl rounded-3xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95">
-        <div className="bg-[#102A43] text-white p-5 px-6 flex items-center justify-between">
+        <div className="bg-[#1B5F85] text-white p-5 px-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-xl bg-teal-500/20 text-teal-300">
+            <div className="p-2 rounded-xl bg-white/10 text-[#2DC4B4]">
               <Sparkles className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-bold text-base">MedDhatri AI Resume Audit</h3>
-              <p className="text-xs text-teal-200">Clinical keyword & recruiter impact analysis</p>
+              <h3 className="font-extrabold text-base">MedDhatri AI Resume Audit</h3>
+              <p className="text-xs text-[#E0F7F5]">Clinical keyword & recruiter impact analysis</p>
             </div>
           </div>
-          <button onClick={onClose} className="p-1.5 rounded-full hover:bg-white/10 text-white/80">
+          <button onClick={onClose} className="p-1.5 rounded-full hover:bg-white/10 text-white/80 cursor-pointer">
             <X className="w-5 h-5" />
           </button>
         </div>
@@ -54,17 +54,17 @@ export const ResumeReviewModal: React.FC<ResumeReviewModalProps> = ({ isOpen, on
         <div className="p-6 overflow-y-auto space-y-6">
           {!report ? (
             <div className="text-center py-8 space-y-4">
-              <div className="w-16 h-16 rounded-3xl bg-teal-50 border border-teal-200 text-teal-700 flex items-center justify-center mx-auto shadow-inner">
-                <UploadCloud className="w-8 h-8" />
+              <div className="w-16 h-16 rounded-3xl bg-[#E0F7F5] border border-[#2DC4B4]/40 text-[#1B5F85] flex items-center justify-center mx-auto shadow-inner">
+                <UploadCloud className="w-8 h-8 text-[#1B5F85]" />
               </div>
-              <h4 className="font-bold text-lg text-slate-900">Scan Your Healthcare Resume</h4>
+              <h4 className="font-black text-lg text-[#1B5F85]">Scan Your Healthcare Resume</h4>
               <p className="text-xs text-slate-500 max-w-md mx-auto leading-relaxed">
                 Our AI inspects your CV against top hospital recruitment matrices, NABH safety benchmarks, and high-yield clinical keywords.
               </p>
               <button
                 onClick={handleStartScan}
                 disabled={analyzing}
-                className="bg-teal-700 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-xl text-xs shadow-md transition inline-flex items-center gap-2"
+                className="bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold px-6 py-3 rounded-xl text-xs shadow-md transition inline-flex items-center gap-2 cursor-pointer"
               >
                 {analyzing ? (
                   <>
@@ -73,7 +73,7 @@ export const ResumeReviewModal: React.FC<ResumeReviewModalProps> = ({ isOpen, on
                   </>
                 ) : (
                   <>
-                    <Sparkles className="w-4 h-4 text-teal-300" />
+                    <Sparkles className="w-4 h-4 text-white" />
                     Run AI Resume Audit
                   </>
                 )}
@@ -82,13 +82,13 @@ export const ResumeReviewModal: React.FC<ResumeReviewModalProps> = ({ isOpen, on
           ) : (
             <div className="space-y-6">
               {/* Score card */}
-              <div className="bg-gradient-to-r from-teal-900 to-[#102A43] text-white p-5 rounded-2xl flex items-center justify-between">
+              <div className="bg-[#1B5F85] text-white p-5 rounded-2xl flex items-center justify-between">
                 <div>
-                  <span className="text-xs text-teal-300 font-semibold block">Resume Health Score</span>
+                  <span className="text-xs text-[#2DC4B4] font-bold block">Resume Health Score</span>
                   <h4 className="text-2xl font-black">{report.score}/100 — High Recruiter Readiness</h4>
                 </div>
                 <div className="p-3 bg-white/10 rounded-2xl">
-                  <FileText className="w-7 h-7 text-teal-300" />
+                  <FileText className="w-7 h-7 text-[#2DC4B4]" />
                 </div>
               </div>
 

@@ -56,7 +56,7 @@ export const CandidateSearchPage: React.FC = () => {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-[#102A43]">Search Verified Healthcare Talent Pool</h1>
+        <h1 className="text-2xl font-black text-[#1B5F85] tracking-tight">Search Verified Healthcare Talent Pool</h1>
         <p className="text-xs text-slate-500 mt-0.5">
           Access council-registered doctors, critical care nurses, and pharmacologists with AI match scoring
         </p>
@@ -79,7 +79,7 @@ export const CandidateSearchPage: React.FC = () => {
           <select
             value={professionFilter}
             onChange={(e) => setProfessionFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700"
+            className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-[#1B5F85] focus:ring-2 focus:ring-[#2DC4B4] focus:outline-none"
           >
             <option value="All">All Professions</option>
             <option value="Doctor">Doctors</option>
@@ -91,7 +91,7 @@ export const CandidateSearchPage: React.FC = () => {
           <select
             value={locationFilter}
             onChange={(e) => setLocationFilter(e.target.value)}
-            className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-semibold text-slate-700"
+            className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-[#1B5F85] focus:ring-2 focus:ring-[#2DC4B4] focus:outline-none"
           >
             <option value="All">All Cities</option>
             <option value="Hyderabad">Hyderabad</option>
@@ -121,17 +121,17 @@ export const CandidateSearchPage: React.FC = () => {
           <div className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-6 animate-in fade-in zoom-in-95">
             <div className="flex items-center justify-between pb-4 border-b border-slate-100">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-teal-50 text-teal-700 flex items-center justify-center border border-teal-100">
-                  <Calendar className="w-5 h-5" />
+                <div className="w-10 h-10 rounded-xl bg-[#E0F7F5] text-[#1B5F85] flex items-center justify-center border border-[#2DC4B4]/40">
+                  <Calendar className="w-5 h-5 text-[#2DC4B4]" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#102A43]">Schedule Clinical Round</h3>
+                  <h3 className="text-base font-black text-[#1B5F85]">Schedule Clinical Round</h3>
                   <p className="text-xs text-slate-500">Candidate: {selectedCandidate.name} ({selectedCandidate.specialization})</p>
                 </div>
               </div>
               <button
                 onClick={() => setInterviewModalOpen(false)}
-                className="p-1 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+                className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 cursor-pointer"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -145,7 +145,7 @@ export const CandidateSearchPage: React.FC = () => {
                 <select
                   value={interviewType}
                   onChange={(e) => setInterviewType(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                 >
                   <option value="Video Round (AI Proctor & Telehealth Suite)">Video Round (Telehealth Suite)</option>
                   <option value="In-Person Hospital Clinical Board">In-Person Hospital Clinical Board</option>
@@ -162,7 +162,7 @@ export const CandidateSearchPage: React.FC = () => {
                     type="date"
                     value={interviewDate}
                     onChange={(e) => setInterviewDate(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                     required
                   />
                 </div>
@@ -174,7 +174,7 @@ export const CandidateSearchPage: React.FC = () => {
                   <select
                     value={interviewTime}
                     onChange={(e) => setInterviewTime(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-600"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs sm:text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                   >
                     <option value="09:30 AM">09:30 AM</option>
                     <option value="11:00 AM">11:00 AM</option>
@@ -185,8 +185,8 @@ export const CandidateSearchPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="p-3 bg-teal-50 border border-teal-200 rounded-xl text-[11px] text-teal-800 flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+              <div className="p-3.5 bg-[#E0F7F5]/50 border border-[#2DC4B4]/40 rounded-xl text-xs text-[#1B5F85] flex items-start gap-2 font-medium">
+                <CheckCircle2 className="w-4 h-4 text-[#2DC4B4] shrink-0 mt-0.5" />
                 <span>The candidate will receive an instant email invitation with meeting credentials and calendar sync.</span>
               </div>
 
@@ -194,13 +194,13 @@ export const CandidateSearchPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setInterviewModalOpen(false)}
-                  className="px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50"
+                  className="px-4 py-2.5 rounded-xl border border-slate-200 text-xs font-bold text-slate-600 hover:bg-slate-50 cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-teal-700 hover:bg-teal-800 text-white px-6 py-2.5 rounded-xl text-xs font-bold shadow-sm transition"
+                  className="bg-[#2DC4B4] hover:bg-[#25ab9d] text-white px-6 py-2.5 rounded-xl text-xs font-extrabold shadow-sm transition cursor-pointer"
                 >
                   Confirm & Send Invitation
                 </button>

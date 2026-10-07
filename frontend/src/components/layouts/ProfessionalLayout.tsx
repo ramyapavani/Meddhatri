@@ -358,7 +358,7 @@ export const ProfessionalLayout: React.FC = () => {
       {/* Floating AI Assistant Trigger */}
       <button
         onClick={() => setAiModalOpen(true)}
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-gradient-to-r from-[#1B5F85] via-teal-700 to-[#102A43] text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full shadow-[0_4px_25px_rgba(45,196,180,0.4)] hover:shadow-[0_6px_30px_rgba(45,196,180,0.6)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 group ring-2 ring-teal-300/40 cursor-pointer"
+        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-[#1B5F85] hover:bg-[#154E70] text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full shadow-[0_4px_20px_rgba(27,95,133,0.35)] hover:shadow-[0_6px_25px_rgba(27,95,133,0.5)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 group ring-2 ring-[#2DC4B4]/40 cursor-pointer"
         title="MedDhatri AI Healthcare Career Advisor"
         aria-label="Open AI Career Assistant Chatbot"
       >

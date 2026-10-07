@@ -12,8 +12,7 @@ export const LeadershipPage: React.FC = () => {
       experience: '22+ Years',
       bio: "Dr. Reddy brings over two decades of distinguished clinical practice and senior hospital administration to MedDhatri AI. As former Director of Clinical Services at Apollo Healthcare, he spearheaded credential standardization and NABH compliance frameworks across 12 tertiary hospitals. At MedDhatri, he defines all medical verification protocols and drives clinician trust standards.",
       expertise: ['Clinical Credential Standards', 'NABH/JCI Compliance', 'Cardiac ICU Protocols', 'Hospital Administration'],
-      avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80',
-      color: 'from-teal-600 to-teal-800'
+      avatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=400&auto=format&fit=crop&q=80'
     },
     {
       name: 'Dr. Shalini Mukhopadhyay',
@@ -23,8 +22,7 @@ export const LeadershipPage: React.FC = () => {
       experience: '14+ Years',
       bio: "A pioneering researcher in ethical AI for clinical workforce optimization, Dr. Mukhopadhyay holds a joint Ph.D. from AIIMS and IISc Bangalore. She architected MedDhatri's proprietary 7-Factor AI Compatibility Engine, which evaluates specialty depth, ICU competency, procedural logbook volumes, and NABH accreditation familiarity to deliver high-precision job matches.",
       expertise: ['AI Match Algorithms', 'Biomedical Informatics', 'Healthcare NLP', 'Clinical Competency Modeling'],
-      avatar: 'https://images.unsplash.com/photo-1594824813590-4892c90f5c93?w=400&auto=format&fit=crop&q=80',
-      color: 'from-cyan-600 to-teal-800'
+      avatar: 'https://images.unsplash.com/photo-1594824813590-4892c90f5c93?w=400&auto=format&fit=crop&q=80'
     },
     {
       name: 'Rajesh Subramanian',
@@ -34,8 +32,7 @@ export const LeadershipPage: React.FC = () => {
       experience: '18+ Years',
       bio: "Rajesh leads all engineering, infrastructure, and platform security at MedDhatri. With over 18 years in enterprise SaaS, including directing engineering for multiple HealthTech unicorns, he built the HIPAA-compliant, NABH-audit-ready credential vaults and scalable real-time hiring pipeline that powers MedDhatri's cross-portal architecture serving 50,000+ clinicians.",
       expertise: ['Distributed Systems', 'HIPAA-Compliant SaaS', 'Healthcare Data Security', 'Real-Time Infrastructure'],
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80',
-      color: 'from-[#102A43] to-teal-900'
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80'
     },
     {
       name: 'Priya Anand',
@@ -45,8 +42,7 @@ export const LeadershipPage: React.FC = () => {
       experience: '12+ Years',
       bio: "Priya drives MedDhatri's hospital network partnerships, B2B growth strategy, and enterprise sales. With her background as VP of Strategy at Practo where she scaled clinical marketplace partnerships to 20,000+ hospitals, she brings unparalleled institutional knowledge of India's hospital procurement and talent acquisition ecosystem.",
       expertise: ['Hospital Partnerships', 'B2B SaaS Sales', 'Healthcare Market Expansion', 'Enterprise Strategy'],
-      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80',
-      color: 'from-rose-800 to-[#102A43]'
+      avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&auto=format&fit=crop&q=80'
     },
     {
       name: 'Dr. Karthik Narayan',
@@ -56,8 +52,7 @@ export const LeadershipPage: React.FC = () => {
       experience: '16+ Years',
       bio: "Dr. Narayan bridges the complex intersection of clinical compliance, healthcare law, and regulatory frameworks. With direct relationships spanning 18 State Medical Councils, the National Medical Commission (NMC), Indian Nursing Council, and Pharmacy Council of India, he ensures every credential verified through MedDhatri meets legal and ethical standards.",
       expertise: ['Medical Council Relations', 'Healthcare Compliance Law', 'NMC Regulations', 'Credential Audit'],
-      avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&auto=format&fit=crop&q=80',
-      color: 'from-purple-900 to-[#102A43]'
+      avatar: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=400&auto=format&fit=crop&q=80'
     },
     {
       name: 'Ananya Krishnamurthy',
@@ -67,8 +62,7 @@ export const LeadershipPage: React.FC = () => {
       experience: '10+ Years',
       bio: "Ananya shapes the product vision and user experience across all five MedDhatri portals. She champions accessibility-first design and ran extensive user research with 2,000+ doctors, nurses, and hospital HR managers to design workflows that feel intuitive to healthcare professionals — from the clinician dashboard to the multi-stage hospital recruitment pipeline.",
       expertise: ['Healthcare UX Research', 'Product Design Systems', 'Clinician-Centered Design', 'Accessibility'],
-      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80',
-      color: 'from-teal-700 to-cyan-900'
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&auto=format&fit=crop&q=80'
     }
   ];
 
@@ -123,7 +117,7 @@ export const LeadershipPage: React.FC = () => {
               className="bg-white rounded-3xl border border-slate-200/80 shadow-subtle hover:shadow-xl hover:border-[#2DC4B4]/40 transition-all duration-300 overflow-hidden flex flex-col"
             >
               {/* Top color band */}
-              <div className="bg-gradient-to-r from-[#1B5F85] to-[#2DC4B4] h-2.5 w-full" />
+              <div className="bg-[#1B5F85] h-2 w-full" />
 
               {/* Content */}
               <div className="p-7 flex flex-col items-center text-center space-y-4 flex-1">
@@ -198,7 +192,7 @@ export const LeadershipPage: React.FC = () => {
       </section>
 
       {/* Values Strip */}
-      <section className="bg-gradient-to-r from-slate-50 via-teal-50/50 to-slate-50 border border-slate-200/80 rounded-3xl p-8 sm:p-10 space-y-6">
+      <section className="bg-white border border-slate-200/80 rounded-3xl p-8 sm:p-10 space-y-6 shadow-subtle">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B5F85] text-center">Our Core Values</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
@@ -219,7 +213,7 @@ export const LeadershipPage: React.FC = () => {
       </section>
 
       {/* CTA */}
-      <div className="bg-gradient-to-r from-[#1B5F85] via-[#165070] to-[#0D9488] rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
+      <div className="bg-[#1B5F85] rounded-3xl p-8 sm:p-12 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
         <div className="space-y-2 text-center md:text-left">
           <h3 className="text-2xl sm:text-3xl font-black">Ready to Join the MedDhatri Network?</h3>
           <p className="text-sm sm:text-base text-teal-100 max-w-xl">

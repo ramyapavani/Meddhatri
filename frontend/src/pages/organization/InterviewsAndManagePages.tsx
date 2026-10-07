@@ -61,13 +61,13 @@ export const InterviewsPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#102A43]">Clinical Interviews & Medical Rounds</h1>
+          <h1 className="text-2xl font-black text-[#1B5F85] tracking-tight">Clinical Interviews & Medical Rounds</h1>
           <p className="text-xs text-slate-500 mt-0.5">Manage scheduled clinical panel assessments and video interviews</p>
         </div>
 
         <button
           onClick={() => setScheduleModalOpen(true)}
-          className="bg-teal-700 hover:bg-teal-800 text-white font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-sm transition"
+          className="bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 shadow-sm transition cursor-pointer"
         >
           <PlusCircle className="w-4 h-4" /> Schedule Clinical Interview
         </button>
@@ -78,15 +78,15 @@ export const InterviewsPage: React.FC = () => {
           <div key={int.id} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-subtle flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2">
-                <h3 className="font-bold text-base text-slate-900">{int.candidateName}</h3>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-teal-50 text-teal-800 border border-teal-200">
+                <h3 className="font-extrabold text-base text-[#1B5F85]">{int.candidateName}</h3>
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#E0F7F5] text-[#1B5F85] border border-[#2DC4B4]/30">
                   {int.status}
                 </span>
               </div>
-              <p className="text-xs text-teal-700 font-semibold">{int.role}</p>
-              <div className="flex items-center gap-4 text-xs text-slate-500 pt-1">
-                <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {int.date}</span>
-                <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {int.time}</span>
+              <p className="text-xs text-[#2DC4B4] font-bold">{int.role}</p>
+              <div className="flex items-center gap-4 text-xs text-slate-500 pt-1 font-medium">
+                <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5 text-slate-400" /> {int.date}</span>
+                <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5 text-slate-400" /> {int.time}</span>
                 <span>• {int.type}</span>
               </div>
             </div>
@@ -96,9 +96,9 @@ export const InterviewsPage: React.FC = () => {
                 href={int.meetingLink}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-[#102A43] hover:bg-[#0B1C2D] text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm"
+                className="bg-[#1B5F85] hover:bg-[#154E70] text-white font-bold text-xs px-5 py-2.5 rounded-xl transition flex items-center gap-2 shadow-sm cursor-pointer"
               >
-                <Video className="w-4 h-4 text-teal-300" /> Start Meeting
+                <Video className="w-4 h-4 text-[#2DC4B4]" /> Start Meeting
               </a>
             )}
           </div>
@@ -106,11 +106,11 @@ export const InterviewsPage: React.FC = () => {
       </div>
 
       {scheduleModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 p-6 space-y-4 animate-in fade-in zoom-in-95">
             <div className="flex items-center justify-between pb-3 border-b border-slate-100">
-              <h3 className="font-bold text-base text-slate-900">Schedule Clinical Round</h3>
-              <button onClick={() => setScheduleModalOpen(false)} className="text-slate-400 hover:text-slate-600">
+              <h3 className="font-black text-base text-[#1B5F85]">Schedule Clinical Round</h3>
+              <button onClick={() => setScheduleModalOpen(false)} className="text-slate-400 hover:text-slate-600 cursor-pointer">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -123,7 +123,7 @@ export const InterviewsPage: React.FC = () => {
                   required
                   value={candidateName}
                   onChange={(e) => setCandidateName(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                 />
               </div>
 
@@ -134,7 +134,7 @@ export const InterviewsPage: React.FC = () => {
                   required
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                 />
               </div>
 
@@ -146,7 +146,7 @@ export const InterviewsPage: React.FC = () => {
                     required
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                   />
                 </div>
 
@@ -157,7 +157,7 @@ export const InterviewsPage: React.FC = () => {
                     required
                     value={time}
                     onChange={(e) => setTime(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                   />
                 </div>
               </div>
@@ -166,13 +166,13 @@ export const InterviewsPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setScheduleModalOpen(false)}
-                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold"
+                  className="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 font-semibold cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-teal-700 hover:bg-teal-800 text-white font-bold px-5 py-2 rounded-xl shadow-sm"
+                  className="bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold px-5 py-2 rounded-xl shadow-sm cursor-pointer transition"
                 >
                   Schedule Round
                 </button>
@@ -190,7 +190,7 @@ export const ManageJobsPage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#102A43]">Manage Hospital Openings</h1>
+          <h1 className="text-2xl font-black text-[#1B5F85] tracking-tight">Manage Hospital Openings</h1>
           <p className="text-xs text-slate-500 mt-0.5">Active and draft vacancies published by your institution</p>
         </div>
       </div>
@@ -200,18 +200,18 @@ export const ManageJobsPage: React.FC = () => {
         {[0, 1, 2].map((idx) => (
           <div key={idx} className="bg-white p-6 rounded-3xl border border-slate-200 shadow-subtle flex items-center justify-between">
             <div>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-800 border border-emerald-200">
+              <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#E0F7F5] text-[#1B5F85] border border-[#2DC4B4]/30">
                 ACTIVE
               </span>
-              <h3 className="font-bold text-base text-slate-900 mt-1">
+              <h3 className="font-extrabold text-base text-[#1B5F85] mt-1">
                 {idx === 0 ? 'Senior Interventional Cardiologist' : idx === 1 ? 'Lead ICU Staff Nurse' : 'Senior Molecular Pathologist'}
               </h3>
-              <p className="text-xs text-slate-500">Department of Clinical Medicine • Hyderabad</p>
+              <p className="text-xs text-slate-500 font-medium">Department of Clinical Medicine • Hyderabad</p>
             </div>
 
             <div className="text-right">
-              <span className="text-xs font-bold text-teal-800 block">{14 + idx * 5} Applicants</span>
-              <span className="text-[11px] text-slate-400">Published 4 days ago</span>
+              <span className="text-xs font-extrabold text-[#1B5F85] block">{14 + idx * 5} Applicants</span>
+              <span className="text-xs text-slate-400">Published 4 days ago</span>
             </div>
           </div>
         ))}

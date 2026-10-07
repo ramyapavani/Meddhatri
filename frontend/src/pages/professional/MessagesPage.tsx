@@ -77,13 +77,13 @@ export const MessagesPage: React.FC = () => {
       {/* Contact List (Hidden on mobile when chat is active) */}
       <div className={`w-full md:w-80 border-r border-slate-200 flex flex-col bg-slate-50/50 ${showMobileChat ? 'hidden md:flex' : 'flex'}`}>
         <div className="p-3.5 sm:p-4 border-b border-slate-200">
-          <h2 className="font-bold text-sm text-slate-900 mb-2">Hospital Conversations</h2>
+          <h2 className="font-bold text-sm text-[#1B5F85] mb-2">Hospital Conversations</h2>
           <div className="relative">
             <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
             <input
               type="text"
               placeholder="Search conversations..."
-              className="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-teal-500"
+              className="w-full bg-white border border-slate-200 rounded-xl pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
           </div>
         </div>
@@ -93,8 +93,8 @@ export const MessagesPage: React.FC = () => {
             <button
               key={c.id}
               onClick={() => handleSelectContact(c)}
-              className={`w-full p-3.5 sm:p-4 text-left flex items-start gap-3 transition ${
-                activeContact.id === c.id ? 'bg-teal-50/80 border-l-4 border-teal-600' : 'hover:bg-slate-100/60'
+              className={`w-full p-3.5 sm:p-4 text-left flex items-start gap-3 transition cursor-pointer ${
+                activeContact.id === c.id ? 'bg-[#E0F7F5]/70 border-l-4 border-[#2DC4B4]' : 'hover:bg-slate-100/60'
               }`}
             >
               <div className="relative shrink-0">
@@ -104,18 +104,18 @@ export const MessagesPage: React.FC = () => {
                   onError={(e) => {
                     (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
                   }}
-                  className="w-10 h-10 rounded-full object-cover"
+                  className="w-10 h-10 rounded-xl object-cover ring-1 ring-slate-200"
                 />
                 {c.online && (
-                  <span className="w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full absolute bottom-0 right-0" />
+                  <span className="w-2.5 h-2.5 bg-[#2DC4B4] border-2 border-white rounded-full absolute bottom-0 right-0" />
                 )}
               </div>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between mb-0.5">
-                  <h4 className="font-bold text-xs text-slate-900 truncate">{c.name}</h4>
-                  <span className="text-[10px] text-slate-400">{c.time}</span>
+                  <h4 className="font-bold text-xs text-[#1B5F85] truncate">{c.name}</h4>
+                  <span className="text-xs text-slate-400">{c.time}</span>
                 </div>
-                <p className="text-[11px] text-slate-500 truncate">{c.lastMessage}</p>
+                <p className="text-xs text-slate-500 truncate">{c.lastMessage}</p>
               </div>
             </button>
           ))}
@@ -130,10 +130,10 @@ export const MessagesPage: React.FC = () => {
             {/* Mobile Back Button */}
             <button
               onClick={() => setShowMobileChat(false)}
-              className="md:hidden p-1.5 -ml-1 text-slate-600 hover:bg-slate-100 rounded-lg transition shrink-0"
+              className="md:hidden p-1.5 -ml-1 text-slate-600 hover:bg-slate-100 rounded-lg transition shrink-0 cursor-pointer"
               aria-label="Back to contacts"
             >
-              <ArrowLeft className="w-5 h-5 text-teal-800" />
+              <ArrowLeft className="w-5 h-5 text-[#1B5F85]" />
             </button>
 
             <img
@@ -142,11 +142,11 @@ export const MessagesPage: React.FC = () => {
               onError={(e) => {
                 (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
               }}
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover shrink-0"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover shrink-0 ring-1 ring-slate-200"
             />
             <div className="min-w-0">
-              <h3 className="font-bold text-xs sm:text-sm text-slate-900 truncate">{activeContact.name}</h3>
-              <p className="text-[10px] sm:text-[11px] text-teal-700 font-medium truncate">{activeContact.role}</p>
+              <h3 className="font-extrabold text-xs sm:text-sm text-[#1B5F85] truncate">{activeContact.name}</h3>
+              <p className="text-xs text-[#2DC4B4] font-semibold truncate">{activeContact.role}</p>
             </div>
           </div>
         </div>
@@ -158,12 +158,12 @@ export const MessagesPage: React.FC = () => {
               <div
                 className={`max-w-[85%] sm:max-w-[75%] p-3 sm:p-3.5 rounded-2xl text-xs leading-relaxed shadow-xs ${
                   m.sender === 'me'
-                    ? 'bg-[#102A43] text-white rounded-tr-none'
-                    : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none'
+                    ? 'bg-[#1B5F85] text-white rounded-tr-none font-medium'
+                    : 'bg-white text-slate-800 border border-slate-200 rounded-tl-none font-normal'
                 }`}
               >
                 <p>{m.text}</p>
-                <span className={`block text-[9.5px] sm:text-[10px] mt-1 ${m.sender === 'me' ? 'text-slate-300 text-right' : 'text-slate-400'}`}>
+                <span className={`block text-xs mt-1 ${m.sender === 'me' ? 'text-slate-200 text-right' : 'text-slate-400'}`}>
                   {m.time}
                 </span>
               </div>
@@ -178,11 +178,11 @@ export const MessagesPage: React.FC = () => {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type message to recruiter..."
-            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 sm:px-4 py-2 sm:py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
           />
           <button
             type="submit"
-            className="bg-teal-700 hover:bg-teal-800 text-white p-2 sm:p-2.5 rounded-xl transition shrink-0"
+            className="bg-[#2DC4B4] hover:bg-[#25ab9d] text-white p-2.5 sm:p-3 rounded-xl transition shrink-0 cursor-pointer shadow-xs"
             aria-label="Send message"
           >
             <Send className="w-4 h-4" />

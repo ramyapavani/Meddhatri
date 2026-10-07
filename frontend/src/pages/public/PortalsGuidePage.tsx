@@ -119,7 +119,7 @@ export const PortalsGuidePage: React.FC = () => {
       </div>
 
       {/* Security & Verification Callout */}
-      <div className="bg-gradient-to-r from-[#1B5F85] via-[#165070] to-[#0D9488] text-white p-8 sm:p-12 rounded-3xl shadow-xl space-y-6">
+      <div className="bg-[#1B5F85] text-white p-8 sm:p-12 rounded-3xl shadow-xl space-y-6">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="space-y-2">
             <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-[#E0F7F5] text-xs font-bold">

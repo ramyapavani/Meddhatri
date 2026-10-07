@@ -57,7 +57,7 @@ export const ProfileEditPage: React.FC = () => {
     <div className="max-w-4xl mx-auto space-y-5 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-[#102A43]">Professional Healthcare Profile</h1>
+          <h1 className="text-xl sm:text-2xl font-black text-[#1B5F85] tracking-tight">Professional Healthcare Profile</h1>
           <p className="text-xs text-slate-500 mt-0.5">Keep your clinical qualifications, council registration, and procedural volume updated</p>
         </div>
 
@@ -77,16 +77,16 @@ export const ProfileEditPage: React.FC = () => {
             onError={(e) => {
               (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&auto=format&fit=crop&q=80';
             }}
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-4 ring-slate-100 shadow-md shrink-0"
+            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover ring-4 ring-[#E0F7F5] shadow-md shrink-0"
           />
           <div>
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
-              <h3 className="font-bold text-base text-slate-900">{name}</h3>
-              <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-teal-50 border border-teal-200 text-teal-800 text-[11px] font-bold">
-                <ShieldCheck className="w-3.5 h-3.5 text-teal-600" /> Verified Practitioner
+              <h3 className="font-extrabold text-base text-[#1B5F85]">{name}</h3>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#E0F7F5] border border-[#2DC4B4]/40 text-[#1B5F85] text-xs font-bold">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#2DC4B4]" /> Verified Practitioner
               </span>
             </div>
-            <p className="text-xs text-slate-500 mt-1">State Medical Council Reg: REG-492104</p>
+            <p className="text-xs text-slate-500 mt-1 font-medium">State Medical Council Reg: REG-492104</p>
           </div>
         </div>
 
@@ -98,7 +98,7 @@ export const ProfileEditPage: React.FC = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
           </div>
 
@@ -108,7 +108,7 @@ export const ProfileEditPage: React.FC = () => {
               type="text"
               value={specialization}
               onChange={(e) => setSpecialization(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
           </div>
         </div>
@@ -119,7 +119,7 @@ export const ProfileEditPage: React.FC = () => {
             type="text"
             value={headline}
             onChange={(e) => setHeadline(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
           />
         </div>
 
@@ -130,7 +130,7 @@ export const ProfileEditPage: React.FC = () => {
               type="number"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
           </div>
 
@@ -140,7 +140,7 @@ export const ProfileEditPage: React.FC = () => {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
           </div>
         </div>
@@ -151,7 +151,7 @@ export const ProfileEditPage: React.FC = () => {
             rows={4}
             value={bio}
             onChange={(e) => setBio(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
           />
         </div>
 
@@ -160,9 +160,9 @@ export const ProfileEditPage: React.FC = () => {
           <label className="text-xs font-bold text-slate-700 block mb-2">Clinical Competencies & Procedural Skills</label>
           <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3">
             {skills.map((s, idx) => (
-              <span key={idx} className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-xl bg-teal-50 text-teal-800 border border-teal-200 text-xs font-semibold">
+              <span key={idx} className="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-[#E0F7F5] text-[#1B5F85] border border-[#2DC4B4]/30 text-xs font-bold">
                 {s}
-                <button type="button" onClick={() => handleRemoveSkill(s)} className="text-teal-600 hover:text-teal-900 font-bold ml-0.5">×</button>
+                <button type="button" onClick={() => handleRemoveSkill(s)} className="text-[#1B5F85] hover:text-red-500 font-bold ml-0.5 cursor-pointer">×</button>
               </span>
             ))}
           </div>
@@ -173,14 +173,14 @@ export const ProfileEditPage: React.FC = () => {
               value={newSkill}
               onChange={(e) => setNewSkill(e.target.value)}
               placeholder="Add skill (e.g. Critical Care, Triage)..."
-              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
             <button
               type="button"
               onClick={handleAddSkill}
-              className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-3 sm:px-4 py-2 rounded-xl text-xs flex items-center gap-1 shrink-0"
+              className="bg-[#1B5F85] hover:bg-[#154E70] text-white font-bold px-3 sm:px-4 py-2 rounded-xl text-xs flex items-center gap-1 shrink-0 cursor-pointer transition"
             >
-              <Plus className="w-3.5 h-3.5" /> Add
+              <Plus className="w-3.5 h-3.5 text-[#2DC4B4]" /> Add
             </button>
           </div>
         </div>
@@ -188,7 +188,7 @@ export const ProfileEditPage: React.FC = () => {
         <div className="pt-4 border-t border-slate-100 flex items-center justify-end">
           <button
             type="submit"
-            className="w-full sm:w-auto bg-teal-700 hover:bg-teal-800 text-white font-bold px-6 py-3 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2"
+            className="w-full sm:w-auto bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold px-6 py-3 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
           >
             <Save className="w-4 h-4" /> Save Profile Updates
           </button>

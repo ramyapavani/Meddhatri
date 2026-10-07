@@ -93,8 +93,8 @@ export const RecruitmentPipelinePage: React.FC = () => {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-[#102A43] flex items-center gap-2">
-            <GitPullRequest className="w-6 h-6 text-teal-600" />
+          <h1 className="text-2xl font-black text-[#1B5F85] flex items-center gap-2 tracking-tight">
+            <GitPullRequest className="w-6 h-6 text-[#2DC4B4]" />
             Clinical Recruitment Pipeline
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">Interactive Kanban board for candidate progression across hospital departments</p>
@@ -108,15 +108,15 @@ export const RecruitmentPipelinePage: React.FC = () => {
           return (
             <div key={stage.key} className="bg-slate-100/70 p-3.5 rounded-2xl border border-slate-200 min-h-[500px] flex flex-col space-y-3">
               <div className="flex items-center justify-between pb-2 border-b border-slate-200">
-                <span className="font-bold text-xs text-slate-800">{stage.label}</span>
-                <span className="px-2 py-0.5 rounded-full bg-white text-[11px] font-bold text-slate-700 shadow-2xs">
+                <span className="font-extrabold text-xs text-[#1B5F85]">{stage.label}</span>
+                <span className="px-2.5 py-0.5 rounded-full bg-white text-xs font-black text-[#1B5F85] shadow-2xs">
                   {stageCandidates.length}
                 </span>
               </div>
 
               <div className="space-y-3 flex-1">
                 {stageCandidates.map((cand) => (
-                  <div key={cand.id} className="bg-white p-3.5 rounded-xl border border-slate-200/90 shadow-xs space-y-3 hover:shadow-subtle transition">
+                  <div key={cand.id} className="bg-white p-3.5 rounded-2xl border border-slate-200/90 shadow-xs space-y-3 hover:shadow-subtle transition">
                     <div className="flex items-center gap-2.5">
                       <img
                         src={cand.avatar || 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80'}
@@ -124,17 +124,17 @@ export const RecruitmentPipelinePage: React.FC = () => {
                         onError={(e) => {
                           (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=100&auto=format&fit=crop&q=80';
                         }}
-                        className="w-9 h-9 rounded-full object-cover"
+                        className="w-10 h-10 rounded-xl object-cover ring-1 ring-slate-200"
                       />
                       <div className="min-w-0 flex-1">
-                        <h4 className="font-bold text-xs text-slate-900 truncate">{cand.name}</h4>
-                        <p className="text-[10px] text-teal-700 font-semibold truncate">{cand.specialization}</p>
+                        <h4 className="font-extrabold text-xs text-[#1B5F85] truncate">{cand.name}</h4>
+                        <p className="text-xs text-[#2DC4B4] font-semibold truncate">{cand.specialization}</p>
                       </div>
                     </div>
 
-                    <div className="flex items-center justify-between text-[10px] text-slate-500 pt-1 border-t border-slate-100">
-                      <span className="font-bold text-teal-800 bg-teal-50 px-1.5 py-0.5 rounded">{cand.matchScore}% Match</span>
-                      <span>{cand.experienceYears} yrs exp</span>
+                    <div className="flex items-center justify-between text-xs text-slate-500 pt-1.5 border-t border-slate-100">
+                      <span className="font-bold text-[#1B5F85] bg-[#E0F7F5] px-2 py-0.5 rounded-md border border-[#2DC4B4]/30">{cand.matchScore}% Match</span>
+                      <span className="font-medium">{cand.experienceYears} yrs exp</span>
                     </div>
 
                     {/* Advance Stage Control */}
@@ -147,7 +147,7 @@ export const RecruitmentPipelinePage: React.FC = () => {
                               moveCandidate(cand.id, stages[nextStageIndex].key);
                             }
                           }}
-                          className="text-[10px] font-bold text-teal-700 hover:text-teal-900 bg-teal-50 px-2.5 py-1 rounded-lg flex items-center gap-1 border border-teal-200"
+                          className="text-xs font-bold text-[#1B5F85] hover:text-white bg-[#E0F7F5] hover:bg-[#1B5F85] px-3 py-1.5 rounded-xl flex items-center gap-1 border border-[#2DC4B4]/40 cursor-pointer transition shadow-2xs"
                         >
                           Advance ➔
                         </button>

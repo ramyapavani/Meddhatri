@@ -8,8 +8,8 @@ export const RecommendedJobsPage: React.FC = () => {
     <div className="space-y-5 sm:space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-[#102A43] flex items-center gap-2">
-            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" />
+          <h1 className="text-xl sm:text-2xl font-black text-[#1B5F85] flex items-center gap-2 tracking-tight">
+            <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-[#2DC4B4]" />
             AI Recommended Healthcare Openings
           </h1>
           <p className="text-xs text-slate-500 mt-0.5">
@@ -31,8 +31,8 @@ export const SavedJobsPage: React.FC = () => {
   return (
     <div className="space-y-5 sm:space-y-6">
       <div>
-        <h1 className="text-xl sm:text-2xl font-bold text-[#102A43] flex items-center gap-2">
-          <Bookmark className="w-5 h-5 sm:w-6 sm:h-6 text-teal-600" />
+        <h1 className="text-xl sm:text-2xl font-black text-[#1B5F85] flex items-center gap-2 tracking-tight">
+          <Bookmark className="w-5 h-5 sm:w-6 sm:h-6 text-[#2DC4B4]" />
           Saved Opportunities
         </h1>
         <p className="text-xs text-slate-500 mt-0.5">Bookmarked healthcare roles for review and application</p>

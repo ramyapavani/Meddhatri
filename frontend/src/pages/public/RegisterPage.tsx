@@ -45,10 +45,10 @@ export const RegisterPage: React.FC = () => {
     <div className="min-h-[85vh] flex items-center justify-center px-4 py-12">
       <div className="max-w-xl w-full bg-white rounded-3xl border border-slate-200 shadow-premium p-8 space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-2xl bg-teal-600 text-white flex items-center justify-center mx-auto shadow-md">
+          <div className="w-12 h-12 rounded-2xl bg-[#1B5F85] text-[#2DC4B4] flex items-center justify-center mx-auto shadow-md">
             <Stethoscope className="w-6 h-6" />
           </div>
-          <h2 className="text-2xl font-extrabold text-[#102A43]">Create Your MedDhatri AI Account</h2>
+          <h2 className="text-2xl font-black text-[#1B5F85]">Create Your MedDhatri AI Account</h2>
           <p className="text-xs text-slate-500">Join the verified healthcare talent ecosystem</p>
         </div>
 
@@ -57,32 +57,32 @@ export const RegisterPage: React.FC = () => {
           <button
             type="button"
             onClick={() => setRole('PROFESSIONAL')}
-            className={`p-4 rounded-2xl border text-left transition flex items-center gap-3 ${
+            className={`p-4 rounded-2xl border text-left transition flex items-center gap-3 cursor-pointer ${
               role === 'PROFESSIONAL'
-                ? 'border-teal-500 bg-teal-50/60 ring-2 ring-teal-500/20'
+                ? 'border-[#2DC4B4] bg-[#E0F7F5]/70 ring-2 ring-[#2DC4B4]/30'
                 : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50'
             }`}
           >
-            <User className={`w-5 h-5 ${role === 'PROFESSIONAL' ? 'text-teal-700' : 'text-slate-400'}`} />
+            <User className={`w-5 h-5 ${role === 'PROFESSIONAL' ? 'text-[#1B5F85]' : 'text-slate-400'}`} />
             <div>
               <span className="font-bold text-xs text-slate-900 block">Healthcare Professional</span>
-              <span className="text-[10px] text-slate-500">Doctor, Nurse, Pharmacist</span>
+              <span className="text-[11px] text-slate-500">Doctor, Nurse, Pharmacist</span>
             </div>
           </button>
 
           <button
             type="button"
             onClick={() => setRole('ORGANIZATION_ADMIN')}
-            className={`p-4 rounded-2xl border text-left transition flex items-center gap-3 ${
+            className={`p-4 rounded-2xl border text-left transition flex items-center gap-3 cursor-pointer ${
               role === 'ORGANIZATION_ADMIN'
-                ? 'border-teal-500 bg-teal-50/60 ring-2 ring-teal-500/20'
+                ? 'border-[#2DC4B4] bg-[#E0F7F5]/70 ring-2 ring-[#2DC4B4]/30'
                 : 'border-slate-200 bg-slate-50/50 hover:bg-slate-50'
             }`}
           >
-            <Building2 className={`w-5 h-5 ${role === 'ORGANIZATION_ADMIN' ? 'text-teal-700' : 'text-slate-400'}`} />
+            <Building2 className={`w-5 h-5 ${role === 'ORGANIZATION_ADMIN' ? 'text-[#1B5F85]' : 'text-slate-400'}`} />
             <div>
               <span className="font-bold text-xs text-slate-900 block">Hospital / Employer</span>
-              <span className="text-[10px] text-slate-500">Hospitals, Clinics, Labs</span>
+              <span className="text-[11px] text-slate-500">Hospitals, Clinics, Labs</span>
             </div>
           </button>
         </div>
@@ -100,7 +100,7 @@ export const RegisterPage: React.FC = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={role === 'PROFESSIONAL' ? 'Dr. Sarah Smith' : 'Rohit Sharma (HR Lead)'}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
               />
             </div>
 
@@ -112,7 +112,7 @@ export const RegisterPage: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@healthcare.org"
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
               />
             </div>
           </div>
@@ -126,7 +126,7 @@ export const RegisterPage: React.FC = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98765 43210"
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
               />
             </div>
 
@@ -137,7 +137,7 @@ export const RegisterPage: React.FC = () => {
                   <select
                     value={profession}
                     onChange={(e) => setProfession(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                   >
                     <option value="Doctor">Doctor / Specialist</option>
                     <option value="Nurse">Staff Nurse / ICU Specialist</option>
@@ -155,7 +155,7 @@ export const RegisterPage: React.FC = () => {
                     value={orgName}
                     onChange={(e) => setOrgName(e.target.value)}
                     placeholder="Apollo / Fortis / NovaCare"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
                   />
                 </div>
               )}
@@ -170,14 +170,14 @@ export const RegisterPage: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Minimum 8 characters"
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-teal-500"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-[#2DC4B4]"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-teal-700 hover:bg-teal-800 text-white font-bold py-3.5 rounded-xl text-xs shadow-md transition"
+            className="w-full bg-[#2DC4B4] hover:bg-[#25ab9d] text-white font-extrabold py-3.5 rounded-xl text-sm shadow-md transition cursor-pointer"
           >
             {loading ? 'Creating Account...' : 'Complete Registration'}
           </button>
@@ -185,7 +185,7 @@ export const RegisterPage: React.FC = () => {
 
         <p className="text-center text-xs text-slate-500">
           Already have an account?{' '}
-          <Link to="/login" className="font-bold text-teal-700 hover:underline">Log in</Link>
+          <Link to="/login" className="font-bold text-[#1B5F85] hover:text-[#2DC4B4]">Log in</Link>
         </p>
       </div>
     </div>

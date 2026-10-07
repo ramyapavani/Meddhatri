@@ -110,7 +110,7 @@ export const ContactUsPage: React.FC = () => {
           </div>
 
           {/* Compliance Info Banner */}
-          <div className="bg-gradient-to-r from-[#1B5F85] via-[#165070] to-[#0D9488] text-white p-6 sm:p-7 rounded-3xl space-y-2.5 shadow-md">
+          <div className="bg-[#1B5F85] text-white p-6 sm:p-7 rounded-3xl space-y-2.5 shadow-md">
             <div className="flex items-center gap-2">
               <ShieldCheck className="w-5 h-5 text-[#2DC4B4]" />
               <h3 className="font-bold text-sm sm:text-base">Medical Council & Hospital Audits</h3>

@@ -58,21 +58,23 @@ export const JobDetailPage: React.FC = () => {
       {/* Main Header Card */}
       <div className="bg-white rounded-3xl border border-slate-200/80 p-6 sm:p-8 shadow-subtle space-y-6">
         <div className="flex flex-col lg:flex-row items-start justify-between gap-6">
-          <div className="flex items-start gap-4 sm:gap-6">
-            <img
-              src={job.organization?.logo || 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=200&auto=format&fit=crop&q=80'}
-              alt={job.organization?.name}
-              onError={(e) => {
-                (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=200&auto=format&fit=crop&q=80';
-              }}
-              className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-slate-100 shadow-sm"
-            />
+          <div className="flex items-start gap-4 sm:gap-5">
+            <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-50 border border-slate-200/80 p-1.5 flex items-center justify-center shrink-0 shadow-xs">
+              <img
+                src={job.organization?.logo || 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=200&auto=format&fit=crop&q=80'}
+                alt={job.organization?.name}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=200&auto=format&fit=crop&q=80';
+                }}
+                className="w-full h-full rounded-xl object-contain"
+              />
+            </div>
             <div>
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-1 flex-wrap">
                 <span className="font-bold text-sm text-slate-700">{job.organization.name}</span>
                 {job.organization.verificationStatus === 'VERIFIED' && (
                   <span className="inline-flex items-center gap-1 text-[11px] font-bold text-[#1B5F85] bg-[#E0F7F5] px-2.5 py-0.5 rounded-full border border-[#2DC4B4]/30">
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#2DC4B4]" /> NABH Verified Hospital
+                    <ShieldCheck className="w-3.5 h-3.5 text-[#0D9488]" /> NABH Verified Hospital
                   </span>
                 )}
               </div>
@@ -82,17 +84,18 @@ export const JobDetailPage: React.FC = () => {
           </div>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-3 w-full lg:w-auto">
+          <div className="flex items-center gap-3 w-full lg:w-auto shrink-0">
             <button
               onClick={() => setSaved(!saved)}
-              className={`p-3.5 rounded-2xl border transition ${
+              className={`p-3.5 rounded-2xl border transition cursor-pointer ${
                 saved
                   ? 'bg-[#E0F7F5] border-[#2DC4B4]/40 text-[#1B5F85]'
                   : 'border-slate-200 text-slate-500 hover:bg-slate-50 bg-white'
               }`}
               title={saved ? 'Job Saved' : 'Save Job'}
+              aria-label="Save Job"
             >
-              <Bookmark className={`w-5 h-5 ${saved ? 'fill-[#2DC4B4] text-[#2DC4B4]' : ''}`} />
+              <Bookmark className={`w-5 h-5 ${saved ? 'fill-[#0D9488] text-[#0D9488]' : ''}`} />
             </button>
 
             {applied ? (
@@ -106,9 +109,9 @@ export const JobDetailPage: React.FC = () => {
             ) : (
               <button
                 onClick={() => setApplyModalOpen(true)}
-                className="flex-1 lg:flex-initial bg-[#1B5F85] hover:bg-[#154E70] text-white font-extrabold text-xs sm:text-sm px-8 py-3.5 rounded-2xl shadow-md transition flex items-center justify-center gap-2"
+                className="flex-1 lg:flex-initial bg-[#2DC4B4] hover:bg-[#25ab9d] active:scale-[0.99] text-white font-extrabold text-xs sm:text-sm px-8 py-3.5 rounded-2xl shadow-md hover:shadow-lg transition flex items-center justify-center gap-2.5 cursor-pointer ring-2 ring-[#2DC4B4]/25"
               >
-                <Sparkles className="w-4 h-4 text-[#2DC4B4]" />
+                <Sparkles className="w-4 h-4 text-white" />
                 Apply With AI Profile
               </button>
             )}
@@ -153,7 +156,7 @@ export const JobDetailPage: React.FC = () => {
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
                 {job.responsibilities.map((r: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#2DC4B4] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
                     <span>{r}</span>
                   </li>
                 ))}
@@ -168,7 +171,7 @@ export const JobDetailPage: React.FC = () => {
               <ul className="space-y-2.5 text-xs sm:text-sm text-slate-700">
                 {job.requirements.map((req: string, idx: number) => (
                   <li key={idx} className="flex items-start gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-[#2DC4B4] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#0D9488] shrink-0 mt-0.5" />
                     <span>{req}</span>
                   </li>
                 ))}
@@ -194,7 +197,10 @@ export const JobDetailPage: React.FC = () => {
         {/* Right Sidebar */}
         <div className="lg:col-span-4 space-y-6">
           {/* AI Match Widget */}
-          <AIMatchWidget />
+          <AIMatchWidget 
+            onApply={() => setApplyModalOpen(true)}
+            applied={applied}
+          />
 
           {/* Hospital Profile Card */}
           <div className="bg-white rounded-3xl border border-slate-200/80 p-6 shadow-subtle space-y-4">
