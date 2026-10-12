@@ -12,6 +12,10 @@ export default defineConfig({
   },
   server: {
     port: 5173,
+    fs: {
+      strict: false,
+      allow: ['..', 'C:/Users/91733/.gemini/antigravity-ide/brain']
+    },
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

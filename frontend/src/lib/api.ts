@@ -61,9 +61,24 @@ export class ApiClient {
         data: INITIAL_CANDIDATES
       };
     }
+    if (endpoint.startsWith('/blogs')) {
+      return {
+        success: true,
+        data: []
+      };
+    }
+    if (endpoint.startsWith('/auth/me')) {
+      return {
+        success: true,
+        data: {
+          name: 'Dr. Ananya Rao',
+          role: 'PROFESSIONAL'
+        }
+      };
+    }
     return {
       success: true,
-      message: 'Operation completed in local simulation mode',
+      message: 'Operation completed in resilient simulation mode',
       data: {}
     };
   }

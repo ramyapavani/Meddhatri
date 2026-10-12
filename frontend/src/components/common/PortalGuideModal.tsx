@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.js';
-import { 
-  Compass, 
-  Stethoscope, 
-  Building2, 
-  ShieldCheck, 
-  Sparkles, 
-  ArrowRight, 
-  X, 
-  CheckCircle2, 
-  Layers, 
-  UserCheck, 
+import {
+  Compass,
+  Stethoscope,
+  Building2,
+  ShieldCheck,
+  Sparkles,
+  ArrowRight,
+  X,
+  CheckCircle2,
+  Layers,
+  UserCheck,
   Briefcase
 } from 'lucide-react';
 
@@ -180,11 +180,10 @@ export const PortalGuideModal: React.FC<{ isOpen: boolean; onClose: () => void }
                 <button
                   key={portal.id}
                   onClick={() => setSelectedPortal(portal)}
-                  className={`w-full text-left p-3 rounded-2xl border transition flex items-start gap-3 ${
-                    isSelected
+                  className={`w-full text-left p-3 rounded-2xl border transition flex items-start gap-3 ${isSelected
                       ? 'bg-white border-teal-500 shadow-md ring-2 ring-teal-500/20'
                       : 'border-slate-200/80 hover:bg-white hover:border-slate-300'
-                  }`}
+                    }`}
                 >
                   <div className={`p-2 rounded-xl shrink-0 ${isSelected ? 'bg-[#1B5F85] text-white' : 'bg-slate-200 text-slate-700'}`}>
                     <Icon className="w-4 h-4" />
@@ -260,7 +259,7 @@ export const FloatingPortalDock: React.FC<{ onOpenGuide: () => void }> = ({ onOp
   const navigate = useNavigate();
 
   return (
-    <div className="fixed bottom-20 left-4 md:bottom-6 md:left-6 z-40">
+    <div className="hidden md:block fixed bottom-6 left-6 z-40">
       {collapsed ? (
         <button
           onClick={() => setCollapsed(false)}

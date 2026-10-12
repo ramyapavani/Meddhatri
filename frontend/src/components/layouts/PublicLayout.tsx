@@ -3,12 +3,12 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { Navbar } from '../common/Navbar.js';
 import { Footer } from '../common/Footer.js';
 import { AICareerAssistantModal } from '../ai/AICareerAssistantModal.js';
-import { 
-  Home, 
-  Briefcase, 
-  Building2, 
-  HelpCircle, 
-  PhoneCall, 
+import {
+  Home,
+  Briefcase,
+  Building2,
+  HelpCircle,
+  PhoneCall,
   Sparkles,
   Users
 } from 'lucide-react';
@@ -29,7 +29,7 @@ export const PublicLayout: React.FC = () => {
   return (
     <div className="min-h-screen flex flex-col bg-[#F8FAFC] w-full max-w-[100vw] overflow-x-clip pb-16 md:pb-0">
       <Navbar />
-      <main className="flex-1 w-full max-w-[100vw] overflow-x-clip">
+      <main className="flex-1 w-full max-w-[100vw] overflow-x-clip pt-16 sm:pt-20">
         <Outlet />
       </main>
       <Footer />
@@ -38,19 +38,18 @@ export const PublicLayout: React.FC = () => {
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-lg border-t border-teal-500/20 shadow-[0_-4px_20px_rgba(0,0,0,0.06)] px-2 py-1.5 flex items-center justify-around">
         {mobileNavItems.map((item) => {
           const Icon = item.icon;
-          const isActive = item.path === '/' 
-            ? location.pathname === '/' 
+          const isActive = item.path === '/'
+            ? location.pathname === '/'
             : location.pathname.startsWith(item.path);
 
           return (
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all duration-200 ${
-                isActive 
-                  ? 'text-[#1B5F85] font-black scale-105' 
+              className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-all duration-200 ${isActive
+                  ? 'text-[#1B5F85] font-black scale-105'
                   : 'text-slate-500 hover:text-[#2DC4B4] font-medium'
-              }`}
+                }`}
             >
               <div className={`p-1 rounded-lg transition-colors ${isActive ? 'bg-[#2DC4B4]/15 text-[#1B5F85]' : ''}`}>
                 <Icon className={`w-4 h-4 ${isActive ? 'text-[#1B5F85]' : 'text-slate-500'}`} />
@@ -64,7 +63,7 @@ export const PublicLayout: React.FC = () => {
       {/* Floating AI Assistant Trigger */}
       <button
         onClick={() => setAiModalOpen(true)}
-        className="fixed bottom-20 right-4 md:bottom-6 md:right-6 z-40 bg-[#1B5F85] hover:bg-[#154E70] text-white px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-full shadow-[0_4px_20px_rgba(27,95,133,0.35)] hover:shadow-[0_6px_25px_rgba(27,95,133,0.5)] hover:scale-105 active:scale-95 transition-all duration-300 flex items-center gap-2 group ring-2 ring-[#2DC4B4]/40 cursor-pointer"
+        className="fixed bottom-[70px] right-3.5 sm:bottom-6 sm:right-6 z-40 bg-[#1B5F85] hover:bg-[#154E70] text-white w-11 h-11 sm:w-auto sm:px-4 sm:py-3 rounded-full shadow-[0_4px_20px_rgba(27,95,133,0.35)] hover:shadow-[0_6px_25px_rgba(27,95,133,0.5)] active:scale-95 transition-all duration-200 flex items-center justify-center sm:justify-start gap-2 group ring-2 ring-[#2DC4B4]/40 cursor-pointer"
         title="MedDhatri AI Healthcare Career Advisor"
         aria-label="Open AI Career Assistant Chatbot"
       >
@@ -75,11 +74,11 @@ export const PublicLayout: React.FC = () => {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
           </span>
         </div>
-        <div className="flex flex-col text-left">
+        <div className="hidden sm:flex flex-col text-left">
           <span className="font-extrabold text-xs leading-tight tracking-tight text-white flex items-center gap-1">
             AI Advisor
           </span>
-          <span className="text-[9px] text-teal-200 hidden sm:inline leading-none font-medium">Healthcare Career Bot</span>
+          <span className="text-[9px] text-teal-200 hidden md:inline leading-none font-medium">Healthcare Career Bot</span>
         </div>
       </button>
 

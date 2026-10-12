@@ -135,8 +135,8 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply, onSave, showMatc
       <div className="pt-3.5 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
         {showMatchScore && (
           <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1.5 bg-[#E0F7F5] border border-[#2DC4B4]/40 text-[#1B5F85] px-3 py-1 rounded-full text-xs font-extrabold shadow-2xs">
-              <Sparkles className="w-3.5 h-3.5 text-[#0D9488]" />
+            <div className="flex items-center gap-1.5 bg-[#E0F7F5] border border-[#20B2AA]/40 text-[#0F766E] px-3 py-1 rounded-full text-xs font-extrabold shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#20B2AA]" />
               <span>{matchScore}% AI Match</span>
             </div>
             <span className="text-xs text-slate-400 hidden sm:inline font-medium">{timeAgo(job.postedAt || new Date().toISOString())}</span>
@@ -146,14 +146,14 @@ export const JobCard: React.FC<JobCardProps> = ({ job, onApply, onSave, showMatc
         <div className="flex items-center gap-2 ml-auto">
           <Link
             to={`${jobBasePath}/${job.slug || job._id}`}
-            className="text-xs sm:text-sm font-bold text-[#1B5F85] hover:text-[#154E70] px-3 py-2 rounded-xl hover:bg-[#E0F7F5] transition flex items-center gap-1 cursor-pointer"
+            className="text-xs sm:text-sm font-bold text-[#0F394C] hover:text-[#20B2AA] px-3 py-2 rounded-xl hover:bg-[#E0F7F5] transition flex items-center gap-1 cursor-pointer"
           >
             Details
-            <ArrowRight className="w-4 h-4 text-[#2DC4B4]" />
+            <ArrowRight className="w-4 h-4 text-[#20B2AA]" />
           </Link>
           <Link
             to={`${jobBasePath}/${job.slug || job._id}?apply=true`}
-            className="text-xs sm:text-sm font-extrabold bg-[#2DC4B4] hover:bg-[#25ab9d] text-white px-4 py-2 rounded-xl shadow-xs hover:shadow-sm transition flex items-center gap-1 cursor-pointer"
+            className="text-xs sm:text-sm font-extrabold bg-[#20B2AA] hover:bg-[#179A93] text-white px-4 py-2 rounded-xl shadow-xs hover:shadow-sm transition flex items-center gap-1 cursor-pointer"
           >
             Apply Now
           </Link>
