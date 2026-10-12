@@ -14,7 +14,7 @@ export default defineConfig({
     port: 5173,
     fs: {
       strict: false,
-      allow: ['..', 'C:/Users/91733/.gemini/antigravity-ide/brain']
+      allow: ['..']
     },
     proxy: {
       '/api': {

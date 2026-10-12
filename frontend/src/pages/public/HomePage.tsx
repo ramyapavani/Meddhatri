@@ -35,7 +35,6 @@ import {
 } from 'lucide-react';
 import { INITIAL_MOCK_JOBS } from '../../lib/mockDb.js';
 import { formatSalary } from '../../lib/utils.js';
-import heroDoctorsImg from 'C:/Users/91733/.gemini/antigravity-ide/brain/1e1bdbf6-b1db-4194-8ecf-65aa950020b8/meddhatri_slide1_hero_1791523722674.jpg';
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -235,7 +234,7 @@ export const HomePage: React.FC = () => {
         {/* Crystal-Clear Right Background Doctor Image (Desktop Only to keep mobile 100% readable) */}
         <div className="hidden lg:flex absolute right-0 top-0 bottom-0 w-[58%] xl:w-[55%] h-full pointer-events-none select-none z-0 overflow-hidden items-center justify-end">
           <img
-            src={heroDoctorsImg}
+            src="/hero-doctor.jpg"
             alt="Healthcare medical team discussing patient care"
             className="w-full h-full object-cover object-center opacity-100 transition-opacity duration-300"
             style={{
