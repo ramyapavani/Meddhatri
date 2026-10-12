@@ -229,33 +229,31 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           SLIDE 1: HERO SECTION - SEAMLESS BACKGROUND INTEGRATION
           ========================================================================= */}
-      <section className="relative bg-white border-b border-slate-200/80 min-h-[440px] sm:min-h-[500px] lg:min-h-[540px] flex items-center overflow-visible">
+      <section className="relative bg-white border-b border-slate-200/80 min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex items-center overflow-hidden">
 
-        {/* Crystal-Clear Right Background Doctor Image (Desktop Only to keep mobile 100% readable) */}
-        <div className="hidden lg:flex absolute right-0 top-0 bottom-0 w-[58%] xl:w-[55%] h-full pointer-events-none select-none z-0 overflow-hidden items-center justify-end">
+        {/* Hero Background Medical Team Banner Image */}
+        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
           <img
-            src="/hero-doctor.jpg"
+            src="/hero-medical-team.png"
             alt="Healthcare medical team discussing patient care"
-            className="w-full h-full object-cover object-center opacity-100 transition-opacity duration-300"
-            style={{
-              maskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.9) 26%, black 40%)',
-              WebkitMaskImage: 'linear-gradient(to right, transparent 0%, rgba(0,0,0,0.15) 10%, rgba(0,0,0,0.9) 26%, black 40%)'
-            }}
+            className="w-full h-full object-cover object-right transition-opacity duration-300"
           />
+          {/* Subtle responsive fade on smaller viewports */}
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent sm:via-white/40 md:via-white/15 md:to-transparent" />
         </div>
 
         {/* Hero Content on the Left */}
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-7 sm:py-16 lg:py-20">
-          <div className="max-w-2xl lg:max-w-3xl space-y-4 sm:space-y-6 text-left">
+          <div className="max-w-xl lg:max-w-xl xl:max-w-2xl space-y-4 sm:space-y-6 text-left">
 
             {/* Headline & Subtitle */}
             <div className="space-y-2 sm:space-y-3.5">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[50px] xl:text-[54px] font-black text-[#0F394C] uppercase tracking-tight leading-[1.12] sm:leading-[1.08]">
+              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[50px] font-black text-[#0F394C] uppercase tracking-tight leading-[1.12] sm:leading-[1.08] max-w-lg lg:max-w-[460px] xl:max-w-xl">
                 THE RIGHT HEALTHCARE<br />
                 ROLE MATCHED TO YOU.
               </h1>
 
-              <p className="text-sm sm:text-lg text-slate-600 font-normal leading-relaxed max-w-xl">
+              <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-normal leading-relaxed max-w-lg">
                 Verified opportunities from trusted hospitals and healthcare networks.
               </p>
             </div>
