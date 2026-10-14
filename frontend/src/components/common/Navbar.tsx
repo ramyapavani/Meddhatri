@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.js';
 import {
-  Building2,
-  ChevronDown,
   Briefcase,
+  ChevronDown,
   PlusCircle,
   Sparkles,
   User,
@@ -12,32 +11,75 @@ import {
   Menu,
   X,
   LogOut,
-  Stethoscope,
-  ShieldCheck,
   Users,
-  Compass
+  Compass,
+  Layers
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { user, logout, switchRole } = useAuth();
+  const { user, logout, switchRole, switchRolePersona } = useAuth();
   const [employerDropdownOpen, setEmployerDropdownOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
 
-  const employerDropdownRef = useRef<HTMLDivElement>(null);
+  const isGuideActive = location.pathname === '/portals';
+  const isProfessionalActive = !isGuideActive && (location.pathname.startsWith('/professional') || location.pathname.startsWith('/jobs') || location.pathname === '/' || user?.role === 'PROFESSIONAL');
+  const isOrganizationActive = !isGuideActive && (location.pathname.startsWith('/organization') || (location.pathname !== '/' && (user?.role === 'ORGANIZATION_ADMIN' || user?.role === 'RECRUITER')));
+  const isAdminActive = !isGuideActive && (location.pathname.startsWith('/admin') || (location.pathname !== '/' && user?.role === 'SUPER_ADMIN'));
 
-  // Close dropdown on click outside
+  const employerDropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+
+  // Close open popovers when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (employerDropdownRef.current && !employerDropdownRef.current.contains(event.target as Node)) {
+      const target = event.target as Node;
+      if (userDropdownRef.current && !userDropdownRef.current.contains(target)) {
+        setUserDropdownOpen(false);
+      }
+      if (employerDropdownRef.current && !employerDropdownRef.current.contains(target)) {
         setEmployerDropdownOpen(false);
+      }
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(target)) {
+        setMobileMenuOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Auto-close open menus on route navigation
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setEmployerDropdownOpen(false);
+    setUserDropdownOpen(false);
+  }, [location.pathname]);
+
+  // Ensure public landing page defaults to logged-out state with Login / Sign Up visible
+  useEffect(() => {
+    const saved = localStorage.getItem('meddhatri_current_user');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          parsed?._id?.startsWith('user_') ||
+          parsed?.email?.includes('demo') ||
+          parsed?.name?.includes('Rajesh') ||
+          parsed?.name?.includes('Ananya')
+        ) {
+          localStorage.removeItem('meddhatri_current_user');
+          localStorage.removeItem('meddhatri_token');
+          logout();
+        }
+      } catch {
+        logout();
+      }
+    }
+  }, [logout]);
 
   const openInNewTab = (e: React.MouseEvent, path: string) => {
     e.preventDefault();
@@ -55,365 +97,432 @@ export const Navbar: React.FC = () => {
     }
   };
 
-  const handlePortalSwitchAndOpen = (e: React.MouseEvent, role: 'PROFESSIONAL' | 'ORGANIZATION_ADMIN' | 'SUPER_ADMIN', path: string) => {
-    switchRole(role);
+  const handlePortalSwitchAndOpen = (
+    e: React.MouseEvent,
+    role: 'PROFESSIONAL' | 'ORGANIZATION_ADMIN' | 'SUPER_ADMIN',
+    path: string,
+    persona?: 'doctor' | 'recruiter' | 'admin'
+  ) => {
+    if (persona && switchRolePersona) {
+      switchRolePersona(persona);
+    } else {
+      switchRole(role);
+    }
     setEmployerDropdownOpen(false);
+    setMobileMenuOpen(false);
+    setUserDropdownOpen(false);
     openInNewTab(e, path);
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 w-full bg-white/95 border-b border-slate-200/80 backdrop-blur-md shadow-xs transition-all duration-200">
-      <div className="w-full max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+    <>
+      {/* Backdrop overlay for floating menus on mobile/tablet */}
+      {(mobileMenuOpen || employerDropdownOpen || userDropdownOpen) && (
+        <div
+          className="fixed inset-0 bg-slate-900/20 backdrop-blur-2xs z-40 animate-in fade-in duration-150"
+          onClick={() => {
+            setMobileMenuOpen(false);
+            setEmployerDropdownOpen(false);
+            setUserDropdownOpen(false);
+          }}
+        />
+      )}
 
-          {/* Left: Brand Logo */}
-          <Link to="/" className="flex items-center group shrink-0">
-            <img
-              src="/logo.png"
-              alt="MedDhatri"
-              className="h-8 sm:h-11 md:h-14 w-auto object-contain group-hover:scale-[1.02] transition-transform duration-200"
-            />
-          </Link>
+      <nav className="sticky top-0 left-0 right-0 z-50 w-full bg-white border-b border-slate-200/80 shadow-xs">
+        <div className="w-full max-w-7xl mx-auto px-3 min-[390px]:px-4 sm:px-6 lg:px-8 relative">
+          <div className="flex items-center justify-between h-16 sm:h-20">
 
-          {/* Center: Standard Navigation Links */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-bold text-slate-700">
-            <button
-              onClick={() => {
-                if (location.pathname === '/') {
-                  document.getElementById('job-board-section')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  navigate('/jobs');
-                }
-              }}
-              className={`py-2 transition-colors hover:text-[#20B2AA] cursor-pointer ${location.pathname.startsWith('/jobs') ? 'text-[#20B2AA] font-black' : ''}`}
-            >
-              Find Jobs
-            </button>
-            <button
-              onClick={() => {
-                if (location.pathname === '/') {
-                  document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  navigate('/how-it-works');
-                }
-              }}
-              className={`py-2 transition-colors hover:text-[#20B2AA] cursor-pointer ${location.pathname === '/how-it-works' ? 'text-[#20B2AA] font-black' : ''}`}
-            >
-              How It Works
-            </button>
-            <Link
-              to="/pricing"
-              className={`py-2 transition-colors hover:text-[#20B2AA] ${location.pathname === '/pricing' ? 'text-[#20B2AA] font-black' : ''}`}
-            >
-              For Employers
-            </Link>
-            <Link
-              to="/about"
-              className={`py-2 transition-colors hover:text-[#20B2AA] ${location.pathname === '/about' ? 'text-[#20B2AA] font-black' : ''}`}
-            >
-              About
-            </Link>
-            <Link
-              to="/contact-us"
-              className={`py-2 transition-colors hover:text-[#20B2AA] ${location.pathname === '/contact-us' || location.pathname === '/contact' ? 'text-[#20B2AA] font-black' : ''}`}
-            >
-              Contact Us
-            </Link>
-          </div>
-
-          {/* Right Action Items: [Login] [Sign Up] | [💼 For Employers ∨] */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-
-            {/* 1. Login Button */}
-            <Link
-              to="/login"
-              className="text-[#0F394C] hover:text-[#20B2AA] hover:bg-slate-100/80 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm transition-all duration-150 inline-flex items-center justify-center shrink-0 cursor-pointer"
-            >
-              Login
+            {/* Left: Brand Logo (Prominent, crisp, matching reference screenshot) */}
+            <Link to="/" className="flex items-center group shrink-0">
+              <div className="h-9 min-[390px]:h-10 sm:h-12 md:h-14 lg:h-16 flex items-center overflow-hidden shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="MedDhatri"
+                  className="h-[50px] min-[390px]:h-[56px] sm:h-14 md:h-16 lg:h-18 w-auto max-w-none object-contain transition-transform group-hover:scale-[1.02] shrink-0"
+                  style={{
+                    mixBlendMode: 'multiply',
+                    filter: 'contrast(1.16) brightness(1.02)',
+                    imageRendering: '-webkit-optimize-contrast'
+                  }}
+                />
+              </div>
             </Link>
 
-            {/* 2. Sign Up Button */}
-            <Link
-              to="/register"
-              className="bg-[#20B2AA] hover:bg-[#179A93] text-white px-3.5 sm:px-6 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all duration-150 inline-flex items-center justify-center shrink-0 cursor-pointer"
-            >
-              Sign Up
-            </Link>
-
-            {/* 3. For Employers Pill Button with Dropdown (Desktop & Tablet) */}
-            <div className="relative hidden md:block" ref={employerDropdownRef}>
+            {/* Center: Standard Navigation Links (Desktop) */}
+            <div className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-bold text-slate-700">
               <button
-                onClick={() => setEmployerDropdownOpen(!employerDropdownOpen)}
-                className="bg-[#0F394C] hover:bg-[#154E70] text-white px-4 sm:px-5 py-2 rounded-full font-bold text-sm flex items-center gap-2 shadow-xs hover:shadow-md transition-all duration-150 shrink-0 cursor-pointer"
+                onClick={() => {
+                  if (location.pathname === '/') {
+                    document.getElementById('job-board-section')?.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    navigate('/jobs');
+                  }
+                }}
+                className={`py-2 transition-colors hover:text-[#20B2AA] cursor-pointer ${location.pathname.startsWith('/jobs') ? 'text-[#20B2AA] font-black' : ''}`}
               >
-                <Briefcase className="w-4 h-4 text-teal-300 shrink-0" />
-                <span className="whitespace-nowrap">For Employers</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-slate-300 transition-transform duration-200 ${employerDropdownOpen ? 'rotate-180' : ''}`} />
+                Find Jobs
               </button>
+              <button
+                onClick={() => {
+                  if (location.pathname === '/') {
+                    document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' });
+                  } else {
+                    navigate('/how-it-works');
+                  }
+                }}
+                className={`py-2 transition-colors hover:text-[#20B2AA] cursor-pointer ${location.pathname === '/how-it-works' ? 'text-[#20B2AA] font-black' : ''}`}
+              >
+                How It Works
+              </button>
+              <Link
+                to="/pricing"
+                className={`py-2 transition-colors hover:text-[#20B2AA] ${location.pathname === '/pricing' ? 'text-[#20B2AA] font-black' : ''}`}
+              >
+                For Employers
+              </Link>
+              <Link
+                to="/about"
+                className={`py-2 transition-colors hover:text-[#20B2AA] ${location.pathname === '/about' ? 'text-[#20B2AA] font-black' : ''}`}
+              >
+                About
+              </Link>
+              <Link
+                to="/contact-us"
+                className={`py-2 transition-colors hover:text-[#20B2AA] ${location.pathname === '/contact-us' || location.pathname === '/contact' ? 'text-[#20B2AA] font-black' : ''}`}
+              >
+                Contact Us
+              </Link>
+            </div>
 
-              {/* For Employer & Portal Access Dropdown Menu */}
-              {employerDropdownOpen && (
-                <div className="absolute right-0 mt-2.5 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200/90 py-3 z-50 animate-in fade-in zoom-in-95 text-slate-800">
-                  {/* Header */}
-                  <div className="px-4 pb-2.5 border-b border-slate-100 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Briefcase className="w-4 h-4 text-[#0F766E]" />
-                      <span className="text-[11px] font-black text-slate-800 uppercase tracking-wider">PORTALS & EMPLOYER HUB</span>
-                    </div>
-                    <span className="text-[10px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200/60">
-                      New Tab ↗
-                    </span>
-                  </div>
+            {/* Right Action Items: [Login] [Sign Up] | [💼 For Employer ⌵] [ ≡ ] */}
+            <div className="flex items-center gap-1.5 min-[390px]:gap-2 sm:gap-2.5 shrink-0">
 
-                  {/* Section 1: Employer & Hiring Solutions */}
-                  <div className="py-2 px-2">
-                    <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider px-2 block mb-1">
-                      Employer Actions
-                    </span>
+              {/* 1. Auth Controls */}
+              {!user ? (
+                <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+                  <Link
+                    to="/login"
+                    className="bg-[#0F2E50] hover:bg-[#0A223E] text-white px-3 min-[390px]:px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all duration-150 inline-flex items-center justify-center shrink-0 cursor-pointer"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="bg-white border border-[#0F2E50] hover:bg-slate-50 text-[#0F2E50] px-3 min-[390px]:px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full font-bold text-xs sm:text-sm shadow-xs hover:shadow-md transition-all duration-150 inline-flex items-center justify-center shrink-0 cursor-pointer"
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              ) : (
+                /* User profile pill with dedicated dropdown (when logged in) */
+                <div className="relative" ref={userDropdownRef}>
+                  <button
+                    onClick={() => {
+                      setUserDropdownOpen(!userDropdownOpen);
+                      setEmployerDropdownOpen(false);
+                      setMobileMenuOpen(false);
+                    }}
+                    className="flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-teal-50 hover:bg-teal-100/80 border border-teal-200/80 text-teal-900 text-xs sm:text-sm font-bold shrink-0 transition cursor-pointer"
+                  >
+                    <User className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-teal-700 shrink-0" />
+                    <span className="truncate max-w-[80px] sm:max-w-[130px]">{user.name?.split(' ')[0]}</span>
+                    <ChevronDown className={`w-3 h-3 text-teal-700 transition-transform duration-200 ${userDropdownOpen ? 'rotate-180' : ''}`} />
+                  </button>
 
-                    <a
-                      href="/organization/jobs/create"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        setEmployerDropdownOpen(false);
-                        handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/jobs/create');
-                      }}
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-teal-50/70 hover:text-teal-900 transition group cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <PlusCircle className="w-4 h-4 text-teal-600 group-hover:scale-110 transition-transform" />
-                        <span>Post a Healthcare Job</span>
+                  {/* Dedicated User Profile & Sign Out Dropdown */}
+                  {userDropdownOpen && (
+                    <div className="absolute right-0 mt-2.5 w-60 bg-white rounded-2xl shadow-2xl border border-slate-200/90 p-3 z-50 text-slate-800 animate-in fade-in zoom-in-95">
+                      <div className="px-2 py-1.5 border-b border-slate-100">
+                        <p className="text-xs font-black text-slate-900 truncate">{user.name}</p>
+                        <span className="inline-block mt-0.5 text-[10px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200/60 uppercase tracking-wider">
+                          {user.role?.toLowerCase().replace('_', ' ')}
+                        </span>
                       </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-teal-600" />
-                    </a>
 
-                    <a
-                      href="/organization/candidates"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        setEmployerDropdownOpen(false);
-                        handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/candidates');
-                      }}
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-teal-50/70 hover:text-teal-900 transition group cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Users className="w-4 h-4 text-teal-600 group-hover:scale-110 transition-transform" />
-                        <span>Find Healthcare Candidates</span>
+                      <div className="py-2">
+                        <button
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            if (user.role === 'SUPER_ADMIN') navigate('/admin/dashboard');
+                            else if (user.role === 'ORGANIZATION_ADMIN' || user.role === 'RECRUITER') navigate('/organization/dashboard');
+                            else navigate('/professional/dashboard');
+                          }}
+                          className="w-full flex items-center justify-between px-2.5 py-2 text-xs font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-900 rounded-xl transition cursor-pointer"
+                        >
+                          <span>My Portal Dashboard</span>
+                          <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                        </button>
                       </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-teal-600" />
-                    </a>
 
-                    <a
-                      href="/pricing"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => {
-                        setEmployerDropdownOpen(false);
-                        openInNewTab(e, '/pricing');
-                      }}
-                      className="flex items-center justify-between px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-teal-50/70 hover:text-teal-900 transition group cursor-pointer"
-                    >
-                      <div className="flex items-center gap-2.5">
-                        <Sparkles className="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" />
-                        <span>Pricing & Hiring Plans</span>
+                      <div className="pt-2 border-t border-slate-100">
+                        <button
+                          onClick={() => {
+                            setUserDropdownOpen(false);
+                            logout();
+                          }}
+                          className="w-full flex items-center justify-center gap-1.5 px-3 py-2 text-xs text-rose-600 hover:bg-rose-50 rounded-xl font-bold transition cursor-pointer border border-rose-200/80"
+                        >
+                          <LogOut className="w-3.5 h-3.5" />
+                          <span>Sign Out</span>
+                        </button>
                       </div>
-                      <ExternalLink className="w-3.5 h-3.5 text-slate-400 group-hover:text-teal-600" />
-                    </a>
-                  </div>
-
-                  {/* Section 2: Balanced Switch Portal Grid (Guide, Doctor, Recruiter, Admin) */}
-                  <div className="pt-2 border-t border-slate-100 px-3 pb-2 bg-slate-50/70 rounded-xl mx-2">
-                    <span className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider block mb-2">
-                      Switch Portal (New Tab):
-                    </span>
-
-                    <div className="grid grid-cols-2 gap-1.5">
-                      {/* 1. Guide */}
-                      <a
-                        href="/portals"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => {
-                          setEmployerDropdownOpen(false);
-                          openInNewTab(e, '/portals');
-                        }}
-                        className="py-2 px-2.5 rounded-xl border border-slate-200 bg-white hover:bg-teal-50 hover:border-teal-300 text-slate-700 hover:text-teal-900 transition flex items-center justify-between font-bold text-xs shadow-2xs cursor-pointer"
-                        title="Open Portals Guide"
-                      >
-                        <div className="flex items-center gap-1.5">
-                          <Compass className="w-3.5 h-3.5 text-teal-600 shrink-0" />
-                          <span>Guide</span>
-                        </div>
-                        <ExternalLink className="w-3 h-3 text-slate-400" />
-                      </a>
-
-                      {/* 2. Doctor */}
-                      <button
-                        type="button"
-                        onClick={(e) => handlePortalSwitchAndOpen(e, 'PROFESSIONAL', '/professional/dashboard')}
-                        className={`py-2 px-2.5 rounded-xl border transition flex items-center justify-between font-bold text-xs shadow-2xs cursor-pointer ${user?.role === 'PROFESSIONAL'
-                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-black ring-1 ring-teal-400/30'
-                            : 'bg-white border-slate-200 text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-900'
-                          }`}
-                        title="Open Clinician Portal (Doctor / Specialist)"
-                      >
-                        <div className="flex items-center gap-1.5">
-                          <span>👨‍⚕️</span>
-                          <span>Doctor</span>
-                        </div>
-                        <ExternalLink className="w-3 h-3 text-teal-600" />
-                      </button>
-
-                      {/* 3. Recruiter */}
-                      <button
-                        type="button"
-                        onClick={(e) => handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/dashboard')}
-                        className={`py-2 px-2.5 rounded-xl border transition flex items-center justify-between font-bold text-xs shadow-2xs cursor-pointer ${user?.role === 'ORGANIZATION_ADMIN' || user?.role === 'RECRUITER'
-                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-black ring-1 ring-teal-400/30'
-                            : 'bg-white border-slate-200 text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-900'
-                          }`}
-                        title="Open Employer Portal (Hospital / Recruiter)"
-                      >
-                        <div className="flex items-center gap-1.5">
-                          <span>🏥</span>
-                          <span>Recruiter</span>
-                        </div>
-                        <ExternalLink className="w-3 h-3 text-teal-600" />
-                      </button>
-
-                      {/* 4. Admin */}
-                      <button
-                        type="button"
-                        onClick={(e) => handlePortalSwitchAndOpen(e, 'SUPER_ADMIN', '/admin/dashboard')}
-                        className={`py-2 px-2.5 rounded-xl border transition flex items-center justify-between font-bold text-xs shadow-2xs cursor-pointer ${user?.role === 'SUPER_ADMIN'
-                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-black ring-1 ring-teal-400/30'
-                            : 'bg-white border-slate-200 text-slate-700 hover:bg-teal-50 hover:border-teal-300 hover:text-teal-900'
-                          }`}
-                        title="Open Admin Portal"
-                      >
-                        <div className="flex items-center gap-1.5">
-                          <span>🛡️</span>
-                          <span>Admin</span>
-                        </div>
-                        <ExternalLink className="w-3 h-3 text-teal-600" />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Clean User Account Footer */}
-                  {user && (
-                    <div className="pt-2.5 border-t border-slate-100 px-3 mt-1 flex items-center justify-between gap-2">
-                      <div className="min-w-0 pr-2">
-                        <p className="text-xs font-bold text-slate-800 truncate">{user.name}</p>
-                        <p className="text-[10px] text-teal-700 font-semibold capitalize truncate">
-                          Active: {user.role?.toLowerCase().replace('_', ' ')}
-                        </p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setEmployerDropdownOpen(false);
-                          logout();
-                        }}
-                        className="px-3 py-1.5 text-xs text-rose-600 hover:bg-rose-50 rounded-lg font-bold transition flex items-center gap-1.5 shrink-0 cursor-pointer border border-rose-200 shadow-2xs"
-                      >
-                        <LogOut className="w-3 h-3" />
-                        <span>Sign Out</span>
-                      </button>
                     </div>
                   )}
                 </div>
               )}
-            </div>
 
-            {/* Mobile Menu Hamburger */}
-            <div className="lg:hidden ml-1">
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2 text-slate-700 hover:text-teal-700 hover:bg-slate-100 rounded-lg transition"
-                aria-label="Toggle Menu"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+              {/* Vertical Separator Bar | (Desktop only, hidden on mobile/tablet) */}
+              <span className="hidden md:inline text-slate-300 font-light text-base mx-1 select-none">
+                |
+              </span>
+
+              {/* 2. For Employer Button (Perfect Geometric Circle on Mobile, Standard Pill on Desktop) */}
+              <div className="relative shrink-0 flex-none" ref={employerDropdownRef}>
+                <button
+                  onClick={() => {
+                    setEmployerDropdownOpen(!employerDropdownOpen);
+                    setUserDropdownOpen(false);
+                    setMobileMenuOpen(false);
+                  }}
+                  className="bg-[#A31D24] hover:bg-[#8B1A1E] text-white w-9 h-9 min-w-9 min-h-9 max-w-9 max-h-9 sm:max-w-none sm:max-h-none sm:w-auto sm:min-w-0 sm:min-h-0 sm:px-4 sm:h-9 rounded-full aspect-square sm:aspect-auto p-0 sm:py-0 sm:px-4 font-bold text-xs sm:text-sm flex items-center justify-center gap-1 sm:gap-1.5 shadow-xs hover:shadow-md transition-all duration-150 shrink-0 flex-none cursor-pointer"
+                  title="For Employer"
+                  aria-label="For Employers Menu"
+                >
+                  <Briefcase className="w-3.5 h-3.5 text-white shrink-0" />
+                  <span className="hidden sm:inline whitespace-nowrap">For Employer</span>
+                  <ChevronDown className={`w-3 h-3 text-white transition-transform duration-200 shrink-0 ${employerDropdownOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* For Employers Dropdown Card with Switch Portal (matching floating Switch Portal dock) */}
+                {employerDropdownOpen && (
+                  <div className="absolute right-0 mt-2.5 w-72 min-[390px]:w-[300px] bg-white rounded-2xl shadow-2xl border border-slate-200/90 p-3.5 z-50 text-slate-800 animate-in fade-in zoom-in-95 max-w-[calc(100vw-1.5rem)]">
+                    {/* Section 1: For Employers */}
+                    <div className="pb-3 border-b border-slate-100">
+                      <div className="text-center font-extrabold text-xs text-[#0F394C] uppercase tracking-wider mb-2 flex items-center justify-center gap-1.5">
+                        <Briefcase className="w-3.5 h-3.5 text-[#A31D24]" />
+                        <span>For Employers</span>
+                      </div>
+
+                      <div className="flex flex-col space-y-1 text-center">
+                        <button
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/dashboard', 'recruiter');
+                          }}
+                          className="w-full py-1.5 px-3 text-xs font-semibold text-slate-700 hover:text-teal-900 hover:bg-teal-50/70 rounded-lg transition cursor-pointer text-center"
+                        >
+                          {user?.role === 'ORGANIZATION_ADMIN' || user?.role === 'RECRUITER' ? 'Employer Dashboard' : 'Employer Login'}
+                        </button>
+
+                        <a
+                          href="/organization/jobs/create"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/jobs/create', 'recruiter');
+                          }}
+                          className="w-full py-1.5 px-3 text-xs font-semibold text-slate-700 hover:text-teal-900 hover:bg-teal-50/70 rounded-lg transition cursor-pointer text-center block"
+                        >
+                          Post a Healthcare Job
+                        </a>
+
+                        <a
+                          href="/organization/candidates"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/candidates', 'recruiter');
+                          }}
+                          className="w-full py-1.5 px-3 text-xs font-semibold text-slate-700 hover:text-teal-900 hover:bg-teal-50/70 rounded-lg transition cursor-pointer text-center block"
+                        >
+                          Find Candidates
+                        </a>
+
+                        <a
+                          href="/pricing"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            openInNewTab(e, '/pricing');
+                          }}
+                          className="w-full py-1.5 px-3 text-xs font-semibold text-slate-700 hover:text-teal-900 hover:bg-teal-50/70 rounded-lg transition cursor-pointer text-center block"
+                        >
+                          Pricing & Plans
+                        </a>
+                      </div>
+                    </div>
+
+                    {/* Section 2: Switch Portal (Role Portals) */}
+                    <div className="pt-3">
+                      <div className="flex items-center justify-between mb-2.5 px-0.5">
+                        <div className="flex items-center gap-1.5">
+                          <Layers className="w-3.5 h-3.5 text-teal-600" />
+                          <span className="text-[10px] font-black text-slate-700 uppercase tracking-wider">
+                            Switch Portal
+                          </span>
+                        </div>
+                        <span className="text-[9px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-full border border-teal-200/60">
+                          New Tab ↗
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2">
+                        {/* 1. Professional Portal (Doctor & Clinicians) */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            handlePortalSwitchAndOpen(e, 'PROFESSIONAL', '/professional/dashboard', 'doctor');
+                          }}
+                          className={`py-2.5 px-2 rounded-xl border transition-all flex items-center justify-center gap-1.5 text-xs cursor-pointer shadow-2xs group ${isProfessionalActive
+                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-extrabold ring-1 ring-teal-400/30'
+                            : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-bold'
+                            }`}
+                          title="Healthcare Professional Portal (Doctor, Clinician)"
+                        >
+                          <span className="text-sm shrink-0">🩺</span>
+                          <span className="whitespace-nowrap">Professional</span>
+                        </button>
+
+                        {/* 2. Organization Portal (Hospitals & Employers) */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/dashboard', 'recruiter');
+                          }}
+                          className={`py-2.5 px-2 rounded-xl border transition-all flex items-center justify-center gap-1.5 text-xs cursor-pointer shadow-2xs group ${isOrganizationActive
+                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-extrabold ring-1 ring-teal-400/30'
+                            : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-bold'
+                            }`}
+                          title="Healthcare Organization Portal (Hospitals & Employers)"
+                        >
+                          <span className="text-sm shrink-0">🏢</span>
+                          <span className="whitespace-nowrap">Organization</span>
+                        </button>
+
+                        {/* 3. Super Admin Portal */}
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            handlePortalSwitchAndOpen(e, 'SUPER_ADMIN', '/admin/dashboard', 'admin');
+                          }}
+                          className={`py-2.5 px-2 rounded-xl border transition-all flex items-center justify-center gap-1.5 text-xs cursor-pointer shadow-2xs group ${isAdminActive
+                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-extrabold ring-1 ring-teal-400/30'
+                            : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-bold'
+                            }`}
+                          title="Super Admin Portal (Platform Management)"
+                        >
+                          <span className="text-sm shrink-0">🛡️</span>
+                          <span className="whitespace-nowrap">Super Admin</span>
+                        </button>
+
+                        {/* 4. Interactive Portals Guide */}
+                        <a
+                          href="/portals"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => {
+                            setEmployerDropdownOpen(false);
+                            openInNewTab(e, '/portals');
+                          }}
+                          className={`py-2.5 px-2 rounded-xl border transition-all flex items-center justify-center gap-1.5 text-xs cursor-pointer shadow-2xs group ${isGuideActive
+                            ? 'bg-teal-50 border-teal-300 text-teal-900 font-extrabold ring-1 ring-teal-400/30'
+                            : 'border-slate-200 bg-white hover:bg-slate-50 hover:border-slate-300 text-slate-700 font-bold'
+                            }`}
+                          title="Interactive Portals Guide"
+                        >
+                          <span className="text-sm shrink-0">🧭</span>
+                          <span className="whitespace-nowrap">Guide</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* 3. Mobile Menu Hamburger / Close Button */}
+              <div className="lg:hidden" ref={mobileMenuRef}>
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(!mobileMenuOpen);
+                    setEmployerDropdownOpen(false);
+                    setUserDropdownOpen(false);
+                  }}
+                  className="w-8 h-8 sm:w-9 sm:h-9 text-slate-800 hover:text-teal-700 hover:bg-slate-100 rounded-lg transition shrink-0 flex-none flex items-center justify-center cursor-pointer p-0"
+                  aria-label="Toggle Navigation Menu"
+                >
+                  {mobileMenuOpen ? <X className="w-5.5 h-5.5 sm:w-6 sm:h-6 text-slate-800" /> : <Menu className="w-5.5 h-5.5 sm:w-6 sm:h-6 text-slate-800" />}
+                </button>
+
+                {/* Classic Floating Mobile Navigation Dropdown Card */}
+                {mobileMenuOpen && (
+                  <div className="absolute right-0 mt-2.5 w-52 bg-white rounded-3xl shadow-2xl border border-slate-100/90 py-4 px-3 z-50 animate-in fade-in zoom-in-95 duration-150 text-slate-800">
+                    <div className="flex flex-col space-y-1 text-center">
+                      <button
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          if (location.pathname === '/') {
+                            document.getElementById('job-board-section')?.scrollIntoView({ behavior: 'smooth' });
+                          } else {
+                            navigate('/jobs');
+                          }
+                        }}
+                        className="w-full py-2 px-3 text-sm font-semibold text-slate-800 hover:text-[#20B2AA] hover:bg-slate-50/80 rounded-xl transition cursor-pointer text-center"
+                      >
+                        Find Jobs
+                      </button>
+
+                      <button
+                        onClick={() => {
+                          setMobileMenuOpen(false);
+                          if (location.pathname === '/') {
+                            document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' });
+                          } else {
+                            navigate('/how-it-works');
+                          }
+                        }}
+                        className="w-full py-2 px-3 text-sm font-semibold text-slate-800 hover:text-[#20B2AA] hover:bg-slate-50/80 rounded-xl transition cursor-pointer text-center"
+                      >
+                        How It Works
+                      </button>
+
+                      <Link
+                        to="/pricing"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="w-full py-2 px-3 text-sm font-semibold text-slate-800 hover:text-[#20B2AA] hover:bg-slate-50/80 rounded-xl transition cursor-pointer block text-center"
+                      >
+                        For Employers
+                      </Link>
+
+                      <Link
+                        to="/about"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="w-full py-2 px-3 text-sm font-semibold text-slate-800 hover:text-[#20B2AA] hover:bg-slate-50/80 rounded-xl transition cursor-pointer block text-center"
+                      >
+                        About Us
+                      </Link>
+
+                      <Link
+                        to="/contact-us"
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="w-full py-2 px-3 text-sm font-semibold text-slate-800 hover:text-[#20B2AA] hover:bg-slate-50/80 rounded-xl transition cursor-pointer block text-center"
+                      >
+                        Contact Us
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
             </div>
           </div>
         </div>
-
-        {/* Mobile Dropdown Menu */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-slate-100 space-y-2 animate-in slide-in-from-top-2 duration-200">
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (location.pathname === '/') {
-                  document.getElementById('job-board-section')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  navigate('/jobs');
-                }
-              }}
-              className="block w-full text-left px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-lg"
-            >
-              Find Jobs
-            </button>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                if (location.pathname === '/') {
-                  document.getElementById('how-it-works-section')?.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                  navigate('/how-it-works');
-                }
-              }}
-              className="block w-full text-left px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-lg"
-            >
-              How It Works
-            </button>
-            <Link
-              to="/pricing"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-lg"
-            >
-              For Employers
-            </Link>
-            <Link
-              to="/about"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-lg"
-            >
-              About
-            </Link>
-            <Link
-              to="/contact-us"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-teal-50 hover:text-teal-700 rounded-lg"
-            >
-              Contact Us
-            </Link>
-
-            <div className="pt-2 border-t border-slate-100 grid grid-cols-2 gap-2">
-              <button
-                onClick={(e) => {
-                  setMobileMenuOpen(false);
-                  handlePortalSwitchAndOpen(e, 'ORGANIZATION_ADMIN', '/organization/dashboard');
-                }}
-                className="py-2 px-3 rounded-lg bg-teal-50 text-teal-800 text-xs font-bold text-center"
-              >
-                Employer Portal ↗
-              </button>
-              <button
-                onClick={(e) => {
-                  setMobileMenuOpen(false);
-                  handlePortalSwitchAndOpen(e, 'PROFESSIONAL', '/professional/dashboard');
-                }}
-                className="py-2 px-3 rounded-lg bg-[#0F394C] text-white text-xs font-bold text-center"
-              >
-                Clinician Portal ↗
-              </button>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+      </nav>
+    </>
   );
 };

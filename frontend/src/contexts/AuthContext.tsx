@@ -79,9 +79,28 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(() => {
     const saved = localStorage.getItem('meddhatri_current_user');
-    return saved ? JSON.parse(saved) : DEMO_PERSONAS.doctor; // Start logged-in as verified Dr. Ananya Rao for instant exploration!
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (
+          parsed?._id?.startsWith('user_') ||
+          parsed?.email?.includes('demo') ||
+          parsed?.email === 'admin@meddhatri.ai' ||
+          parsed?.name?.includes('Rajesh') ||
+          parsed?.name?.includes('Ananya')
+        ) {
+          localStorage.removeItem('meddhatri_current_user');
+          localStorage.removeItem('meddhatri_token');
+          return null;
+        }
+        return parsed;
+      } catch {
+        return null;
+      }
+    }
+    return null;
   });
-  const [token, setToken] = useState<string | null>(() => ApiClient.getToken() || 'demo_mock_jwt_token');
+  const [token, setToken] = useState<string | null>(() => ApiClient.getToken() || null);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {

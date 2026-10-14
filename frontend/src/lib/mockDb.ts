@@ -286,7 +286,7 @@ export const INITIAL_MOCK_JOBS: IMockJob[] = [
     status: 'ACTIVE'
   },
   {
-    _id: 'job_002',
+    _id: 'job_007',
     title: 'Lead Critical Care Staff Nurse (ICU)',
     slug: 'lead-critical-care-staff-nurse-medisphere',
     organization: {
@@ -330,7 +330,7 @@ export const INITIAL_MOCK_JOBS: IMockJob[] = [
     status: 'ACTIVE'
   },
   {
-    _id: 'job_003',
+    _id: 'job_008',
     title: 'Senior Molecular Pathologist / Lab Technologist',
     slug: 'senior-molecular-pathologist-vitalis',
     organization: {
@@ -374,7 +374,7 @@ export const INITIAL_MOCK_JOBS: IMockJob[] = [
     status: 'ACTIVE'
   },
   {
-    _id: 'job_004',
+    _id: 'job_009',
     title: 'Senior Clinical Pharmacist',
     slug: 'senior-clinical-pharmacist-carebridge',
     organization: {
@@ -418,7 +418,7 @@ export const INITIAL_MOCK_JOBS: IMockJob[] = [
     status: 'ACTIVE'
   },
   {
-    _id: 'job_005',
+    _id: 'job_010',
     title: 'Clinical AI Solutions Lead & Health Informatics Specialist',
     slug: 'clinical-ai-solutions-lead-aurelia',
     organization: {
