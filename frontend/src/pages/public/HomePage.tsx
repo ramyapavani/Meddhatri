@@ -31,10 +31,12 @@ import {
   FileText,
   Zap,
   Award,
-  Clock
+  Clock,
+  ChevronRight
 } from 'lucide-react';
 import { INITIAL_MOCK_JOBS } from '../../lib/mockDb.js';
 import { formatSalary } from '../../lib/utils.js';
+import { hospitalPartnersList, HospitalBrandLogo, HospitalFullBrandLogo } from '../../components/common/HospitalLogos.js';
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
@@ -74,7 +76,7 @@ export const HomePage: React.FC = () => {
       const matchRole = !query || j.title.toLowerCase().includes(query) || j.specialization?.toLowerCase().includes(query) || j.profession.toLowerCase().includes(query);
       const matchLoc = !locQuery || j.location.toLowerCase().includes(locQuery);
       return matchRole && matchLoc;
-    }).slice(0, 4);
+    }).slice(0, 3);
 
     return matchedJobs;
   }, [heroRole, heroLocation]);
@@ -96,45 +98,6 @@ export const HomePage: React.FC = () => {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
-
-  // Hospital Partners (Slide 2)
-  const hospitalPartners = [
-    {
-      name: 'Apollo Hospitals',
-      tagline: 'Quaternary Healthcare',
-      location: 'Hyderabad & Pan-India',
-      color: '#D97706',
-      iconText: 'Apollo'
-    },
-    {
-      name: 'MEDICOVER HOSPITALS',
-      tagline: 'European Care Standards',
-      location: 'Hyderabad & Vizag',
-      color: '#0284C7',
-      iconText: 'Medicover'
-    },
-    {
-      name: 'KIMS HOSPITALS',
-      tagline: 'Super-Specialty Excellence',
-      location: 'Secunderabad & Hyderabad',
-      color: '#0D9488',
-      iconText: 'KIMS'
-    },
-    {
-      name: 'AIG HOSPITALS',
-      tagline: 'Gastroenterology & Quaternary',
-      location: 'Gachibowli, Hyderabad',
-      color: '#4F46E5',
-      iconText: 'AIG'
-    },
-    {
-      name: 'Star Hospitals',
-      tagline: 'Cardiac & Multi-Specialty',
-      location: 'Banjara Hills & Nanakramguda',
-      color: '#E11D48',
-      iconText: 'Star'
-    }
-  ];
 
   // Featured Roles (Slide 2)
   const featuredRoles = [
@@ -224,49 +187,53 @@ export const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 overflow-x-hidden pb-16 sm:pb-0">
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 overflow-x-clip pb-16 sm:pb-0">
 
       {/* =========================================================================
           SLIDE 1: HERO SECTION - SEAMLESS BACKGROUND INTEGRATION
           ========================================================================= */}
-      <section className="relative bg-white border-b border-slate-200/80 min-h-[460px] sm:min-h-[500px] lg:min-h-[540px] flex items-center overflow-hidden">
+      <section className="relative bg-white border-b border-slate-200/80 flex items-center overflow-hidden">
 
-        {/* Hero Background Medical Team Banner Image */}
-        <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden">
+        {/* Desktop Right-Side Crystal-Clear Medical Team Visual (Zero fog over doctors) */}
+        <div className="hidden lg:block absolute top-0 right-0 bottom-0 w-[58%] xl:w-[54%] pointer-events-none select-none z-0 overflow-hidden">
           <img
-            src="/hero-medical-team.png"
+            src="/hero-medical-team-hd.jpg?v=5"
             alt="Healthcare medical team discussing patient care"
-            className="w-full h-full object-cover object-right transition-opacity duration-300"
+            className="w-full h-full object-cover object-[80%_center] transition-all duration-300"
+            style={{
+              imageRendering: '-webkit-optimize-contrast',
+              filter: 'contrast(1.08) brightness(1.02) saturate(1.06)'
+            }}
           />
-          {/* Subtle responsive fade on smaller viewports */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent sm:via-white/40 md:via-white/15 md:to-transparent" />
+          {/* Subtle soft edge blend on the left edge only - doctors on right have 0% fog */}
+          <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-white via-white/80 to-transparent" />
         </div>
 
         {/* Hero Content on the Left */}
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-7 sm:py-16 lg:py-20">
-          <div className="max-w-xl lg:max-w-xl xl:max-w-2xl space-y-4 sm:space-y-6 text-left">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-6 pb-6 sm:py-14 lg:py-20">
+          <div className="max-w-xl lg:max-w-[540px] xl:max-w-[580px] space-y-3 sm:space-y-6 text-left">
 
             {/* Headline & Subtitle */}
-            <div className="space-y-2 sm:space-y-3.5">
-              <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[50px] font-black text-[#0F394C] uppercase tracking-tight leading-[1.12] sm:leading-[1.08] max-w-lg lg:max-w-[460px] xl:max-w-xl">
+            <div className="space-y-1.5 sm:space-y-3">
+              <h1 className="text-[22px] xs:text-2xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[50px] font-black text-[#0F394C] uppercase tracking-tight leading-tight sm:leading-[1.08] max-w-lg lg:max-w-[460px] xl:max-w-xl">
                 THE RIGHT HEALTHCARE<br />
-                ROLE MATCHED TO YOU.
+                <span className="text-[#20B2AA]">ROLE MATCHED TO YOU.</span>
               </h1>
 
-              <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-normal leading-relaxed max-w-lg">
+              <p className="text-xs sm:text-base lg:text-lg text-slate-500 font-medium leading-relaxed max-w-lg">
                 Verified opportunities from trusted hospitals and healthcare networks.
               </p>
             </div>
 
-            {/* Unified Horizontal Hero Search Box Capsule with Live Typeahead */}
+            {/* Unified Hero Search Box Capsule with Live Typeahead */}
             <div className="relative w-full max-w-full sm:max-w-[540px] md:max-w-[580px]" ref={searchBoxRef}>
               <form
                 onSubmit={handleHeroSearch}
-                className="bg-white p-2 sm:p-2 rounded-2xl sm:rounded-full shadow-[0_8px_30px_rgba(15,57,76,0.08)] border border-teal-500/30 hover:border-teal-500/60 focus-within:border-[#20B2AA] focus-within:ring-2 focus-within:ring-[#20B2AA]/15 transition-all duration-200 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 w-full"
+                className="bg-white p-2.5 sm:p-2 rounded-2xl sm:rounded-full shadow-[0_4px_25px_rgba(15,57,76,0.08)] border border-slate-100 sm:border-teal-500/30 hover:border-teal-500/60 focus-within:border-[#20B2AA] focus-within:ring-2 focus-within:ring-[#20B2AA]/15 transition-all duration-200 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 w-full"
               >
                 {/* Role Input Field */}
-                <div className="flex-1 min-w-0 flex items-center gap-2.5 px-3 py-2.5 sm:py-1 bg-slate-50/80 sm:bg-transparent rounded-xl sm:rounded-none border border-slate-200/60 sm:border-0">
-                  <Search className="w-4 h-4 text-teal-600 shrink-0" />
+                <div className="flex-1 min-w-0 flex items-center px-3.5 py-2.5 sm:py-1 bg-slate-50/70 sm:bg-transparent rounded-xl sm:rounded-none">
+                  <Search className="w-4 h-4 text-[#20B2AA] shrink-0 mr-2.5" />
                   <input
                     type="text"
                     value={heroRole}
@@ -284,8 +251,8 @@ export const HomePage: React.FC = () => {
                 <div className="hidden sm:block h-6 w-[1px] bg-slate-200 shrink-0" />
 
                 {/* Location Input Field */}
-                <div className="flex-1 min-w-0 flex items-center gap-2.5 px-3 py-2.5 sm:py-1 bg-slate-50/80 sm:bg-transparent rounded-xl sm:rounded-none border border-slate-200/60 sm:border-0">
-                  <MapPin className="w-4 h-4 text-teal-600 shrink-0" />
+                <div className="flex-1 min-w-0 flex items-center px-3.5 py-2.5 sm:py-1 bg-slate-50/70 sm:bg-transparent rounded-xl sm:rounded-none">
+                  <MapPin className="w-4 h-4 text-[#20B2AA] shrink-0 mr-2.5" />
                   <input
                     type="text"
                     value={heroLocation}
@@ -302,8 +269,9 @@ export const HomePage: React.FC = () => {
                 {/* Search Action Button */}
                 <button
                   type="submit"
-                  className="bg-[#20B2AA] hover:bg-[#179A93] active:scale-[0.98] text-white font-black text-xs sm:text-sm px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-full shadow-xs hover:shadow-md transition-all duration-150 flex items-center justify-center shrink-0 cursor-pointer"
+                  className="bg-[#20B2AA] hover:bg-[#179A93] active:scale-[0.98] text-white font-bold text-xs sm:text-sm px-6 py-2.5 sm:py-3 rounded-xl sm:rounded-full shadow-xs hover:shadow-md transition-all duration-150 flex items-center justify-center gap-1.5 shrink-0 cursor-pointer w-full sm:w-auto"
                 >
+                  <Search className="w-4 h-4 text-white sm:hidden" />
                   <span>Search</span>
                 </button>
               </form>
@@ -365,50 +333,120 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Category Quick Tags */}
-            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-              {['Doctors', 'Nurses', 'Pharmacists', 'Allied Health'].map((category) => (
-                <button
-                  key={category}
-                  onClick={() => handleCategoryClick(category)}
-                  className="px-3.5 py-1.5 rounded-full text-xs font-bold border border-slate-200 bg-white hover:border-[#20B2AA] hover:text-[#20B2AA] text-slate-700 shadow-2xs transition shrink-0 cursor-pointer"
-                >
-                  {category}
-                </button>
-              ))}
+            <div className="pt-1.5">
+              <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5">
+                {['Doctors', 'Nurses', 'Pharmacists', 'Allied Health'].map((category) => {
+                  const isActive = category === 'Doctors';
+                  return (
+                    <button
+                      key={category}
+                      onClick={() => handleCategoryClick(category)}
+                      className={`px-3.5 py-1.5 rounded-full text-xs font-bold border transition text-center whitespace-nowrap shrink-0 cursor-pointer ${isActive
+                          ? 'bg-[#E0F7F5] border-[#20B2AA] text-[#0F766E] shadow-2xs'
+                          : 'bg-white border-slate-200/80 text-slate-600 hover:border-[#20B2AA] hover:text-[#20B2AA]'
+                        }`}
+                    >
+                      {category}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
 
-            {/* Trust Metrics Strip */}
-            <div className="pt-3 flex items-center justify-between sm:justify-start gap-2 sm:gap-6 text-[11px] sm:text-xs font-semibold text-slate-600 border-t border-slate-100 max-w-2xl">
-              <span className="flex items-center gap-1.5 text-slate-800 font-bold">
+            {/* Trust Metrics Strip - Soft Rounded Capsule Matching Mockup */}
+            <div className="bg-[#F0FAF8] border border-teal-200/60 rounded-2xl py-2 px-3 sm:px-4 flex items-center justify-between text-[10.5px] sm:text-xs font-bold text-[#0F394C]">
+              <div className="flex items-center gap-1.5 shrink-0">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#20B2AA] shrink-0" />
-                100% Verified
-              </span>
-              <span className="text-slate-300">•</span>
-              <span className="text-slate-800 font-bold">500+ Partner Hospitals</span>
-              <span className="text-slate-300">•</span>
-              <span className="text-slate-800 font-bold">Zero Agency Fees</span>
+                <span>100% Verified</span>
+              </div>
+              <span className="text-teal-400 select-none">•</span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <Building2 className="w-3.5 h-3.5 text-[#20B2AA] shrink-0" />
+                <span>500+ Hospitals</span>
+              </div>
+              <span className="text-teal-400 select-none">•</span>
+              <div className="flex items-center gap-1.5 shrink-0">
+                <Star className="w-3.5 h-3.5 text-[#20B2AA] shrink-0" />
+                <span>Zero Fees</span>
+              </div>
             </div>
+
+            {/* Dedicated Mobile Crystal-Clear Medical Team Showcase */}
+            <div className="lg:hidden pt-0.5">
+              <div className="relative rounded-3xl overflow-hidden shadow-sm border border-slate-200/80 bg-slate-100 h-40 xs:h-44 w-full">
+                <img
+                  src="/hero-medical-team-hd.jpg?v=7"
+                  alt="Verified Healthcare Medical Team"
+                  className="w-full h-full object-cover"
+                  style={{
+                    transform: 'scale(1.75) translate(-10%, 2%)',
+                    transformOrigin: 'center center',
+                    imageRendering: '-webkit-optimize-contrast',
+                    filter: 'contrast(1.08) brightness(1.02) saturate(1.06)'
+                  }}
+                />
+                <div className="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-md px-2.5 py-1.5 rounded-xl border border-slate-200/80 shadow-xs flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span className="text-[10px] sm:text-[11px] font-bold text-[#0F394C]">500+ Verified Hospital Roles</span>
+                  </div>
+                  <span className="text-[9px] sm:text-[10px] font-bold text-teal-700 bg-teal-50 px-2 py-0.5 rounded-md border border-teal-200/50">Active Hiring</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Dedicated LIVE 2026 PAY Card Matching Mockup */}
+            <div className="lg:hidden bg-gradient-to-r from-[#0F394C] to-[#154E70] rounded-2xl p-3 text-white shadow-md relative overflow-hidden">
+              <div className="flex items-center justify-between gap-2">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <span className="p-1 rounded bg-teal-500/20 text-[#2DC4B4] shrink-0">
+                      <TrendingUp className="w-3.5 h-3.5" />
+                    </span>
+                    <span className="font-extrabold tracking-wide uppercase text-teal-300 text-[10.5px]">
+                      LIVE 2026 PAY:
+                    </span>
+                    <span className="text-white font-bold text-xs">
+                      Cardiologist: ₹35L – ₹65L
+                    </span>
+                  </div>
+
+                  <Link
+                    to="/jobs"
+                    className="inline-flex items-center gap-1 text-[11px] font-bold text-[#2DC4B4] hover:text-white transition"
+                  >
+                    <span>Explore Compensation Insights</span>
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+
+                <div className="w-10 h-10 rounded-full bg-teal-900/70 border border-teal-500/40 flex items-center justify-center shrink-0 shadow-inner">
+                  <Sparkles className="w-5 h-5 text-teal-300" />
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* =========================================================================
-          HEALTHCARE SALARY BENCHMARKS STRIP
+          HEALTHCARE SALARY BENCHMARKS STRIP (Desktop only)
           ========================================================================= */}
-      <section className="bg-gradient-to-r from-[#0F394C] to-[#154E70] text-white py-3 sm:py-4 px-4 sm:px-6 lg:px-8 shadow-inner border-y border-teal-500/20">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 sm:gap-4">
+      <section className="hidden lg:block bg-gradient-to-r from-[#0F394C] to-[#154E70] text-white py-3 sm:py-4 px-4 sm:px-6 lg:px-8 shadow-inner border-y border-teal-500/20">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-4 pr-12 sm:pr-0">
           <div className="flex items-center gap-2 text-xs sm:text-sm flex-wrap">
-            <span className="p-1 rounded bg-teal-500/20 text-[#2DC4B4]">
+            <span className="p-1 rounded bg-teal-500/20 text-[#2DC4B4] shrink-0">
               <TrendingUp className="w-3.5 h-3.5" />
             </span>
-            <span className="font-extrabold tracking-wide uppercase text-teal-300 text-[11px] sm:text-xs">Live 2026 Pay:</span>
-            <span className="text-slate-200 text-xs">Cardiologist: <strong className="text-white">₹35L - ₹65L</strong></span>
-            <span className="text-slate-200 text-xs hidden xs:inline">• ICU: <strong className="text-white">₹20L - ₹38L</strong></span>
+            <span className="font-extrabold tracking-wide uppercase text-teal-300 text-[11px] sm:text-xs whitespace-nowrap">Live 2026 Pay:</span>
+            <span className="text-slate-200 text-xs whitespace-nowrap">Cardiologist: <strong className="text-white">₹35L - ₹65L</strong></span>
+            <span className="text-slate-200 text-xs hidden sm:inline">• ICU: <strong className="text-white">₹20L - ₹38L</strong></span>
           </div>
 
           <Link
             to="/jobs"
-            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#2DC4B4] hover:text-white transition whitespace-nowrap self-end sm:self-auto"
+            className="inline-flex items-center gap-1 text-[11px] sm:text-xs font-bold text-[#2DC4B4] hover:text-white transition whitespace-nowrap self-start sm:self-auto"
           >
             <span>Explore Compensation Insights</span>
             <ArrowRight className="w-3.5 h-3.5" />
@@ -436,7 +474,7 @@ export const HomePage: React.FC = () => {
                     </span>
                   </h2>
                 </div>
-                
+
                 <div className="flex items-center gap-2 pl-9">
                   <span className="inline-flex items-center justify-center bg-gradient-to-r from-[#0F394C] to-[#1B5F85] text-white text-xs font-black px-2.5 py-0.5 rounded-md shadow-2xs">
                     50+
@@ -457,38 +495,42 @@ export const HomePage: React.FC = () => {
               </span>
             </div>
 
-            {/* Hospital Partner Badges */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5 sm:gap-4">
-              {hospitalPartners.map((hospital, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-xl border border-slate-200/90 hover:border-teal-500/50 p-3.5 sm:p-4 shadow-2xs hover:shadow-md transition-all duration-200 flex flex-col justify-between group cursor-pointer hover:-translate-y-0.5"
-                  onClick={() => {
-                    setLocationFilter('Hyderabad');
-                    document.getElementById('job-board-section')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
-                  <div className="flex items-center gap-2.5 mb-2">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center font-black text-xs text-white shadow-2xs shrink-0"
-                      style={{ backgroundColor: hospital.color }}
-                    >
-                      {hospital.iconText.slice(0, 2).toUpperCase()}
-                    </div>
-                    <span className="text-xs font-extrabold text-slate-900 group-hover:text-[#20B2AA] transition-colors leading-tight">
-                      {hospital.name}
-                    </span>
-                  </div>
+            {/* Hospital Partner Badges: Nextenti-Style Infinite Smooth Auto-Scrolling Marquee */}
+            <div className="relative w-full overflow-hidden py-1">
+              {/* Left & Right Edge Vignette Fades */}
+              <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+              <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-10 sm:w-20 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
 
-                  <div className="space-y-0.5 pt-1 border-t border-slate-100">
-                    <p className="text-[11px] font-semibold text-slate-600 truncate">{hospital.tagline}</p>
-                    <p className="text-[10px] text-slate-400 font-medium flex items-center gap-1">
-                      <MapPin className="w-2.5 h-2.5 text-teal-600 shrink-0" />
-                      <span className="truncate">{hospital.location}</span>
-                    </p>
+              <div className="animate-hospital-marquee flex items-center gap-4 py-2 hover:[animation-play-state:paused] cursor-pointer">
+                {[...hospitalPartnersList, ...hospitalPartnersList].map((hospital, idx) => (
+                  <div
+                    key={`${hospital.id}-${idx}`}
+                    className="w-72 sm:w-80 shrink-0 bg-white rounded-2xl border border-slate-200/90 hover:border-teal-400 p-4 shadow-xs hover:shadow-lg transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 select-none cursor-pointer"
+                    onClick={() => {
+                      setSearchKeyword(hospital.shortName);
+                      document.getElementById('job-board-section')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    {/* Official Brand Logo Banner */}
+                    <div className="flex items-center justify-between gap-2 mb-3 pb-2.5 border-b border-slate-100">
+                      <div className="h-10 flex items-center shrink-0 max-w-[210px]">
+                        <HospitalFullBrandLogo id={hospital.id} className="h-9 w-auto max-w-[200px] object-contain group-hover:scale-[1.03] transition-transform origin-left" />
+                      </div>
+                      <span className="text-[10px] font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full shrink-0 border border-emerald-200/60 shadow-2xs">
+                        Verified HR
+                      </span>
+                    </div>
+
+                    <div className="space-y-1">
+                      <p className="text-xs font-bold text-slate-700 truncate">{hospital.tagline}</p>
+                      <p className="text-[11px] text-slate-400 font-medium flex items-center gap-1.5">
+                        <MapPin className="w-3 h-3 text-teal-600 shrink-0" />
+                        <span className="truncate">{hospital.location}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
 
@@ -564,36 +606,40 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           SLIDE 3: INTERACTIVE JOB FILTERS & AI-MATCHED LISTINGS
           ========================================================================= */}
-      <section id="job-board-section" className="py-10 sm:py-14 bg-[#F8FAFC]">
+      <section id="job-board-section" className="pt-6 pb-4 sm:py-14 bg-[#F8FAFC]">
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
 
           {/* Mobile Filter Toggle Header */}
-          <div className="lg:hidden flex items-center justify-between p-3.5 bg-white rounded-2xl border border-slate-200 shadow-2xs">
-            <button
-              type="button"
-              onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-              className="flex items-center gap-2 font-black text-sm text-[#0F394C] cursor-pointer"
-            >
+          <div
+            onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
+            className="lg:hidden flex items-center justify-between p-3.5 bg-white rounded-2xl border border-slate-200/90 shadow-2xs cursor-pointer hover:border-teal-500/50 transition-colors select-none"
+          >
+            <div className="flex items-center gap-2 font-black text-sm text-[#0F394C]">
               <SlidersHorizontal className="w-4 h-4 text-[#20B2AA]" />
-              <span>Filters {activeFiltersCount > 0 && <span className="bg-teal-500 text-white text-[10px] px-2 py-0.5 rounded-full ml-1">({activeFiltersCount} active)</span>}</span>
-            </button>
+              <span>Filters</span>
+              {activeFiltersCount > 0 && (
+                <span className="bg-teal-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold ml-0.5">
+                  {activeFiltersCount} active
+                </span>
+              )}
+            </div>
 
             <div className="flex items-center gap-2">
               {activeFiltersCount > 0 && (
                 <button
-                  onClick={resetFilters}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    resetFilters();
+                  }}
                   className="text-xs text-[#20B2AA] font-bold px-2 py-1 rounded-md hover:bg-teal-50 cursor-pointer"
                 >
                   Reset
                 </button>
               )}
-              <button
-                type="button"
-                onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-                className="p-1 rounded-lg text-slate-400 hover:text-slate-600"
-              >
-                <ChevronDown className={`w-4 h-4 transition-transform ${mobileFilterOpen ? 'rotate-180' : ''}`} />
-              </button>
+              <div className="p-1 rounded-lg text-slate-400">
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileFilterOpen ? 'rotate-180' : ''}`} />
+              </div>
             </div>
           </div>
 
@@ -718,26 +764,30 @@ export const HomePage: React.FC = () => {
             {/* Right Main Column: Matching Job Listings */}
             <main className="lg:col-span-8 space-y-4">
 
-              <div className="flex items-center justify-between pb-2 border-b border-slate-200/80">
+              {/* Section Header: Title & Sort Controls */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-slate-200/80">
                 <div>
-                  <h2 className="text-lg font-black text-[#0F394C]">
+                  <h2 className="text-base sm:text-lg font-black text-[#0F394C] leading-snug">
                     Verified Healthcare Openings
                   </h2>
-                  <p className="text-xs text-slate-500">
+                  <p className="text-xs text-slate-500 mt-0.5">
                     Showing <strong className="text-slate-800">{displayedJobs.length}</strong> of {filteredJobs.length} live verified roles
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold text-slate-500 hidden sm:inline">Sort by:</span>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as 'match' | 'all')}
-                    className="bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-bold text-slate-700 focus:outline-none cursor-pointer"
-                  >
-                    <option value="match">AI Match Score</option>
-                    <option value="all">Latest Posted</option>
-                  </select>
+                <div className="flex items-center gap-2 self-start sm:self-auto">
+                  <span className="text-xs font-bold text-slate-500">Sort:</span>
+                  <div className="relative">
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value as 'match' | 'all')}
+                      className="bg-white border border-slate-200/90 rounded-xl pl-3 pr-8 py-1.5 text-xs font-bold text-slate-700 focus:outline-none cursor-pointer appearance-none shadow-2xs hover:border-[#20B2AA]"
+                    >
+                      <option value="match">AI Match Score</option>
+                      <option value="all">Latest Posted</option>
+                    </select>
+                    <ChevronDown className="w-3.5 h-3.5 text-slate-400 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
                 </div>
               </div>
 
@@ -756,10 +806,10 @@ export const HomePage: React.FC = () => {
                   {displayedJobs.map((job, idx) => (
                     <div
                       key={job._id}
-                      className="bg-white rounded-2xl border border-slate-200/90 hover:border-teal-500 p-5 sm:p-6 shadow-[0_4px_20px_rgba(15,57,76,0.03)] hover:shadow-[0_8px_30px_rgba(32,178,170,0.08)] transition-all duration-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 group"
+                      className="bg-white rounded-2xl border border-slate-200/90 hover:border-teal-500 p-4 sm:p-6 shadow-[0_4px_20px_rgba(15,57,76,0.03)] hover:shadow-[0_8px_30px_rgba(32,178,170,0.08)] transition-all duration-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3.5 sm:gap-4 group"
                     >
                       {/* Left Job Info */}
-                      <div className="space-y-2 flex-1">
+                      <div className="space-y-1.5 flex-1 w-full">
                         <div className="flex items-center gap-2 flex-wrap">
                           <Link
                             to={`/jobs/${job.slug || job._id}`}
@@ -779,24 +829,27 @@ export const HomePage: React.FC = () => {
                           <span>{job.organization?.name}</span>
                         </p>
 
-                        <div className="flex flex-wrap items-center gap-3 text-xs text-slate-500 pt-1 font-medium">
-                          <span className="flex items-center gap-1">
-                            <MapPin className="w-3.5 h-3.5 text-teal-600" />
-                            {job.location}
-                          </span>
-                          <span>•</span>
-                          <span className="bg-slate-100 px-2 py-0.5 rounded text-[11px] font-semibold text-slate-600">
-                            {job.jobType}
-                          </span>
-                          <span>•</span>
-                          <span className="font-extrabold text-[#0F766E]">
+                        {/* Responsive Metadata with Clean Salary Row (No Trailing Dot) */}
+                        <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-3 text-xs text-slate-500 pt-0.5 font-medium">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="flex items-center gap-1">
+                              <MapPin className="w-3.5 h-3.5 text-teal-600 shrink-0" />
+                              <span>{job.location}</span>
+                            </span>
+                            <span className="text-slate-300">•</span>
+                            <span className="bg-slate-100 px-2 py-0.5 rounded text-[11px] font-semibold text-slate-600">
+                              {job.jobType}
+                            </span>
+                          </div>
+                          <span className="hidden sm:inline text-slate-300">•</span>
+                          <div className="font-extrabold text-[#0F766E] text-xs sm:text-sm">
                             {formatSalary(job.salaryMin, job.salaryMax)}
-                          </span>
+                          </div>
                         </div>
                       </div>
 
                       {/* Right AI Match Pill & Action Button */}
-                      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-3 shrink-0 pt-2.5 sm:pt-0 border-t sm:border-t-0 border-slate-100">
                         <div className="inline-flex items-center gap-1.5 bg-gradient-to-r from-[#E0F7F5] to-[#D1F6F2] text-[#0F766E] px-3.5 py-1 rounded-full text-xs font-extrabold border border-[#20B2AA]/30 shadow-2xs">
                           <Sparkles className="w-3.5 h-3.5 text-[#20B2AA]" />
                           <span>{idx === 0 ? '94%' : idx === 1 ? '96%' : '94%'} Match</span>
@@ -805,7 +858,7 @@ export const HomePage: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <Link
                             to={`/jobs/${job.slug || job._id}`}
-                            className="bg-[#20B2AA] hover:bg-[#179A93] text-white text-xs font-bold px-5 py-2 rounded-xl shadow-xs hover:shadow-md transition cursor-pointer"
+                            className="bg-[#20B2AA] hover:bg-[#179A93] active:scale-95 text-white text-xs font-bold px-5 py-2 rounded-xl shadow-xs hover:shadow-md transition cursor-pointer"
                           >
                             Details
                           </Link>
@@ -819,16 +872,16 @@ export const HomePage: React.FC = () => {
                     {filteredJobs.length > 3 && (
                       <button
                         onClick={() => setShowAllJobs(!showAllJobs)}
-                        className="w-full sm:w-auto text-xs font-bold text-[#0F394C] bg-white hover:bg-slate-50 border border-slate-200 px-5 py-2.5 rounded-xl shadow-2xs hover:border-slate-300 transition cursor-pointer flex items-center justify-center gap-1.5"
+                        className="w-full sm:w-auto text-xs font-bold text-[#0F394C] bg-white hover:bg-slate-50 border border-slate-200/90 px-5 py-2.5 rounded-xl shadow-2xs hover:border-slate-300 transition cursor-pointer flex items-center justify-center gap-1.5 active:scale-98"
                       >
-                        <span>{showAllJobs ? 'Show Slide View (3 Jobs)' : `Show More (${filteredJobs.length} roles)`}</span>
-                        <ChevronDown className={`w-3.5 h-3.5 transition-transform ${showAllJobs ? 'rotate-180' : ''}`} />
+                        <span>{showAllJobs ? 'Show Slide View (3 Roles)' : `Show All ${filteredJobs.length} Verified Roles`}</span>
+                        <ChevronDown className={`w-3.5 h-3.5 text-teal-600 transition-transform duration-200 ${showAllJobs ? 'rotate-180' : ''}`} />
                       </button>
                     )}
 
                     <Link
                       to="/jobs"
-                      className="text-xs font-bold text-[#20B2AA] hover:text-[#179A93] hover:underline flex items-center gap-1 ml-auto"
+                      className="w-full sm:w-auto text-xs font-bold text-[#20B2AA] hover:text-[#179A93] hover:underline flex items-center justify-center sm:justify-end gap-1.5 sm:ml-auto py-1"
                     >
                       <span>Explore all 120+ Healthcare Jobs</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -846,20 +899,20 @@ export const HomePage: React.FC = () => {
       {/* =========================================================================
           SLIDE 4: HOW MEDDHATRI WORKS
           ========================================================================= */}
-      <section id="how-it-works-section" className="py-12 sm:py-16 bg-white border-t border-slate-200/80">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
+      <section id="how-it-works-section" className="pt-6 pb-10 sm:py-16 bg-white border-t border-slate-200/80">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6 sm:space-y-14">
 
           {/* Part A: HOW MEDDHATRI WORKS */}
-          <div className="text-center space-y-10 max-w-5xl mx-auto">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-1.5 bg-teal-50 text-[#0F766E] px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest border border-teal-200/60">
+          <div className="text-center space-y-6 sm:space-y-10 max-w-5xl mx-auto">
+            <div className="space-y-2 sm:space-y-3">
+              <div className="inline-flex items-center gap-1.5 bg-teal-50 text-[#0F766E] px-3.5 py-1 rounded-full text-xs font-extrabold uppercase tracking-widest border border-teal-200/60 shadow-2xs">
                 <Sparkles className="w-3.5 h-3.5 text-[#20B2AA]" />
                 <span>Simple 3-Step Process</span>
               </div>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F394C] tracking-tight uppercase">
+              <h2 className="text-xl xs:text-2xl sm:text-3xl lg:text-4xl font-black text-[#0F394C] tracking-tight uppercase">
                 HOW MEDDHATRI WORKS
               </h2>
-              <p className="text-sm sm:text-base text-slate-500 max-w-xl mx-auto font-normal">
+              <p className="text-xs sm:text-base text-slate-500 max-w-xl mx-auto font-normal leading-relaxed">
                 Seamlessly connect with verified hospitals and fast-track your clinical placement in three simple steps.
               </p>
             </div>

@@ -22,7 +22,7 @@ export const Footer: React.FC = () => {
   ];
 
   return (
-    <footer className="bg-[#1B5F85] text-slate-100 border-t border-[#2DC4B4]/30 pt-6 sm:pt-10 pb-20 md:pb-8 w-full">
+    <footer className="bg-[#1B5F85] text-slate-100 border-t border-[#2DC4B4]/30 pt-6 sm:pt-10 pb-28 sm:pb-32 w-full">
       <div className="w-full px-4 sm:px-6 lg:px-10 xl:px-12">
         
         {/* Desktop-Only Sitemap Quick Bar */}
@@ -50,13 +50,18 @@ export const Footer: React.FC = () => {
         {/* Structured Footer Columns */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-5 sm:gap-8 pb-6 sm:pb-8 border-b border-slate-700/60">
           {/* Brand Col */}
-          <div className="col-span-2 lg:col-span-2 space-y-2.5 text-center sm:text-left">
+          <div className="col-span-2 lg:col-span-2 space-y-3 text-center sm:text-left">
             <div className="flex items-center justify-center sm:justify-start">
-              <Link to="/" className="inline-block bg-white px-4 py-2 rounded-2xl shadow-xs transition hover:shadow-md">
+              <Link to="/" className="inline-flex items-center bg-white px-4 py-2 rounded-xl shadow-xs hover:shadow-md transition group">
                 <img
                   src="/logo.png"
                   alt="MedDhatri"
-                  className="h-10 sm:h-12 md:h-14 w-auto max-w-[220px] object-contain"
+                  className="h-10 sm:h-11 w-auto max-w-[200px] object-contain group-hover:scale-[1.02] transition-transform"
+                  style={{
+                    mixBlendMode: 'multiply',
+                    filter: 'contrast(1.16) brightness(1.02)',
+                    imageRendering: '-webkit-optimize-contrast'
+                  }}
                 />
               </Link>
             </div>
@@ -110,15 +115,20 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Legal Bar */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 gap-2.5 text-center sm:text-left">
-          <p>&copy; 2026 MedDhatri AI. Healthcare Career & Talent Platform.</p>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-[11px]">
-            <Link to="/about" className="hover:text-white transition">About</Link>
-            <Link to="/leadership" className="hover:text-white transition">Leadership</Link>
-            <Link to="/how-it-works" className="hover:text-white transition">How It Works</Link>
-            <Link to="/faqs" className="hover:text-white transition">FAQs</Link>
-            <Link to="/contact" className="hover:text-white transition">Contact</Link>
-            <Link to="/pricing" className="hover:text-white transition">Pricing</Link>
+        <div className="pt-6 flex flex-col md:flex-row items-center justify-between text-xs text-slate-300/80 gap-3 text-center md:text-left">
+          <p className="font-medium">&copy; 2026 MedDhatri AI. All rights reserved. Intelligent Healthcare Career & Talent Platform.</p>
+          <div className="flex flex-wrap items-center justify-center gap-3.5 text-xs font-semibold">
+            <Link to="/about" className="hover:text-teal-300 transition">About</Link>
+            <span className="text-slate-500">•</span>
+            <Link to="/leadership" className="hover:text-teal-300 transition">Leadership</Link>
+            <span className="text-slate-500">•</span>
+            <Link to="/how-it-works" className="hover:text-teal-300 transition">How It Works</Link>
+            <span className="text-slate-500">•</span>
+            <Link to="/faqs" className="hover:text-teal-300 transition">FAQs</Link>
+            <span className="text-slate-500">•</span>
+            <Link to="/contact" className="hover:text-teal-300 transition">Contact</Link>
+            <span className="text-slate-500">•</span>
+            <Link to="/pricing" className="hover:text-teal-300 transition">Pricing</Link>
           </div>
         </div>
       </div>

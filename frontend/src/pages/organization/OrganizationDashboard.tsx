@@ -1,27 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { 
-  Building2, 
-  Briefcase, 
-  Users, 
-  UserCheck, 
-  Calendar, 
-  PlusCircle, 
-  TrendingUp, 
+import {
+  Building2,
+  Briefcase,
+  Users,
+  UserCheck,
+  Calendar,
+  PlusCircle,
+  TrendingUp,
   ArrowRight,
   ShieldCheck,
   CheckCircle2,
   GitPullRequest
 } from 'lucide-react';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  Tooltip, 
-  ResponsiveContainer, 
-  AreaChart, 
-  Area 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  Tooltip,
+  ResponsiveContainer,
+  AreaChart,
+  Area
 } from 'recharts';
 import { INITIAL_CANDIDATES } from '../../lib/mockDb.js';
 
